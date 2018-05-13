@@ -66,6 +66,56 @@
                         <ui-btn>末项</ui-btn>
                     </ui-btn-group>
                 </section>
+                <hr>
+                <section class="row">
+                    radio-值为-{{radio}}：
+                    <ui-radio v-model="radio" label="1">选项1</ui-radio>
+                    <ui-radio v-model="radio" label="2">选项2</ui-radio>
+                    <ui-radio v-model="radio" label="3">选项3</ui-radio>
+                </section>
+                <section class="row">
+                    [禁用]radio：
+                    <ui-radio name="disable" v-model="radioDisable" label="1" disabled>选项1</ui-radio>
+                    <ui-radio name="disable" v-model="radioDisable" label="2" disabled>选项2</ui-radio>
+                    <ui-radio name="disable" v-model="radioDisable" label="3" disabled>选项3</ui-radio>
+                </section>
+                <section class="row">
+                    [边框]radio：
+                    <ui-radio v-model="radio" label="1" border>选项1</ui-radio>
+                    <ui-radio v-model="radio" label="2" border size="medium">选项1</ui-radio>
+                    <ui-radio v-model="radio" label="3" border size="small">选项2</ui-radio>
+                    <ui-radio v-model="radio" label="4" border size="mini">选项3</ui-radio>
+                </section>
+                <section class="row">
+                    [按钮]radio：
+                    <ui-radio-button v-model="radio" label="1" name="abc" activeStyle="color: #e10; background: #eee">选项2</ui-radio-button><!--
+                --><ui-radio-button v-model="radio" label="2" name="abc">选项3</ui-radio-button><!--
+                --><ui-radio-button v-model="radio" label="3" name="abc">选项4</ui-radio-button><!--
+                --><ui-radio-button v-model="radio" label="4" name="abc">选项5</ui-radio-button>
+                </section>
+                <hr>
+                <section class="row">
+                    checkbox：
+                    <ui-checkbox v-for="item in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange"></ui-checkbox>
+                </section>
+                <section class="row">
+                    [边框]checkbox：
+                    <ui-checkbox v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox>
+                </section>
+                <section class="row">
+                    [大小]checkbox：
+                    <ui-checkbox :checkedItem="checkedItem" label="选框-最小" @change="checkChange" size="mini" border/>
+                    <ui-checkbox :checkedItem="checkedItem" label="选框-小" @change="checkChange" size="small" border/>
+                    <ui-checkbox :checkedItem="checkedItem" label="选框-中等" @change="checkChange" size="medium" border/>
+                    <ui-checkbox :checkedItem="checkedItem" label="选框-正常" @change="checkChange" border />
+                </section>
+                <section class="row">
+                    [按钮]checkbox：
+                    <ui-checkbox-button v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox-button>
+                </section>
+                <section class="row">
+                    <ui-slider></ui-slider>
+                </section>
             </div>
         </ui-main>
         <ui-foot>京公网安备11000002000001号 互联网新闻信息服务许可 © 2018 百度  使用百度前必读</ui-foot>
@@ -73,6 +123,8 @@
 </template>
 
 <script>
+import 'assets/css/common.less';
+
 import Head from 'components/header/white/Header';
 import Main from 'components/main/Index';
 import Foot from 'components/footer/Footer';
@@ -82,8 +134,38 @@ import iconStyle from '@theme/lib/icon.css';
 import Icon from 'components/icon';
 import BtnGroup from 'components/button-group';
 
-import 'assets/css/common.less';
+// 这里是radio
+import radioSyl from '@theme/lib/radio.css';
+import Radio from 'components/radio';
+
+// radio-button
+import RadioBtnSyl from '@theme/lib/radio-button.css';
+import RadioBtn from 'components/radio-button';
+
+// checkbox
+
+import CheckboxSyl from '@theme/lib/checkbox.css';
+import Checkbox from 'components/checkbox';
+
+// checkbox-button
+
+import CheckboxBtnSyl from '@theme/lib/checkbox-button.css';
+import CheckboxBtn from 'components/checkbox-button';
+
+// slider
+
+import Slider from 'components/slider';
+
 export default {
+    data() {
+        return {
+            radio: '1',
+            radioDisable: '1',
+            radioBtn: '1',
+            checkboxOptions: ['上海', '北京', '广州', '西安'],
+            checkedItem: ['上海', '北京']
+        }
+    },
 	components: {
       // 可以以key-value的形式注册组件, 此时挂载点的名字就是key
       // 否则挂载点和组件名字一致, 即vhead
@@ -92,11 +174,27 @@ export default {
       'ui-foot': Foot,
       'ui-btn': Btn,
       'ui-btn-group': BtnGroup,
-      'ui-icon': Icon
+      'ui-icon': Icon,
+      'ui-radio': Radio,
+      'ui-radio-button': RadioBtn,
+      'ui-checkbox': Checkbox,
+      'ui-checkbox-button': CheckboxBtn,
+      'ui-slider': Slider
     },
     methods: {
         iclk() {
             alert('谁敢杀我');
+        },
+        radioClk(lbl) {
+            this.radio = lbl;
+        },
+        checkChange(name, value) {
+            if (this.checkboxOptions.indexOf(name) === -1) return false;
+            const checkedItem = this.checkedItem;
+            const idx = checkedItem.indexOf(name);
+            value && idx === -1 && checkedItem.push(name);
+            !value && idx > -1 && checkedItem.splice(idx, 1);
+            console.log('最终结果: ', checkedItem);
         }
     }
 }

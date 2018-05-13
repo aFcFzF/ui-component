@@ -1,0 +1,84 @@
+<template>
+  <label
+    class="el-checkbox"
+    :class="[
+        size && `el-checkbox--${size}`,
+        {
+            'is-disabled': disabled,
+            'is-checked': isChecked,
+            'is-border': border
+        }
+    ]"
+  >
+  <span
+  class="el-checkbox__input"
+  :class="[
+    {
+        'is-checked': isChecked,
+    }
+  ]">
+    <i class="el-checkbox__inner">
+        <input
+            type="checkbox"
+            class="el-checkbox__original"
+            tabindex="-1"
+            :value="label"
+            :disabled=disabled
+            :name="name"
+            :border="border"
+            v-model="tmpChecked"
+        >
+    </i>
+  </span>
+  <span class="el-radio__label"><slot></slot></span>
+  <template v-if="!$slots.default">{{label}}</template>
+  </label>
+</template>
+
+<script>
+    export default {
+
+        data() {
+            console.log('data', this)
+            return {
+                isChecked: false
+            }
+        },
+
+        props: {
+            size: String,
+            name: String,
+            disabled: Boolean,
+            tabIndex: Number,
+            options: Array,
+            label: null,
+            border: String
+        },
+
+        methods: {
+            changeHandler() {
+                this.$emit('change', this.value);
+            }
+        },
+
+        created() {
+            console.log('created', this)
+        },
+
+        computed: {
+            tmpChecked: {
+                get() {
+                    const {label, options} = this;
+                    console.log('获取？', options.indexOf(label) > -1);
+                    return options.indexOf(label) > -1;
+                },
+                set(val) {
+                    console.log('value?', val);
+                    this.$emit('input', val);
+                    this.isChecked = val;
+                }
+            }
+        }
+
+    }
+</script>

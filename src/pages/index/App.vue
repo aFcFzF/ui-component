@@ -114,7 +114,7 @@
                     <ui-checkbox-button v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox-button>
                 </section>
                 <section class="row">
-                    <ui-slider></ui-slider>
+                    <div style="width: 400px; padding: 0 30px;"><ui-slider></ui-slider></div>
                 </section>
             </div>
         </ui-main>
@@ -153,7 +153,7 @@ import CheckboxBtnSyl from '@theme/lib/checkbox-button.css';
 import CheckboxBtn from 'components/checkbox-button';
 
 // slider
-
+import SliderSyl from '@theme/lib/slider.css';
 import Slider from 'components/slider';
 
 export default {

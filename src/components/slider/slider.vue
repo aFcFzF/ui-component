@@ -1,7 +1,7 @@
 <template>
-  <div class="slider">
+  <div class="slider" ref="container">
       <div class="line"></div>
-      <span class="block" ref="block" @mousedown.stop="mouseHandler"></span>
+      <span class="btn" ref="btn" @mousedown="mouseHandler"></span>
   </div>
 </template>
 
@@ -9,8 +9,9 @@
     .slider {
         height: 30px;
         line-height: 30px;
-        width: 300px;
+        width: 100%;
         position: relative;
+        user-select: none;
         .line {
             border: solid 3px #999;
             border-radius: 3px;
@@ -21,8 +22,9 @@
             width: 100%;
             transform: translateY(-50%);
             box-sizing: border-box;
+            user-select: none;
         }
-        .block {
+        .btn {
             position: absolute;
             left: 0px;
             display: inline-block;
@@ -32,70 +34,59 @@
             cursor: pointer;
             border: solid 3px #10e;
             vertical-align: middle;
+            user-select: none;
+            transform: translateX(-50%) scale(0.9);
+            &:hover {
+                transform: translateX(-50%) ;
+            }
         }
     }
 </style>
 
 <script>
-    let start = 0, down = false, left = 0, block = null, w = window, screenX = 0;
     export default {
         mounted() {
-            block = this.$refs.block;
+            this.btn = this.$refs.btn;
+            this.containerWidth = this.$refs.container.clientWidth;
+        },
+
+        data() {
+            return {
+                containerWidth: 0,
+                startX: 0, // 初始点击位置
+                down: false, // 是否按下
+                btnOffsetX: 0, // 按钮目前所处的位置
+                btn: null // 按钮dom
+            }
         },
 
         created() {
+
             document.addEventListener('mousemove', evt => {
+                const {down, btn, btnOffsetX, startX, containerWidth} = this;
                 if (down !== true) return null;
-                screenX = (evt || w.event).clientX;
-                block.style.left = left + (screenX - start)+ 'px';
-                console.log('移动。。')
+                const screenX = (evt || w.event).clientX; // 鼠标移动时候的x轴坐标
+                const to = btnOffsetX + (screenX - startX); // 按钮相对于父元素的X轴坐标 + （目前移动的X轴坐标 - 初始x轴坐标）
+                const toPercent = (to / containerWidth).toFixed(2) * 100;
+                toPercent >= 0 && toPercent <= 100 && !(toPercent % 10) && (btn.style.left = toPercent + '%');
             });
 
             document.addEventListener('mouseup', evt => {
-                down = false;
-                console.log('鼠标弹起了')
+                this.down = false;
             });
-
-            console.log('created', block);
         },
 
         methods: {
             mouseHandler(evt) {
                 switch(evt.type) {
                     case 'mousedown' :
-                        start = evt.clientX;
-                        left = block.offsetLeft;
-                        down = true;
-                        console.log('鼠标按下')
+                        this.startX = evt.clientX;
+                        this.btnOffsetX = this.btn.offsetLeft;
+                        this.down = true;
                     break;
                     case 'default' :
                     break;
                 }
-                // switch(evt.type) {
-                //     case 'mousedown' :
-                //         start = evt.clientX;
-                //         left = block.offsetLeft;
-                //         down = true;
-                //         console.log('mousedown', evt);
-                //     break;
-                //     case 'mousemove' :
-                //         if (!down) return;
-                //         const offsetX = evt.offsetX - start; // 这是鼠标移动的距离
-                //         console.log('鼠标移动的距离： ', offsetX)
-                //         block.style.left = left + offsetX + 'px';
-                //     break;
-                //     case 'mouseup' :
-                //         down = false;
-                //         console.log('鼠标弹起了')
-                //     break;
-                //     case 'mouseleave' :
-                //         down = false;
-                //     break;
-                //     default:
-                //     break;
-                // }
-
-
             }
         }
     }

@@ -1,9 +1,8 @@
-/**
- * @file: slider 滑块
- * @author: afcfzf
- * @File Created: Sunday, 13th May 2018 12:08:11 am
- */
+import Slider from './src/main';
 
-import Slider from './slider';
+/* istanbul ignore next */
+Slider.install = function(Vue) {
+  Vue.component(Slider.name, Slider);
+};
 
 export default Slider;

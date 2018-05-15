@@ -113,8 +113,10 @@
                     [按钮]checkbox：
                     <ui-checkbox-button v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox-button>
                 </section>
+                <hr>
                 <section class="row">
-                    <div style="width: 400px; padding: 0 30px;"><ui-slider></ui-slider></div>
+                    <div style="width: 400px; height: 30px; line-height: 30px; padding: 0 30px; overflow: hidden"><span style="vertical-align: middle;margin-right: 10px;">值为：{{val01}}</span><ui-slider class="abcdef" style="width: 300px; float: right;" disabled v-model="val01"></ui-slider></div>
+                    <div style="width: 400px; height: 30px; line-height: 30px; padding: 0 30px; overflow: hidden"><span style="vertical-align: middle;margin-right: 10px;">值为：{{val02}}</span><ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val02" @change="changeHandler"></ui-slider></div>
                 </section>
             </div>
         </ui-main>
@@ -163,7 +165,9 @@ export default {
             radioDisable: '1',
             radioBtn: '1',
             checkboxOptions: ['上海', '北京', '广州', '西安'],
-            checkedItem: ['上海', '北京']
+            checkedItem: ['上海', '北京'],
+            val01: 10,
+            val02: 30
         }
     },
 	components: {
@@ -195,6 +199,9 @@ export default {
             value && idx === -1 && checkedItem.push(name);
             !value && idx > -1 && checkedItem.splice(idx, 1);
             console.log('最终结果: ', checkedItem);
+        },
+        changeHandler(val) {
+            console.log('改变的值: ', val * 10);
         }
     }
 }

@@ -1,13 +1,22 @@
 <template>
   <div class="slider"
     ref="container"
-    :class="{
-        'is-disabled': disabled
-    }"
+    :class="[
+        size && `slider-size-${size}`,
+        {
+            'is-disabled': disabled
+        }
+    ]"
   >
-      <div class="line"></div>
-      <div class="progress" :style="{width: tmpValue + '%'}"></div>
-      <span class="btn" ref="btn" :style="{left: tmpValue + '%'}" @mousedown="mouseHandler"></span>
+      <div class="line" @click ="clkHandler">
+        <div class="progress" :style="{width: tmpValue + '%'}"></div>
+      </div>
+      <span class="btn"
+        ref="btn"
+        :style="{left: tmpValue + '%'}"
+        @mousedown="mouseHandler"
+       >
+       </span>
   </div>
 </template>
 
@@ -18,19 +27,49 @@
         width: 100%;
         position: relative;
         user-select: none;
+        margin: 0 10px;
+
+        &&-size-medium {
+            .line, .progress {
+                height: 9px;
+            }
+            .btn {
+                height: 18px;
+            }
+        }
+
+        &&-size-small {
+            .line, .progress {
+                height: 6px;
+            }
+            .btn {
+                height: 16px;
+            }
+        }
+
+        &&-size-mini {
+            .line, .progress {
+                height: 3px;
+            }
+            .btn {
+                height: 14px;
+            }
+        }
+
         &.is-disabled {
             .progress {
-                border-color: #d5d6d8;
+                background-color: #d5d6d8;
             }
             .btn {
                 cursor: not-allowed;
                 border-color: #eee;
             }
         }
+
         .line, .progress {
-            border: solid 3px #E4E7ED;
-            border-radius: 3px;
-            height:0;
+            background-color: #E4E7ED;
+            border-radius: 25px;
+            height: 14px;
             position: absolute;
             top: 50%;
             left: 0;
@@ -38,28 +77,30 @@
             transform: translateY(-50%);
             box-sizing: border-box;
             user-select: none;
+            cursor: pointer;
         }
+
         .progress {
-            border-color: #3388FF;
+            background-color: #3388FF;
             z-index: 1;
         }
+
         .btn {
             position: absolute;
             left: 0px;
-            display: inline-block;
+            top: 50%;
             height: 24px;
-            line-height: 26px;
             width: 14px;
             background: #F3F8FF;
             cursor: pointer;
             border: solid 1px #3388FF;
             border-radius: 25px;
-            vertical-align: middle;
             user-select: none;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             z-index: 2;
             text-align: center;
         }
+
     }
 </style>
 
@@ -68,7 +109,7 @@
 
     export default {
         mounted() {
-            this.btn = this.$refs.btn;
+            const btn = this.btn = this.$refs.btn;
             this.containerWidth = this.$refs.container.clientWidth;
         },
 
@@ -97,7 +138,8 @@
                 type: Number,
                 default: 0
             },
-            formatValue: Function
+            formatValue: Function,
+            size: String
         },
 
         created() {
@@ -105,8 +147,8 @@
                 document.addEventListener('mousemove', evt => {
                 const {down, btn, btnOffsetX, startX, containerWidth} = this;
                 if (down !== true) return null;
-                const screenX = (evt || w.event).clientX; // 鼠标移动时候的x轴坐标
-                const to = btnOffsetX + (screenX - startX); // 按钮相对于父元素的X轴坐标 + （目前移动的X轴坐标 - 初始x轴坐标）
+                const moveX = (evt || w.event).clientX; // 鼠标移动时候的x轴坐标
+                const to = btnOffsetX + (moveX - startX); // 按钮相对于父元素的X轴坐标 + （目前移动的X轴坐标 - 初始x轴坐标）
                 this.tmpValue = Math.round(to / containerWidth * 100); // 1次1像素。
                 // 放在这会卡顿。所以还是放在computed里面了
                 // if (toPercent >= 0 && toPercent <= 100) {
@@ -139,6 +181,7 @@
                     this.oldValue = r;
                 }
             },
+
             enableFormat() {
                 return typeof this.formatValue === 'function';
             }
@@ -156,6 +199,10 @@
                     case 'default' :
                     break;
                 }
+            },
+
+            clkHandler(evt) {
+                !this.disabled && (this.tmpValue = Math.round(evt.offsetX / this.containerWidth * 100));
             }
         }
     }

@@ -64,8 +64,8 @@ const config = {
     alias: {
       '@': join(__dirname, '../src'),
       '@theme': join(__dirname, '../src/components/theme-pkg'),
-      assets: join(__dirname, '../src/assets'),
-      components: join(__dirname, '../src/components')
+      '@assets': join(__dirname, '../src/assets'),
+      '@components': join(__dirname, '../src/components')
     }
   },
   module: {

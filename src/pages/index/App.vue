@@ -88,10 +88,10 @@
                 </section>
                 <section class="row">
                     [按钮]radio：
-                    <ui-radio-button v-model="radio" label="1" name="abc" activeStyle="color: #e10; background: #eee">选项2</ui-radio-button><!--
-                --><ui-radio-button v-model="radio" label="2" name="abc">选项3</ui-radio-button><!--
-                --><ui-radio-button v-model="radio" label="3" name="abc">选项4</ui-radio-button><!--
-                --><ui-radio-button v-model="radio" label="4" name="abc">选项5</ui-radio-button>
+                    <ui-radio-btn v-model="radio" label="1" name="abc" activeStyle="color: #e10; background: #eee">选项2</ui-radio-btn><!--
+                --><ui-radio-btn v-model="radio" label="2" name="abc">选项3</ui-radio-btn><!--
+                --><ui-radio-btn v-model="radio" label="3" name="abc">选项4</ui-radio-btn><!--
+                --><ui-radio-btn v-model="radio" label="4" name="abc">选项5</ui-radio-btn>
                 </section>
                 <hr>
                 <section class="row">
@@ -111,12 +111,36 @@
                 </section>
                 <section class="row">
                     [按钮]checkbox：
-                    <ui-checkbox-button v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox-button>
+                    <ui-checkbox-btn v-for="(item, idx) in checkboxOptions" :key="item" :checkedItem="checkedItem" :label="item" @change="checkChange" border :disabled="idx === 2"></ui-checkbox-btn>
                 </section>
                 <hr>
                 <section class="row">
-                    <div style="width: 400px; height: 30px; line-height: 30px; padding: 0 30px; overflow: hidden"><span style="vertical-align: middle;margin-right: 10px;">值为：{{val01}}</span><ui-slider class="abcdef" style="width: 300px; float: right;" disabled v-model="val01"></ui-slider></div>
-                    <div style="width: 400px; height: 30px; line-height: 30px; padding: 0 30px; overflow: hidden"><span style="vertical-align: middle;margin-right: 10px;">值为：{{val02}}</span><ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val02" @change="changeHandler"></ui-slider></div>
+                    <div style="width: 600px; padding:0 30px;">
+                        <section style="overflow: hidden; height: 30px; line-height: 30px;">
+                            <span style="vertical-align: middle;margin-right: 10px;">禁用-值为：{{val01}}</span>
+                            <ui-slider class="abcdef" style="width: 300px; float: right;" disabled v-model="val01"></ui-slider>
+                        </section>
+
+                        <section style="overflow: hidden; height: 30px; line-height: 30px;">
+                            <span style="vertical-align: middle;margin-right: 10px;">禁用-值为：{{val02}}</span>
+                            <ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val02"></ui-slider>
+                        </section>
+
+                        <section style="overflow: hidden; height: 30px; line-height: 30px;">
+                            <span style="vertical-align: middle;margin-right: 10px;">初始值-值为：{{val03}}</span>
+                            <ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val03" size="medium"></ui-slider>
+                        </section>
+
+                        <section style="overflow: hidden; height: 30px; line-height: 30px;">
+                            <span style="vertical-align: middle;margin-right: 10px;">初始值-值为：{{val04}}</span>
+                            <ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val04" size="small"></ui-slider>
+                        </section>
+
+                        <section style="overflow: hidden; height: 30px; line-height: 30px;">
+                            <span style="vertical-align: middle;margin-right: 10px;">初始值-值为：{{val05}}</span>
+                            <ui-slider class="abcdef" style="width: 300px; float: right;" v-model="val05" size="mini"></ui-slider>
+                        </section>
+                    </div>
                 </section>
             </div>
         </ui-main>
@@ -125,38 +149,32 @@
 </template>
 
 <script>
-import 'assets/css/common.less';
+import '@assets/css/common.less';
 
-import Head from 'components/header/white/Header';
-import Main from 'components/main/Index';
-import Foot from 'components/footer/Footer';
-import Btn from 'components/button';
+import Head from '@components/header/white/Header';
+import Main from '@components/main/Index';
+import Foot from '@components/footer/Footer';
+
+// 按钮样式
 import btnStyle from '@theme/lib/button.css';
+
+// 图片样式
 import iconStyle from '@theme/lib/icon.css';
-import Icon from 'components/icon';
-import BtnGroup from 'components/button-group';
 
 // 这里是radio
 import radioSyl from '@theme/lib/radio.css';
-import Radio from 'components/radio';
 
 // radio-button
 import RadioBtnSyl from '@theme/lib/radio-button.css';
-import RadioBtn from 'components/radio-button';
 
 // checkbox
-
 import CheckboxSyl from '@theme/lib/checkbox.css';
-import Checkbox from 'components/checkbox';
 
 // checkbox-button
-
 import CheckboxBtnSyl from '@theme/lib/checkbox-button.css';
-import CheckboxBtn from 'components/checkbox-button';
 
 // slider
 import SliderSyl from '@theme/lib/slider.css';
-import Slider from 'components/slider';
 
 export default {
     data() {
@@ -167,24 +185,19 @@ export default {
             checkboxOptions: ['上海', '北京', '广州', '西安'],
             checkedItem: ['上海', '北京'],
             val01: 10,
-            val02: 30
+            val02: 20,
+            val03: 30,
+            val04: 40,
+            val05: 50,
         }
     },
-	components: {
-      // 可以以key-value的形式注册组件, 此时挂载点的名字就是key
-      // 否则挂载点和组件名字一致, 即vhead
-      'ui-head': Head,
-      'ui-main': Main,
-      'ui-foot': Foot,
-      'ui-btn': Btn,
-      'ui-btn-group': BtnGroup,
-      'ui-icon': Icon,
-      'ui-radio': Radio,
-      'ui-radio-button': RadioBtn,
-      'ui-checkbox': Checkbox,
-      'ui-checkbox-button': CheckboxBtn,
-      'ui-slider': Slider
+
+    components: {
+        uiHead: Head,
+        uiMain: Main,
+        uiFoot: Foot
     },
+
     methods: {
         iclk() {
             alert('谁敢杀我');

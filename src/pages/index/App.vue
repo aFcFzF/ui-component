@@ -142,6 +142,18 @@
                         </section>
                     </div>
                 </section>
+                <section class="row">
+                    <div style="padding: 30px 0;">
+                        <ui-radio :label="1" v-model="rot" @change="switchItem">选项1</ui-radio>
+                        <ui-radio :label="2" v-model="rot" @change="switchItem">选项2</ui-radio>
+                        <ui-radio :label="3" v-model="rot" @change="switchItem">选项2</ui-radio>
+                    </div>
+                    <div style="border: solid">
+                        <router-view name="nav"></router-view>
+                        <router-view name="userSettings"></router-view>
+                        <router-view name="helper"></router-view>
+                    </div>
+                </section>
             </div>
         </ui-main>
         <ui-foot>京公网安备11000002000001号 互联网新闻信息服务许可 © 2018 百度  使用百度前必读</ui-foot>
@@ -176,6 +188,7 @@ import CheckboxBtnSyl from '@theme/lib/checkbox-button.css';
 // slider
 import SliderSyl from '@theme/lib/slider.css';
 
+
 export default {
     data() {
         return {
@@ -189,6 +202,7 @@ export default {
             val03: 30,
             val04: 40,
             val05: 50,
+            rot: 1
         }
     },
 
@@ -199,12 +213,15 @@ export default {
     },
 
     methods: {
+
         iclk() {
-            alert('谁敢杀我');
+            alert('弹框测试');
         },
+
         radioClk(lbl) {
             this.radio = lbl;
         },
+
         checkChange(name, value) {
             if (this.checkboxOptions.indexOf(name) === -1) return false;
             const checkedItem = this.checkedItem;
@@ -213,9 +230,20 @@ export default {
             !value && idx > -1 && checkedItem.splice(idx, 1);
             console.log('最终结果: ', checkedItem);
         },
+
         changeHandler(val) {
             console.log('改变的值: ', val * 10);
+        },
+
+        switchItem(val) {
+            val == 1 && this.$router.push({name: 'b', params: {ext: 'abc'}});
+            val == 2 && this.$router.push({name: 'd', params: {ext1: 'bcd'}});
+            val == 3 && this.$router.push({name: 'hie', params: {ext1: 'bcd'}});
         }
+
+    },
+    mounted() {
+        console.log('其他页面访问$rouret', this.$router, this.$route);
     }
 }
 </script>

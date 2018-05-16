@@ -142,6 +142,12 @@
             size: String
         },
 
+        watch: {
+            tmpValue(oldVal, val) {
+                console.log('监控的值是: ', oldVal, val);
+            }
+        },
+
         created() {
             const initEvt = _ => {
                 document.addEventListener('mousemove', evt => {

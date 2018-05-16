@@ -54,7 +54,7 @@
         methods: {
             changeHandler() {
                 this.$nextTick(() => {
-                    this.$emit('change', this.model);
+                    this.$emit('change', this.value);
                 });
             }
         },

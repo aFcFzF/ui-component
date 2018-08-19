@@ -8,18 +8,24 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-import comp from '@components';
-Vue.use(comp);
-
-import Router from 'vue-router';
-Vue.use(Router);
-
 import Foo from './Foo.vue';
 import Foo1 from './Foo1.vue';
 import Foo2 from './Foo2.vue';
 
 import Test from './Test.vue';
 import SubItem from './SubItem.vue';
+
+import Nav from './Nav';
+import UserSettings from './UserSettings';
+import UserEmails from './UserEmailsSubscriptions';
+import UserProfile from './UserProfilePreview';
+
+import comp from '@components';
+import Router from 'vue-router';
+
+Vue.use(comp);
+
+Vue.use(Router);
 // const Foo = { template: '<div>这是foo组件部分</div>'};
 // const Test = { template: '<div style="color: #e10; fontWeight: bold">这是foo组件部分</div>'};
 
@@ -42,11 +48,6 @@ import SubItem from './SubItem.vue';
 // console.log('我是 abc', abc, this);
 console.log('我是Foo： ', Foo);
 console.log('我是Test： ', Test);
-
-import Nav from './Nav';
-import UserSettings from './UserSettings';
-import UserEmails from './UserEmailsSubscriptions';
-import UserProfile from './UserProfilePreview';
 
 const routes = [
     {

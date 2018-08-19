@@ -5,18 +5,27 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import routes from './routes';
+import docRoute from './routes.js';
 import Home from '../components/home/home.vue';
+import Index from '../components/index/index.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: Home
+        component: Home,
+        children: [
+            {
+                path: '',
+                component: Index
+            },
+            docRoute
+        ]
     }
 ];
+
+console.log('router: ', routes);
 
 export default new VueRouter({
     routes

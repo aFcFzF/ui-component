@@ -2,13 +2,17 @@
     <router-view></router-view>
 </template>
 
-<style lang="stylus">
-    #app
-        width: 100%
-        height: 100%
-        background-color: white
-    .ov-hidden
-        overflow: hidden
+<style lang="less">
+@import '~@/styles/index.less';
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+    .ov-hidden {
+        overflow: hidden;
+    }
+}
 </style>
 
 <script>

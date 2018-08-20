@@ -9,6 +9,11 @@ import Vue from 'vue';
 import router from './router';
 import './common/all.styl';
 
+// doc全局引入组件
+import comp from '@components';
+console.log('comp', comp);
+Vue.use(comp);
+
 new Vue({
     el: '#app',
     router,

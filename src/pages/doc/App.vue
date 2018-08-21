@@ -3,7 +3,7 @@
 </template>
 
 <style lang="less">
-@import '~@/styles/index.less';
+@import '~@/themes/index.less';
 #app {
     width: 100%;
     height: 100%;

@@ -7,7 +7,6 @@
 import App from './App.vue';
 import Vue from 'vue';
 import router from './router';
-import './common/all.styl';
 
 // doc全局引入组件
 import comp from '@components';

@@ -38,40 +38,50 @@
         </div>
     </div>
 </template>
-<style lang="stylus">
-    .index-page
-        text-align center
-        min-height 100%
-        padding-top 60px
+<style lang="less">
+.index-page {
+    text-align: center;
+    min-height: 100%;
+    padding-top: 60px;
 
-        .index-title
-            color #555
+    .index-title {
+        color: #555;
+    }
 
-        .title-desc
-            color #999
-            line-height 18px
-            font-size 18px
-            margin-bottom 60px
+    .title-desc {
+        color: #999;
+        line-height: 18px;
+        font-size: 18px;
+        margin-bottom: 60px;
+    }
 
-        .form-img
-            width 900px
+    .form-img {
+        width: 900px;
+    }
 
-        .feature-title
-            margin-top 120px
-            margin-bottom 50px
-            color #555
+    .feature-title {
+        margin-top: 120px;
+        margin-bottom: 50px;
+        color: #555;
+    }
 
-        .feature-section
-            display flex
-            justify-content space-around
+    .feature-section {
+        display: flex;
+        justify-content: space-around;
 
-            .item
-                &-icon
-                    width 128px
+        .item {
+            &-icon {
+                width: 128px;
+            }
 
-                &-desc
-                    .caption
-                        font-size 20px
-                        line-height 30px
+            &-desc {
+                .caption {
+                    font-size: 20px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+}
 </style>
 

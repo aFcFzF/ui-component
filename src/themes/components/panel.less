@@ -1,0 +1,47 @@
+@panel-prefix: ~"@{prefix}panel";
+
+.@{panel-prefix}{
+    background: #fff;
+    border-radius: @border-radius;
+    position: relative;
+    border: @border;
+
+    &-no-border {
+        border: none;
+    }
+
+    &:hover {
+        border-color: #eee;
+    }
+
+    &-extra {
+        position: absolute;
+        right: 16px;
+        top: 14px;
+    }
+
+    &-bar {
+        padding: 8px 16px;
+        border-bottom: @border;
+        position: relative;
+        >span{
+            vertical-align: middle;
+        }
+    }
+
+    &-bar &-title {
+        line-height: 26px;
+        font-size: 120%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &-bar &-right {
+        .middle();
+        right: 16px;
+    }
+
+    &-body {
+        padding: 16px;
+    }
+}

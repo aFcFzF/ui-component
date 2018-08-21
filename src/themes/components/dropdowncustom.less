@@ -1,0 +1,35 @@
+@dropdowncustom-prefix: ~"@{prefix}dropdowncustom";
+.@{dropdowncustom-prefix} {
+  display: inline-block;
+  &-show{
+    position: relative;
+    &-toggle &-content{
+      padding-right: 26px;
+    }
+    .rotate-icon-down(false);
+    &-content {
+      display: inline-block;
+      // padding-right: 26px;
+      transition: all 0.2s;
+    }
+  }
+
+  &-show&-disabled{
+    cursor: default;
+    color: @disabled-color !important;
+    >.ui-icon-down{
+      color: @disabled-color !important;
+    }
+  }
+}
+
+.h-text-dropdown{
+  cursor: pointer;
+  &>span{
+    transition: @transition-time;
+    vertical-align: middle;
+  }
+  &:hover, &.@{pop-ref-prefix}{
+    color: @primary-color;
+  }
+}

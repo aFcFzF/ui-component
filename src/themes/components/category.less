@@ -1,0 +1,24 @@
+@category-prefix: ~"@{prefix}category";
+
+.plugin-input(@category-prefix);
+
+.@{category-prefix}{
+  &-item{
+    padding: 3px 5px;
+    cursor: pointer;
+    &:hover{
+      background: @hover-background-color;
+    }
+  }
+
+  &-modal-multiple-tags{
+    min-height: @input-height;
+    padding-right: 180px;
+    >span {
+      .tag-span-func();
+    }
+  }
+  &-modal-single-tag{
+    min-height: @input-height;
+  }
+}

@@ -1,0 +1,121 @@
+@menu-prefix: ~"@{prefix}menu";
+.@{menu-prefix} {
+    display: block;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    list-style: none;
+    font-size: @font-size-mini;
+    position: relative;
+    line-height: 1;
+
+    &-ul {
+        max-height: 0;
+        transition: max-height .3s cubic-bezier(0, 1, 0, 1);
+        overflow: hidden;
+    }
+
+    &-li {
+        >ul>li {
+            >div {
+                padding-left: 50px;
+            }
+            >ul>li {
+                >div {
+                    padding-left: 70px;
+                }
+            }
+        }
+    }
+
+    &-li-opened>&-ul {
+        max-height: 1000px;
+        transition: max-height .8s ease-in-out;
+    }
+
+    &-li-opened>&-show &-show-expand>i {
+        transform: rotate(0deg);
+    }
+
+    &-show {
+        position: relative;
+        padding: 15px 26px;
+        cursor: pointer;
+        transition: @transition-time;
+        &-icon {
+            margin-right: 5px;
+        }
+        &-expand {
+            font-size: 12px;
+            .middle();
+            right: 20px;
+            >i  {
+                transition: @transition-time;
+                transform: rotate(-90deg);
+            }
+        }
+
+        &-count {
+            .middle();
+            right: 60px;
+        }
+    }
+}
+
+.@{menu-prefix}-dark {
+    background: @importance-color;
+    color: darken(@white-color, 20%);
+    .@{menu-prefix} {
+        &-show {
+            border-right: 0 solid transparent;
+            &:hover {
+                color: @white-color;
+            }
+        }
+        &-ul {
+            background: darken(@importance-color, 10%);
+        }
+        &-li {
+            &-selected {
+                background: @primary-color;
+                color: @white-color;
+            }
+        }
+    }
+}
+
+.@{menu-prefix}-white {
+    background: @white-color;
+    .@{menu-prefix} {
+        &-show {
+            &:hover {
+                color: @primary-color;
+            }
+        }
+        &-li {
+            position: relative;
+            .@{menu-prefix} {
+                &-show {
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        width: 0;
+                        background: @primary-color;
+                    }
+                }
+
+                &-li-selected {
+                    background-color: tint(@primary-color, 90%);
+                    color: @primary-color;
+                    &:after {
+                        width: 3px;
+                        transition: @transition-time;
+                    }
+                }
+            }
+        }
+    }
+}

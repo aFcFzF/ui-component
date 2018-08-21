@@ -1,0 +1,85 @@
+@prefix : ui-;
+// Color
+@primary-color : #457EFF; // 主要颜色 / 状态中
+@hover-color: #1D59E0;
+@link-color : @primary-color;
+@green-color : #63CE81; // 正确/通过
+@yellow-color : #FFD735; // 提示/中间状态
+@red-color : #F95D5D; // 错误/警告
+
+
+@importance-color: #333; // 主要颜色
+@secondary-color: #666; // 次要信息
+@describe-color: #9d9d9d; // 一般信息
+@weakest-color: #c7c7c7; // 最浅色
+
+@split-color: #eee; // 分割线/输入框
+@fill-color: #f9f9f9; // 强调填充/不可输入
+@white-color: #fff; // 默认白色
+
+//hover
+@hover-background-color: rgb(245, 245, 245);
+
+
+//tag
+@tag-background-color: lighten(@primary-color, 37%);
+@tag-color: @primary-color;
+
+//font-size
+@font-size : 14px;
+@font-size-mini : 13px;
+@font-size-input : @font-size-mini;
+@font-size-input-tag : 12px;
+@font-size-badge : 12px;
+
+
+@font-family : "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+@line-height : 1.5;
+@line-height-computed : floor((@font-size * @line-height));
+
+// Input
+@input-height : 30px;
+
+//border
+@border-color: @split-color;
+@border: 1px solid @split-color;
+
+//disabled
+@disabled-cursor: not-allowed;
+@disabled-color: @describe-color;
+@disabled-border-color: @weakest-color;
+@disabled-background-color: @fill-color;
+
+//radius
+@border-radius : 4px;
+@btn-border-radius: 4px;
+
+//box-shadow
+@box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+@box-shadow-button: 0 1px 1px 0 @split-color;
+@box-shadow-notify: 0 5px 10px rgba(0, 0, 0, 0.1);
+@box-shadow-dropdown : 0 5px 10px rgba(0, 0, 0, 0.1);
+@box-shadow-select-dropdown: 0 1px 6px rgba(0, 0, 0, .2);
+
+//switch
+@switch-hight: 26px;
+@min-switch-height: 18px;
+
+//dropdown,tooltip触发的el添加相关class
+@pop-ref-prefix: h-pop-trigger;
+@icon-prefix: h-icon-;
+// Z-index
+@zindex-loading : 8;
+@zindex-affix : 10;
+@zindex-backtop : 10;
+@zindex-select : 1000;
+@zindex-dropdown : 1000;
+@zindex-modal : 1000;
+@zindex-notify : 1000;
+@zindex-message : 1010;
+@zindex-tooltip : 1060;
+@zindex-loading-fullscreen : 2000;
+@zindex-loading-bar : 2000;
+// Animation
+@animation-time : .3s;
+@transition-time : .2s;

@@ -1,0 +1,96 @@
+@modal-cls: ~"@{prefix}modal";
+@notify-cls: ~"@{prefix}notify";
+@modal-padding: 15px;
+.@{modal-cls} {
+    // z-index: @zindex-modal;
+    // position: absolute;
+    position: static;
+    .@{notify-cls} {
+        &-body{
+            position: relative;
+            overflow: initial;
+        }
+        &-container {
+            margin-bottom: 100px;
+            min-width: 350px;
+            header {
+                min-height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+                padding-left: @modal-padding;
+            }
+            footer {
+                padding: 10px @modal-padding;
+                text-align: right;
+            }
+        }
+        &-content {
+            padding: 10px @modal-padding;
+            &.@{notify-cls}-content-component{
+                padding: 0;
+            }
+        }
+    }
+
+    
+    &-full-screen{
+      .h-notify-container{
+        margin-bottom: 0;
+        transform: none;
+        top: 30px !important;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        .h-notify-content{
+          flex: 1;
+          overflow: auto;
+        }
+      }
+    }
+
+    &.@{notify-cls} {
+        &-has-mask{
+            .@{notify-cls} {
+                &-body{
+                    position: fixed;
+                    overflow: auto;
+                }
+                &-container {
+                    position: absolute;
+                }
+            }
+        }
+        &-no-mask {
+            .@{notify-cls} {
+                &-container {
+                    z-index: 1000;
+                }
+            }
+        }
+
+        &-has-divider{
+            header{
+                border-bottom: 1px solid @border-color;
+            }
+            footer{
+                border-top: 1px solid @border-color;
+            }
+        }
+        &-show {
+            .@{notify-cls}-container-center {
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &.@{modal-cls}-full-screen{
+              .h-notify-container{
+                top: 0 !important;
+                bottom: 0;
+                left: 0;
+                right: 0;
+              }
+            }
+        }
+    }
+}

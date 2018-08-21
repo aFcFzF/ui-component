@@ -10,7 +10,8 @@
         "rules": {
             "no-console": 0,
             "no-require": 0,
-            "fecs-esnext-ext": ["js", "jsx", "es", "san", "vue"]
+            "fecs-esnext-ext": ["js", "jsx", "es", "san", "vue"],
+            "fecs-properties-quote": 0
         },
         "globals": {
             Box

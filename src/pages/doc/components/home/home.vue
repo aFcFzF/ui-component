@@ -68,7 +68,7 @@
                     text-decoration: none;
                     color: #555;
                     margin-left: 10px;
-                    transition: color 0.3s;
+                    transition: color .3s;
 
                     &:hover {
                         color: #4C8EFF;

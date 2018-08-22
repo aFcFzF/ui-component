@@ -29,7 +29,7 @@
     }
 
     &-li-opened>&-ul {
-        max-height: 1000px;
+        max-height: 3000px;
         transition: max-height .8s ease-in-out;
     }
 
@@ -42,9 +42,11 @@
         padding: 15px 26px;
         cursor: pointer;
         transition: @transition-time;
+
         &-icon {
             margin-right: 5px;
         }
+
         &-expand {
             font-size: 12px;
             .middle();
@@ -52,6 +54,16 @@
             >i  {
                 transition: @transition-time;
                 transform: rotate(-90deg);
+            }
+        }
+
+        &-disabled {
+            color: @describe-color;
+            font-size: 14px;
+            .@{menu-prefix}-show {
+                &-expand {
+                    display: none;
+                }
             }
         }
 
@@ -88,8 +100,18 @@
     background: @white-color;
     .@{menu-prefix} {
         &-show {
+            color: @importance-color;
             &:hover {
                 color: @primary-color;
+            }
+            &-disabled {
+                color: @describe-color;
+                &:hover {
+                    color: @describe-color;
+                }
+            }
+            &-emphasis {
+                font-weight: 700;
             }
         }
         &-li {

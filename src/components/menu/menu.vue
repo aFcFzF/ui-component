@@ -17,7 +17,7 @@ import MenuItem from './menu-item';
 const prefix = 'ui-menu';
 
 const initStatus = (list = [], param, parent) => {
-    let datas = [];
+    let dts = [];
     for (let data of list) {
         let obj = {
             key: data[param.keyName],
@@ -29,13 +29,16 @@ const initStatus = (list = [], param, parent) => {
                 opened: false,
                 disabled: !!data.disabled
             },
+            style: {
+                emphasis: !!data.emphasis
+            },
             parent
         };
         let children = data[param.childrenName] || [];
         obj.children = initStatus(children, param, obj);
-        datas.push(obj);
+        dts.push(obj);
     }
-    return datas;
+    return dts;
 };
 
 const getObj = (list = [], param) => {
@@ -79,7 +82,7 @@ export default {
             param,
             status: {
                 selected: null,
-                opened: []
+                opened: this.getExp(this.datas) || []
             }
         };
     },
@@ -98,6 +101,25 @@ export default {
         }
     },
     methods: {
+
+        /**
+         * getExp 找出展开的字段
+         *
+         * @param {Array} o 必须是array
+         * @param {Array} r 返回值
+         * @return {Array} 其实就是r
+        */
+        getExp(o, r = []) {
+            const t = o =>
+                o.forEach(e => {
+                    e.open && r.push(e.key);
+                    e.children && t(e.children);
+                });
+            t(o);
+            console.log('折叠字段？', r);
+            return r;
+        },
+
         select(key) {
             let selected = this.menuobj[key];
             if (selected) {
@@ -105,6 +127,7 @@ export default {
                 this.status.opened = updateOpened(selected);
             }
         },
+
         trigger(data) {
             if (data.type === 'togglemenuEvent') {
                 this.status.opened = utils.toggleValue(

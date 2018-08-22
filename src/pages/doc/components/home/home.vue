@@ -21,6 +21,10 @@
     </div>
 </template>
 <style lang="less">
+html,
+body {
+    height: 100%;
+}
 .home-page {
     height: 100%;
 
@@ -86,6 +90,7 @@
     .router-view {
         width: 1200px;
         margin: 0 auto;
+        min-height: 100%;
     }
 
     .home-footer {

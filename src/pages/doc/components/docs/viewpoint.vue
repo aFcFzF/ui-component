@@ -29,15 +29,18 @@ import list from '@/pages/doc/common/config/menu.json';
 const convertDts = o => Object.entries(o).map(([k, v]) => {
     const d = {
         title: v.name || k,
-        key: k
+        key: k,
+        disabled: v.disabled,
+        open: v.open,
+        emphasis: v.emphasis
     };
     let child = null;
     v.subList && (child = convertDts(v.subList));
-    child && (d.children = child);
+    child && (d.children = child, d.open = true);
     return d;
 });
 const menuList = convertDts(list);
-
+console.log('list: ', menuList);
 export default {
     data() {
         return {
@@ -47,6 +50,7 @@ export default {
             //     key: 'favor',
             //     icon: 'ui-icon-star',
             //     count: 20,
+            //     open: true,
             //     children: [
             //         {
             //             title: '类型-1',
@@ -56,6 +60,8 @@ export default {
             //         {
             //             title: '类型-2',
             //             key: '3-2',
+            //             open: true,
+            //             disabled: true,
             //             children: [
             //                 {
             //                     title: '类型-2-3',

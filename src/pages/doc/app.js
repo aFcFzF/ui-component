@@ -9,9 +9,11 @@ import Vue from 'vue';
 import router from './router';
 
 // doc全局引入组件
-import comp from '@components';
-console.log('comp', comp);
-Vue.use(comp);
+import uiComp from '@components';
+import demoBlock from './components/docs/demo-block';
+
+Vue.use(uiComp);
+Vue.component('DemoBlock', demoBlock);
 
 new Vue({
     el: '#app',

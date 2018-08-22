@@ -116,7 +116,6 @@ export default {
                     e.children && t(e.children);
                 });
             t(o);
-            console.log('折叠字段？', r);
             return r;
         },
 

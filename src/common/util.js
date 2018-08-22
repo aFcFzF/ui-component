@@ -4,3 +4,4 @@
 */
 import Vue from 'vue';
 export const event = new Vue();
+export const version = '1.0.0';

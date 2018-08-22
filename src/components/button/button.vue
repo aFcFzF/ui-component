@@ -6,7 +6,6 @@
 <script>
 const prefix = 'ui-btn';
 export default {
-    name: 'uiButton',
     props: {
         color: String,
         textColor: String,

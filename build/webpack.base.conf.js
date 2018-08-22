@@ -3,12 +3,34 @@
 *@author: afcfzf (9301462@qq.com)
 */
 
-const {join, resolve} = require('path');
+const { join, resolve } = require('path');
 const webpack = require('webpack');
 const glob = require('glob');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// markdown 配置
+const slugify = require('transliteration').slugify;
+const md = require('markdown-it')();
+const striptags = require('./strip-tags');
+
+function convert(str) {
+    str = str.replace(/(&#x)(\w{4});/gi, function ($0) {
+        return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
+    });
+    return str;
+}
+
+function wrap(render) {
+    return function () {
+        return render.apply(this, arguments)
+            .replace('<code v-pre class="', '<code class="hljs ')
+            .replace('<code>', '<code class="hljs">');
+    };
+}
+
+// markdown 配置_结束
 
 const extractCSS = new ExtractTextPlugin({
     filename: 'assets/css/[name].css',
@@ -124,7 +146,54 @@ const config = {
             },
             {
                 test: /\.md$/,
-                loader: 'vue-markdown-loader'
+                loader: 'vue-markdown-loader',
+                options: {
+                    use: [
+                        [require('markdown-it-anchor'), {
+                            level: 2,
+                            slugify: slugify,
+                            permalink: true,
+                            permalinkBefore: true
+                        }],
+                        [require('markdown-it-container'), 'demo', {
+                            validate(params) {
+                                return params.trim().match(/^demo\s*(.*)$/);
+                            },
+
+                            render(tokens, idx) {
+                                var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
+                                if (tokens[idx].nesting === 1) {
+                                    var description = (m && m.length > 1) ? m[1] : '';
+                                    var content = tokens[idx + 1].content;
+                                    var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
+                                    var script = striptags.fetch(content, 'script');
+                                    var style = striptags.fetch(content, 'style');
+                                    var jsfiddle = {html: html, script: script, style: style};
+                                    var descriptionHTML = description
+                                        ? md.render(description)
+                                        : '';
+
+                                    jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
+
+                                    return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
+                                    <div class="source" slot="source">${html}</div>
+                                    ${descriptionHTML}
+                                    <div class="highlight" slot="highlight">`;
+                                }
+                                return '</div></demo-block>\n';
+                            }
+                        }],
+                        [require('markdown-it-container'), 'tip'],
+                        [require('markdown-it-container'), 'warning']
+                    ],
+                    preprocess(MarkdownIt, source) {
+                        MarkdownIt.renderer.rules['table_open'] = function () {
+                            return '<table class="table">';
+                        };
+                        MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
+                        return source;
+                    }
+                }
             },
             {
                 test: /\.js$/,

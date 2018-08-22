@@ -4,7 +4,6 @@
 */
 import {event} from '@/common/util.js';
 import menuCfg from '../common/config/menu.json';
-import('../components/docs/viewpoint.vue').then(mod => console.log(mod));
 
 event.$on('begin-loading', () => console.log('哈哈哈哈哈'));
 event.$on('finish-loading', () => console.log('结束了'));

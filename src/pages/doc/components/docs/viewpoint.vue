@@ -3,7 +3,7 @@
         <p>我是viewpoint额</p>
         <!-- <Button>按钮</Button> -->
         <div class="component-list">
-            <Menu :datas="menuList" className="ui-menu-white"></Menu>
+            <Menu :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></Menu>
         </div>
         <div class="component-doc">
             <router-view></router-view>
@@ -40,7 +40,7 @@ const convertDts = o => Object.entries(o).map(([k, v]) => {
     return d;
 });
 const menuList = convertDts(list);
-console.log('list: ', menuList);
+
 export default {
     data() {
         return {
@@ -76,6 +76,11 @@ export default {
             //     ]
             // }]
         };
+    },
+    methods: {
+        menuSelHdl(e) {
+            this.$router.push(e.key);
+        }
     }
 };
 </script>

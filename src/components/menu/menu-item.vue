@@ -41,9 +41,6 @@ export default {
     data() {
         return {};
     },
-    mounted() {
-        console.log('bold', this.data.bold)
-    },
     methods: {
         trigger(data) {
             this.$emit('trigger', data);

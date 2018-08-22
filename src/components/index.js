@@ -38,7 +38,7 @@ import Menu, {MenuItem} from './menu';
 // import Tooltip from './components/tooltip';
 // import Uploader from './components/uploader';
 // import AutoComplete from './components/autocomplete';
-// import {Row, Col} from './components/layout';
+import {Row, Col} from './layout';
 // import Timeline from './components/timeline';
 import {Button, ButtonGroup} from './button';
 // import TextEllipsis from './components/textellipsis';
@@ -82,7 +82,7 @@ const components = {
     // FormItem: Form.Item,
     // FormItemList: Form.ItemList,
     Menu,
-    MenuItem
+    MenuItem,
     // hMenuItem: Menu.menuItem,
     // Modal: modal.Modal,
     // ModalComponent: modal.ModalComponent,
@@ -92,14 +92,14 @@ const components = {
     // Progress,
     // Radio,
     // Rate,
-    // Row,
+    Row,
     // Search,
     // Select,
     // Slider,
     // Steps,
     // hSwitch: Switch,
     // SwitchList,
-    // Col,
+    Col,
     // Timeline,
     // TimelineItem: Timeline.Item,
     // Loading,
@@ -157,6 +157,7 @@ const install = function (Vue, opts) {
 
     Object.entries(components).forEach(([k, v]) => {
         Vue.component(k, v);
+        Vue.component(`ui${k}`, v);
         // debugger;
         // if (k.indexOf('h') !== 0) {
         //     Vue.component(`h${k}`, components[k]);

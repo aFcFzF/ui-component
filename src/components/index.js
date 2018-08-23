@@ -26,7 +26,7 @@ import Menu, {MenuItem} from './menu';
 // import Loading from './components/loading';
 // import Steps from './components/steps';
 // import Search from './components/search';
-// import Select from './components/select';
+import Select from './select';
 import Switch from './switch';
 import SwitchList from './switchlist';
 // import {Table, TableItem} from './components/table';
@@ -94,7 +94,7 @@ const components = {
     // Rate,
     Row,
     // Search,
-    // Select,
+    Select,
     // Slider,
     // Steps,
     uiSwitch: Switch,

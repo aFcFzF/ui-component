@@ -1,114 +1,113 @@
 <template>
-  <div :class="showCls">
-    <slot></slot>
-    <div class="h-tooltip-inner-content">{{content}}<slot name='content'></slot></div>
-  </div>
+    <div :class="showCls">
+        <slot></slot>
+        <div class="ui-tooltip-inner-content">{{content}}<slot name="content"></slot></div>
+    </div>
 </template>
 <script>
 import Tooltip from '../../plugins/tooltip';
 
-const prefix = 'h-tooltip';
+const prefix = 'ui-tooltip';
 
 export default {
-  name: 'hTooltip',
-  props: {
-    trigger: {
-      type: String,  //click,hover
-      default: "hover"
+    props: {
+        trigger: {
+            type: String, // click orhover
+            default: 'hover'
+        },
+        content: String,
+        placement: {
+            type: String,
+            default: 'top'
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        className: {
+            type: String
+        },
+        theme: String,
+        delay: {
+            type: Number,
+            default: 0
+        }
     },
-    content: String,
-    placement: {
-      type: String,
-      default: 'top'
+    mounted() {
+        this.init();
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    className: {
-      type: String,
-    },
-    theme: String,
-    delay: {
-      type: Number,
-      default: 0
-    },
-  },
-  mounted() {
-    this.init();
-  },
-  methods: {
-    show() {
-      if (this.tooltip) {
-        this.tooltip.show();
-      }
-    },
-    hide() {
-      if (this.tooltip) {
-        this.tooltip.hide();
-      }
-    },
-    update() {
-      if (this.tooltip) {
-        this.tooltip.update();
-      }
-    },
-    init() {
-      this.$nextTick(() => {
-        let el = this.$el;
-        let content = this.$el.querySelector('.h-tooltip-inner-content');
-        this.tooltip = new Tooltip(el, {
-          content,
-          theme: this.theme,
-          html: true,
-          trigger: this.trigger,
-          className: this.className,
-          container: document.body,
-          placement: this.placement,
-          disabled: this.disabled,
-          delay: this.delay,
-          events: {
-            show: ()=>{
-              this.$emit('show');
-            },
-            hide: ()=>{
-              this.$emit('hide');
+    methods: {
+        show() {
+            if (this.tooltip) {
+                this.tooltip.show();
             }
-          }
-        });
-      });
-    }
-  },
-  watch: {
-    disabled() {
-      if(!this.tooltip) return;
-      if (!this.disabled) {
-        this.tooltip.enabled()
-      } else {
-        this.tooltip.disabled()
-      }
+        },
+        hide() {
+            if (this.tooltip) {
+                this.tooltip.hide();
+            }
+        },
+        update() {
+            if (this.tooltip) {
+                this.tooltip.update();
+            }
+        },
+        init() {
+            this.$nextTick(() => {
+                let el = this.$el;
+                let content = this.$el.querySelector('.ui-tooltip-inner-content');
+                this.tooltip = new Tooltip(el, {
+                    content,
+                    theme: this.theme,
+                    html: true,
+                    trigger: this.trigger,
+                    className: this.className,
+                    container: document.body,
+                    placement: this.placement,
+                    disabled: this.disabled,
+                    delay: this.delay,
+                    events: {
+                        show: () => {
+                            this.$emit('show');
+                        },
+                        hide: () => {
+                            this.$emit('hide');
+                        }
+                    }
+                });
+            });
+        }
     },
-    content() {
-      if(!this.tooltip) return;
-      this.tooltip.update();
-    }
-  },
-  computed: {
-    tooltipCls() {
-      return {
-        [`${prefix}`]: true
-      }
+    watch: {
+        disabled() {
+            if (!this.tooltip) {
+                return;
+            }
+            !this.disabled ? this.tooltip.enabled() : this.tooltip.disabled();
+        },
+        content() {
+            if (!this.tooltip) {
+                return;
+            }
+            this.tooltip.update();
+        }
     },
-    showCls() {
-      return {
-        [`${prefix}-show`]: true
-      }
-    },
-    groupCls() {
-      return {
-        [`${prefix}`]: true
-      }
+    computed: {
+        tooltipCls() {
+            return {
+                [`${prefix}`]: true
+            };
+        },
+        showCls() {
+            return {
+                [`${prefix}-show`]: true
+            };
+        },
+        groupCls() {
+            return {
+                [`${prefix}`]: true
+            };
+        }
     }
-  }
 };
 </script>

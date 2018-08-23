@@ -54,7 +54,7 @@
     <ui-button class="ui-btn-circle">圆角按钮</ui-button>
     <ui-button class="ui-btn-circle ui-btn-text-primary">主要按钮</ui-button>
     <ui-button class="ui-btn-circle ui-btn-text-green">成功按钮</ui-button>
-    <ui-button class="ui-btn-circle ui-btn-text-infoy">信息按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-info">信息按钮</ui-button>
     <ui-button class="ui-btn-circle ui-btn-text-yellow">警告按钮</ui-button>
     <ui-button class="ui-btn-circle ui-btn-text-red">危险按钮</ui-button>
 </ui-row>
@@ -88,11 +88,11 @@
 
 <ui-row>
     <ui-button plain disabled>朴素按钮</ui-button>
-    <ui-button type="primary" plain disabled>主要按钮</ui-button>
-    <ui-button type="success" plain disabled>成功按钮</ui-button>
-    <ui-button type="info" plain disabled>信息按钮</ui-button>
-    <ui-button type="warning" plain disabled>警告按钮</ui-button>
-    <ui-button type="danger" plain disabled>危险按钮</ui-button>
+    <ui-button class="ui-btn-text-primary" disabled>主要按钮</ui-button>
+    <ui-button class="ui-btn-text-green" disabled>成功按钮</ui-button>
+    <ui-button class="ui-btn-text-info" disabled>信息按钮</ui-button>
+    <ui-button class="ui-btn-text-yellow" disabled>警告按钮</ui-button>
+    <ui-button class="ui-btn-text-red" disabled>危险按钮</ui-button>
 </ui-row>
 ```
 :::

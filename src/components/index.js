@@ -27,15 +27,15 @@ import Menu, {MenuItem} from './menu';
 // import Steps from './components/steps';
 // import Search from './components/search';
 // import Select from './components/select';
-// import Switch from './components/switch';
-// import SwitchList from './components/switchlist';
+import Switch from './switch';
+import SwitchList from './switchlist';
 // import {Table, TableItem} from './components/table';
 // import Tabs from './components/tabs';
 // import TagInput from './components/taginput';
 // import Tree from './components/tree';
 // import TreePicker from './components/treepicker';
 // import NumberInput from './components/numberinput';
-// import Tooltip from './components/tooltip';
+import Tooltip from './tooltip';
 // import Uploader from './components/uploader';
 // import AutoComplete from './components/autocomplete';
 import {Row, Col} from './layout';
@@ -97,8 +97,8 @@ const components = {
     // Select,
     // Slider,
     // Steps,
-    // hSwitch: Switch,
-    // SwitchList,
+    uiSwitch: Switch,
+    SwitchList,
     Col,
     // Timeline,
     // TimelineItem: Timeline.Item,
@@ -107,7 +107,7 @@ const components = {
     // Table,
     // TableItem,
     // Tabs,
-    // Tooltip,
+    Tooltip,
     // Tree,
     // TreePicker,
     // Uploader,
@@ -157,11 +157,7 @@ const install = function (Vue, opts) {
 
     Object.entries(components).forEach(([k, v]) => {
         Vue.component(k, v);
-        Vue.component(`ui${k}`, v);
-        // debugger;
-        // if (k.indexOf('h') !== 0) {
-        //     Vue.component(`h${k}`, components[k]);
-        // }
+        k.indexOf('ui') === -1 && Vue.component(`ui${k}`, v);
     });
 
     // Object.keys(filters).forEach(key => {

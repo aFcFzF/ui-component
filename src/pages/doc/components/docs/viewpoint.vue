@@ -1,9 +1,9 @@
 <template>
     <div class="doc-page">
-        <p>我是viewpoint额</p>
+        <!-- <p>我是viewpoint额</p> -->
         <!-- <Button>按钮</Button> -->
         <div class="component-list">
-            <Menu :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></Menu>
+            <ui-menu :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
         </div>
         <div class="component-doc">
             <router-view></router-view>
@@ -12,6 +12,7 @@
 </template>
 <style lang="less">
 .doc-page {
+    margin-top: 50px;
     .component-list {
         width: 200px;
         float: left;

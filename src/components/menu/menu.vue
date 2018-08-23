@@ -1,12 +1,12 @@
 <template>
     <ul :class="classes">
-        <MenuItem v-for="menu of menuDatas"
+        <ui-menuItem v-for="menu of menuDatas"
             :key="menu.key"
             :data="menu"
             :param="param"
             :status="status"
             @trigger="trigger">
-        </MenuItem>
+        </ui-menuItem>
     </ul>
 </template>
 <script>
@@ -144,7 +144,7 @@ export default {
         }
     },
     components: {
-        MenuItem
+        uiMenuItem: MenuItem
     }
 };
 </script>

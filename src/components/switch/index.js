@@ -1,3 +1,6 @@
-import Switch from './switch';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Switch;
+export {default} from './switch.vue';

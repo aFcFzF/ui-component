@@ -1,3 +1,6 @@
-import Tooltip from './tooltip';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Tooltip;
+export {default} from './tooltip';

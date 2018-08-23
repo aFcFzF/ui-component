@@ -16,6 +16,11 @@
         border-color: shade(@color, 20%);
         background-color: shade(@color, 20%);
     }
+    &[disabled] {
+        cursor: @disabled-cursor;
+        border-color: tint(@color, 60%);
+        background-color: tint(@color, 60%);
+    }
 }
 
 .btn-text-color(@color, @default: true) {
@@ -31,6 +36,12 @@
     &:active {
         border-color: darken(@color, 10%);
         color: darken(@color, 10%);
+    }
+    &[disabled] {
+        cursor: @disabled-cursor;
+        border-color: tint(@color, 70%);
+        color: tint(@color, 50%);
+        background-color: tint(@color, 95%);
     }
 }
 
@@ -129,21 +140,21 @@
         }
     }
 
-    &[disabled] {
-        cursor: @disabled-cursor;
-        background-color: @disabled-background-color;
-        border-color: @disabled-border-color;
-        color: @disabled-color;
-        &:hover {
-            background-color: @disabled-background-color;
-            border-color: @disabled-border-color;
-            color: @disabled-color;
-        }
-        &.@{btn-prefix}-text {
-            border-color: transparent;
-            background-color: transparent;
-        }
-    }
+    //&[disabled] {
+        // cursor: @disabled-cursor;
+        // background-color: @disabled-background-color;
+        // border-color: @disabled-border-color;
+        // color: @disabled-color;
+        // &:hover {
+        //     background-color: @disabled-background-color;
+        //     border-color: @disabled-border-color;
+        //     color: @disabled-color;
+        // }
+        // &.@{btn-prefix}-text {
+        //     border-color: transparent;
+        //     background-color: transparent;
+        // }
+    //}
     +.@{btn-prefix} {
         margin-left: 4px;
     }

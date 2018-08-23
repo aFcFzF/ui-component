@@ -19,7 +19,7 @@
             v-if="data.children && data.children.length > 0"
             class="ui-menu-ul"
         >
-            <MenuItem
+            <ui-menuItem
                 v-for="child of data.children"
                 :key="child.key"
                 :data="child"
@@ -27,7 +27,7 @@
                 :status="status"
                 @trigger="trigger"
             >
-            </MenuItem>
+            </ui-menuItem>
         </ul>
     </li>
 </template>

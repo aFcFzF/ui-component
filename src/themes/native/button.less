@@ -5,12 +5,16 @@
     border-color: darken(@color, 2%);
     color: @white-color;
     &:hover {
-        border-color: lighten(@color, @percent);
-        background-color: lighten(@color, @percent);
+        //border-color: lighten(@color, @percent);
+        // background-color: lighten(@color, @percent);
+        border-color: shade(@color, 10%);
+        background-color: shade(@color, 10%);
     }
     &:active {
-        border-color: darken(@color, 8%);
-        background-color: darken(@color, 8%);
+        // border-color: darken(@color, 8%);
+        // background-color: darken(@color, 8%);
+        border-color: shade(@color, 20%);
+        background-color: shade(@color, 20%);
     }
 }
 
@@ -22,6 +26,7 @@
     &:hover {
         border-color: lighten(@color, 10%);
         color: lighten(@color, 10%);
+        background-color: tint(@color, 90%);
     }
     &:active {
         border-color: darken(@color, 10%);
@@ -32,19 +37,18 @@
 .@{btn-prefix} {
     border: none;
     outline: none;
-    padding: 8px 15px;
+    padding: 12px 20px;
     font-family: inherit;
     display: inline-block;
     border-radius: @btn-border-radius;
     color: inherit;
-    font-size: @font-size-mini;
+    font-size: @font-size;
     line-height: 1;
     box-sizing: border-box;
     cursor: pointer;
     transition: all @transition-time;
     background-color: transparent;
     border: 1px solid @weakest-color;
-    box-shadow: @box-shadow-button;
     .btn-text-color(@primary-color, false);
     >i {
         font-size: 90%;
@@ -73,8 +77,8 @@
         &-green {
             .btn-color(@green-color, 5%);
         }
-        &-blue {
-            .btn-color(@primary-color);
+        &-info {
+            .btn-color(@info-color);
         }
         &-text {
             box-shadow: none;
@@ -94,13 +98,19 @@
             &-green {
                 .btn-text-color(@green-color);
             }
-            &-blue {
-                .btn-text-color(@primary-color);
+            &-info {
+                .btn-text-color(@info-color);
             }
         }
         &-no-border {
             box-shadow: none;
             border-color: transparent !important;
+        }
+        &-no-fill {
+            background: none;
+            &:hover {
+                background: none;
+            }
         }
         &-circle {
             border-radius: 20px;
@@ -137,14 +147,14 @@
     +.@{btn-prefix} {
         margin-left: 4px;
     }
-    &.@{btn-prefix}-large {
-        padding: 10px 20px;
+    &.@{btn-prefix}-l {
+        padding: 14px 22px;
     }
-    &.@{btn-prefix}-normal {
-        padding: 7px 16px;
+    &.@{btn-prefix}-s {
+        padding: 9px 16px;
     }
-    &.@{btn-prefix}-small {
-        padding: 5px 10px;
+    &.@{btn-prefix}-xs {
+        padding: 7px 10px;
     }
     &-group {
         display: inline-block;
@@ -179,13 +189,13 @@
                 z-index: -1;
             }
             &-l>.@{btn-prefix} {
-                padding: 10px 20px;
+                padding: 14px 22px;
             }
             &-s>.@{btn-prefix} {
-                padding: 5px 8px;
+                padding: 9px 8px;
             }
             &-xs>.@{btn-prefix} {
-                padding: 2px 6px;
+                padding: 7px 6px;
                 font-size: 90%;
             }
         }

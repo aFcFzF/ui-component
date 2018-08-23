@@ -33,39 +33,39 @@
 
 ```html
 <ui-row>
-  <ui-button>默认按钮</ui-button>
-  <ui-button type="primary">主要按钮</ui-button>
-  <ui-button type="success">成功按钮</ui-button>
-  <ui-button type="info">信息按钮</ui-button>
-  <ui-button type="warning">警告按钮</ui-button>
-  <ui-button type="danger">危险按钮</ui-button>
+    <ui-button>默认按钮</ui-button>
+    <ui-button class="ui-btn-primary">主要按钮</ui-button>
+    <ui-button class="ui-btn-green">成功按钮</ui-button>
+    <ui-button class="ui-btn-info">信息按钮</ui-button>
+    <ui-button class="ui-btn-yellow">警告按钮</ui-button>
+    <ui-button class="ui-btn-red">危险按钮</ui-button>
 </ui-row>
 
 <ui-row>
-  <ui-button plain>朴素按钮</ui-button>
-  <ui-button type="primary" plain>主要按钮</ui-button>
-  <ui-button type="success" plain>成功按钮</ui-button>
-  <ui-button type="info" plain>信息按钮</ui-button>
-  <ui-button type="warning" plain>警告按钮</ui-button>
-  <ui-button type="danger" plain>危险按钮</ui-button>
+    <ui-button>朴素按钮</ui-button>
+    <ui-button class="ui-btn-text-primary">主要按钮</ui-button>
+    <ui-button class="ui-btn-text-green">成功按钮</ui-button>
+    <ui-button class="ui-btn-text-info">信息按钮</ui-button>
+    <ui-button class="ui-btn-text-yellow">警告按钮</ui-button>
+    <ui-button class="ui-btn-text-red">危险按钮</ui-button>
 </ui-row>
 
 <ui-row>
-  <ui-button round>圆角按钮</ui-button>
-  <ui-button type="primary" round>主要按钮</ui-button>
-  <ui-button type="success" round>成功按钮</ui-button>
-  <ui-button type="info" round>信息按钮</ui-button>
-  <ui-button type="warning" round>警告按钮</ui-button>
-  <ui-button type="danger" round>危险按钮</ui-button>
+    <ui-button class="ui-btn-circle">圆角按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-primary">主要按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-green">成功按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-infoy">信息按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-yellow">警告按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-red">危险按钮</ui-button>
 </ui-row>
 
 <ui-row>
-  <ui-button icon="el-icon-search" circle></ui-button>
-  <ui-button type="primary" icon="el-icon-edit" circle></ui-button>
-  <ui-button type="success" icon="el-icon-check" circle></ui-button>
-  <ui-button type="info" icon="el-icon-message" circle></ui-button>
-  <ui-button type="warning" icon="el-icon-star-off" circle></ui-button>
-  <ui-button type="danger" icon="el-icon-delete" circle></ui-button>
+    <ui-button class="ui-btn-icon-circle"><i class="ui-icon-search"></i></ui-button>
+    <ui-button class="ui-btn-icon-circle ui-btn-text-primary"><i class="ui-icon-star"></i></ui-button>
+    <ui-button class="ui-btn-icon-circle ui-btn-text-green"><i class="ui-icon-star"></i></ui-button>
+    <ui-button class="ui-btn-icon-circle ui-btn-text-info"><i class="ui-icon-star"></i></ui-button>
+    <ui-button class="ui-btn-icon-circle ui-btn-text-yellow"><i class="ui-icon-star"></i></ui-button>
+    <ui-button class="ui-btn-icon-circle ui-btn-text-red"><i class="ui-icon-star"></i></ui-button>
 </ui-row>
 ```
 :::
@@ -78,21 +78,21 @@
 
 ```html
 <ui-row>
-  <ui-button disabled>默认按钮</ui-button>
-  <ui-button type="primary" disabled>主要按钮</ui-button>
-  <ui-button type="success" disabled>成功按钮</ui-button>
-  <ui-button type="info" disabled>信息按钮</ui-button>
-  <ui-button type="warning" disabled>警告按钮</ui-button>
-  <ui-button type="danger" disabled>危险按钮</ui-button>
+    <ui-button disabled>默认按钮</ui-button>
+    <ui-button class="ui-btn-primary" disabled>主要按钮</ui-button>
+    <ui-button class="ui-btn-green" disabled>成功按钮</ui-button>
+    <ui-button class="ui-btn-info" disabled>信息按钮</ui-button>
+    <ui-button class="ui-btn-yellow" disabled>警告按钮</ui-button>
+    <ui-button class="ui-btn-red" disabled>危险按钮</ui-button>
 </ui-row>
 
 <ui-row>
-  <ui-button plain disabled>朴素按钮</ui-button>
-  <ui-button type="primary" plain disabled>主要按钮</ui-button>
-  <ui-button type="success" plain disabled>成功按钮</ui-button>
-  <ui-button type="info" plain disabled>信息按钮</ui-button>
-  <ui-button type="warning" plain disabled>警告按钮</ui-button>
-  <ui-button type="danger" plain disabled>危险按钮</ui-button>
+    <ui-button plain disabled>朴素按钮</ui-button>
+    <ui-button type="primary" plain disabled>主要按钮</ui-button>
+    <ui-button type="success" plain disabled>成功按钮</ui-button>
+    <ui-button type="info" plain disabled>信息按钮</ui-button>
+    <ui-button type="warning" plain disabled>警告按钮</ui-button>
+    <ui-button type="danger" plain disabled>危险按钮</ui-button>
 </ui-row>
 ```
 :::
@@ -103,8 +103,20 @@
 
 :::demo
 ```html
-<ui-button type="text">文字按钮</ui-button>
-<ui-button type="text" disabled>文字按钮</ui-button>
+<ui-button class="ui-btn-no-border">文字按钮</ui-button>
+<ui-button class="ui-btn-text-primary ui-btn-no-border">主要按钮</ui-button>
+<ui-button class="ui-btn-text-green ui-btn-no-border">成功按钮</ui-button>
+<ui-button class="ui-btn-text-info ui-btn-no-border">信息按钮</ui-button>
+<ui-button class="ui-btn-text-yellow ui-btn-no-border">警告按钮</ui-button>
+<ui-button class="ui-btn-text-red ui-btn-no-border">危险按钮</ui-button>
+<br>
+<br>
+<ui-button class="ui-btn-no-border ui-btn-no-fill">文字按钮</ui-button>
+<ui-button class="ui-btn-text-primary ui-btn-no-border ui-btn-no-fill">主要按钮</ui-button>
+<ui-button class="ui-btn-text-green ui-btn-no-border ui-btn-no-fill">成功按钮</ui-button>
+<ui-button class="ui-btn-text-info ui-btn-no-border ui-btn-no-fill">信息按钮</ui-button>
+<ui-button class="ui-btn-text-yellow ui-btn-no-border ui-btn-no-fill">警告按钮</ui-button>
+<ui-button class="ui-btn-text-red ui-btn-no-border ui-btn-no-fill">危险按钮</ui-button>
 ```
 :::
 
@@ -115,11 +127,18 @@
 :::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
 ```html
-<ui-button type="primary" icon="el-icon-edit"></ui-button>
-<ui-button type="primary" icon="el-icon-share"></ui-button>
-<ui-button type="primary" icon="el-icon-delete"></ui-button>
-<ui-button type="primary" icon="el-icon-search">搜索</ui-button>
-<ui-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></ui-button>
+<ui-button class="ui-btn-icon-circle"><i class="ui-icon-inbox"></i></ui-button>
+<ui-button class="ui-btn-circle"><i class="ui-icon-inbox"></i></ui-button>
+<ui-button><i class="ui-icon-inbox"></i></ui-button>
+<ui-button><span>查询</span><i class="ui-icon-search"></i></ui-button>
+<ui-button class="ui-btn-text-primary"><i class="ui-icon-outbox"></i><span>上传</span></ui-button>
+<ui-button class="ui-btn-text-red"><i class="ui-icon-trash"></i><span>删除</span></ui-button>
+<ui-button class="ui-btn-primary">
+    <i class="ui-icon-search"></i><span>查询</span>
+</ui-button>
+<ui-button class="ui-btn-circle ui-btn-primary">
+    <i class="ui-icon-search"></i><span>查询</span>
+</ui-button>
 ```
 :::
 
@@ -130,15 +149,51 @@
 :::demo 使用`<ui-button-group>`标签来嵌套你的按钮。
 
 ```html
-<ui-button-group>
-  <ui-button type="primary" icon="el-icon-arrow-left">上一页</ui-button>
-  <ui-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></ui-button>
-</ui-button-group>
-<ui-button-group>
-  <ui-button type="primary" icon="el-icon-edit"></ui-button>
-  <ui-button type="primary" icon="el-icon-share"></ui-button>
-  <ui-button type="primary" icon="el-icon-delete"></ui-button>
-</ui-button-group>
+<template>
+    <ui-button-group>
+        <ui-button type="primary" @click="bSize(0)">大</ui-button>
+        <ui-button type="primary" @click="bSize(1)">中</ui-button>
+        <ui-button type="primary" @click="bSize(2)">小</ui-button>
+        <ui-button type="primary" @click="bSize(3)">超小</ui-button>
+    </ui-button-group>
+    <p>当前大小: {{sizeDesc}}</p>
+    <ui-button-group :class="!!btnSize ? 'ui-btn-group-' + btnSize : ''">
+        <ui-button class="ui-btn-primary"><i class="ui-icon-search"></i><span>查询</span></ui-button>
+        <ui-button class="ui-btn-primary"><i class="ui-icon-outbox"></i><span>上传</span></ui-button>
+        <ui-button class="ui-btn-primary"><i class="ui-icon-trash"></i><span>删除</span></ui-button>
+    </ui-button-group>
+    <br/>
+    <br/>
+    <ui-button class="ui-btn-primary" :class="btnSizeCls">测试按钮</ui-button>
+    <ui-button class="ui-btn-primary" :class="btnSizeCls"><i class="ui-icon-search"></i><span>查询</span></ui-button>
+    <br>
+    <br>
+    <ui-button class="ui-btn-text-red" :class="btnSizeCls">危险按钮</ui-button>
+    <ui-button class="ui-btn-circle ui-btn-text-primary" :class="btnSizeCls">主要按钮</ui-button>
+    <br>
+    <br>
+    <ui-button class="ui-btn-icon-circle" :class="btnSizeCls"><i class="ui-icon-inbox"></i></ui-button>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                btnSize: '',
+                btnSizeCls: '',
+                sizeDesc: '中',
+            }
+        },
+        methods: {
+            bSize(i) {
+                const size = ['l', '', 's', 'xs'][i];
+                const desc = ['大', '中', '小', '超小'][i];
+                this.btnSize = size;
+                this.btnSizeCls = !!size ? 'ui-btn-' + size : '';
+                this.sizeDesc = desc;
+            }
+        }
+    }
+</script>
 ```
 :::
 
@@ -161,16 +216,16 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 
 ```html
 <ui-row>
-  <ui-button>默认按钮</ui-button>
-  <ui-button size="medium">中等按钮</ui-button>
-  <ui-button size="small">小型按钮</ui-button>
-  <ui-button size="mini">超小按钮</ui-button>
+    <ui-button class="ui-btn-l ui-btn-primary">大型按钮</ui-button>
+    <ui-button class="ui-btn-primary">中等按钮</ui-button>
+    <ui-button class="ui-btn-s ui-btn-primary">小型按钮</ui-button>
+    <ui-button class="ui-btn-xs ui-btn-primary">超小按钮</ui-button>
 </ui-row>
 <ui-row>
-  <ui-button round>默认按钮</ui-button>
-  <ui-button size="medium" round>中等按钮</ui-button>
-  <ui-button size="small" round>小型按钮</ui-button>
-  <ui-button size="mini" round>超小按钮</ui-button>
+    <ui-button class="ui-btn-xs ui-btn-text-primary">超小按钮</ui-button>
+    <ui-button class="ui-btn-s ui-btn-text-primary">小型按钮</ui-button>
+    <ui-button class="ui-btn-text-primary">中等按钮</ui-button>
+    <ui-button class="ui-btn-l ui-btn-text-primary">大型按钮</ui-button>
 </ui-row>
 ```
 :::

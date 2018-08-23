@@ -1,6 +1,6 @@
 <template>
     <button :class="buttonCls" :disabled="!!this.disabled" @click="trigger">
-        <i :class="iconCls" v-if="!!iconCode"></i><span v-if="hasText"><slot></slot></span>
+        <i :class="iconCls" v-if="!!iconCode"></i><template v-if="hasText"><slot></slot></template>
     </button>
 </template>
 <script>
@@ -21,7 +21,7 @@ export default {
         size: {
             type: String,
             validator(value) {
-                return ['small', 'normal', 'large'].indexOf(value) > -1;
+                return ['l', 's', 'xs'].indexOf(value) > -1;
             }
         },
         text: Boolean,
@@ -63,11 +63,11 @@ export default {
         },
 
         iconCode() {
-            return this.loading ? 'h-icon-loading' : this.icon;
+            return this.loading ? 'ui-icon-loading' : this.icon;
         },
 
         iconCls() {
-            const iconCode = this.loading ? 'h-icon-loading' : this.icon;
+            const iconCode = this.loading ? 'ui-icon-loading' : this.icon;
             return {
                 [`${iconCode}`]: !!iconCode
             };

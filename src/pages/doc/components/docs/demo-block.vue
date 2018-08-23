@@ -17,20 +17,18 @@
         :class="{ 'is-fixed': fixedControl }"
         @click="isExpanded = !isExpanded">
         <transition name="arrow-slide">
-            <i :class="[iconClass, { 'hovering': hovering }]"></i>
+            <i :class="[iconClass, { 'hovering': true }]"></i>
         </transition>
         <transition name="text-slide">
-            <span v-show="hovering">好吧替换controlText</span>
+            <span>查看源码</span>
         </transition>
         <!-- <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right"> -->
             <transition name="text-slide">
             <ui-button
-                v-show="hovering || isExpanded"
-                size="small"
-                type="text"
-                class="control-button"
-                @click.stop="goJsfiddle">
-                替换掉原来的值
+                size="s"
+                class="control-button ui-btn-text-primary ui-btn-no-border ui-btn-no-fill"
+                @click="goJsfiddle">
+                在线运行
                 <!-- {{langConfig['button-text'] }} -->
             </ui-button>
             </transition>
@@ -41,8 +39,8 @@
 <style lang="less">
 .demo-block {
     border: solid 1px #ebebeb;
-    border-radius: 3px;
-    transition: .2s;
+    // border-radius: 3px;
+    // transition: .2s;
 
     &.hover {
         box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
@@ -199,6 +197,7 @@ export default {
 
     methods: {
         goJsfiddle() {
+            debugger;
             const {script, html, style} = this.jsfiddle;
             const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>'
             + '\n<scr' + `ipt src="//unpkg.com/element-ui@${version}/lib/index.js"></scr` + 'ipt>';
@@ -259,7 +258,7 @@ export default {
         },
 
         iconClass() {
-            return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom';
+            return this.isExpanded ? 'ui-icon-top' : 'ui-icon-down';
         },
 
         controlText() {
@@ -269,11 +268,11 @@ export default {
         },
 
         codeArea() {
-            return this.$el.querySelector('.meta')[0];
+            return this.$el.querySelector('.meta');
         },
 
         codeAreaHeight() {
-            if (this.$el.querySelector('.description').length > 0) {
+            if (this.$el.querySelector('.description')) {
                 return (
                     this.$el.querySelector('.description').clientHeight
                     + this.$el.querySelector('.highlight').clientHeight + 20
@@ -289,22 +288,23 @@ export default {
             if (!val) {
                 this.fixedControl = false;
                 this.$refs.control.style.left = '0';
-                this.removeScrollHandler();
+                // this.removeScrollHandler();
                 return;
             }
-            setTimeout(() => {
-                this.scrollParent = document.querySelector('.page-component__scroll > .el-scrollbar__wrap');
-                this.scrollParent
-                && this.scrollParent.addEventListener('scroll', this.scrollHandler);
-                this.scrollHandler();
-            }, 200);
+            // setTimeout(() => {
+            //     this.scrollParent = document.querySelector('.page-component__scroll > .el-scrollbar__wrap');
+            //     this.scrollParent
+            //     && this.scrollParent.addEventListener('scroll', this.scrollHandler);
+            //     this.scrollHandler();
+            // }, 200);
         }
     },
 
     mounted() {
         this.$nextTick(() => {
             let highlight = this.$el.querySelector('.highlight');
-            if (this.$el.querySelector('.description').length === 0) {
+            const desc = this.$el.querySelector('.description');
+            if (!desc) {
                 highlight.style.width = '100%';
                 highlight.borderRight = 'none';
             }

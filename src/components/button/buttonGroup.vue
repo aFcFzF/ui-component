@@ -4,18 +4,15 @@
     </div>
 </template>
 <script>
-const prefix = 'h-btn-group';
-const Props = {
-    size: new Set(['l', 's', 'xs'])
-};
+const prefix = 'ui-btn-group';
+
 export default {
-    name: 'uiButtonGroup',
     props: {
         circle: Boolean,
         size: {
             type: String,
-            validator(value) {
-                return Props.size.has(value);
+            validato(value) {
+                return ['l', 's', 'xs'].indexOf(value) > -1;
             }
         }
     },

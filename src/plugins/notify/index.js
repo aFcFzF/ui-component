@@ -18,15 +18,15 @@ const Default = {
   noPadding: false
 };
 
-const notifyCls = 'h-notify';
-const notifyHasCloseCls = 'h-notify-has-close';
-const notifyContentCls = 'h-notify-content';
-const notifyContainerCls = 'h-notify-container';
-const notifyBodyCls = 'h-notify-body';
-const notifyCloseCls = 'h-notify-close';
-const notifyMaskCls = 'h-notify-mask';
-const notifyShowCls = 'h-notify-show';
-const closeIcon = 'h-icon-close';
+const notifyCls = 'ui-notify';
+const notifyHasCloseCls = 'ui-notify-has-close';
+const notifyContentCls = 'ui-notify-content';
+const notifyContainerCls = 'ui-notify-container';
+const notifyBodyCls = 'ui-notify-body';
+const notifyCloseCls = 'ui-notify-close';
+const notifyMaskCls = 'ui-notify-mask';
+const notifyShowCls = 'ui-notify-show';
+const closeIcon = 'ui-icon-close';
 
 class Notify {
   constructor(orignalparam) {
@@ -38,7 +38,7 @@ class Notify {
     if (param.hasMask) {
       html += `<div class="${notifyMaskCls}"></div>`;
     }
-    if (param.type === 'h-modal' && param.hasMask) {
+    if (param.type === 'ui-moda' && param.hasMask) {
       html += `<div class="${notifyBodyCls}">`;
     }
     html += `<div class="${notifyContainerCls}">`;
@@ -69,7 +69,7 @@ class Notify {
       }
       html += `<footer>${footeHtml}</footer>`;
     }
-    if (param.type === 'h-modal') {
+    if (param.type === 'ui-moda') {
       html += `</div>`;
     }
 
@@ -77,15 +77,15 @@ class Notify {
     let $body = document.createElement(`div`);
     utils.addClass($body, notifyCls);
     if (param.hasMask) {
-      utils.addClass($body, 'h-notify-has-mask');
+      utils.addClass($body, 'ui-notify-has-mask');
     } else {
-      utils.addClass($body, 'h-notify-no-mask');
+      utils.addClass($body, 'ui-notify-no-mask');
     }
-    // if (param.type == 'h-modal') {
+    // if (param.type == 'ui-moda') {
     //   utils.addClass($body, 'h-dropdown-common-container');
     // }
     if (param.fullScreen) {
-      utils.addClass($body, 'h-modal-full-screen');
+      utils.addClass($body, 'ui-moda-full-screen');
     }
     if (param.class) {
       utils.addClass($body, param.class);

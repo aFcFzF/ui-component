@@ -16,13 +16,13 @@
         </div>
       </div>
       <div class="h-uploader-image-empty h-uploader-browse-button" v-else>
-        <i class="h-icon-plus"></i>
+        <i class="ui-icon-plus"></i>
       </div>
     </template>
 
     <template v-if="type=='images'">
       <div class="h-uploader-image-empty h-uploader-browse-button">
-        <i class="h-icon-plus"></i>
+        <i class="ui-icon-plus"></i>
       </div>
       <div v-for="(file, index) in fileList" :key="file.id" class="h-uploader-image">
         <div class="h-uploader-image-background" :style="getBackgroundImage(file)"></div>
@@ -31,23 +31,23 @@
         </div>
         <div class="h-uploader-image-operate" v-else>
           <div>
-            <span class="h-uploader-operate" @click="previewImage(file)"><i class="h-icon-fullscreen"></i></span>
+            <span class="h-uploader-operate" @click="previewImage(file)"><i class="ui-icon-fullscreen"></i></span>
             <i class="h-split" v-width="3"></i>
-            <span class="h-uploader-operate" @click="deleteFile(index)"><i class="h-icon-trash"></i></span>
+            <span class="h-uploader-operate" @click="deleteFile(index)"><i class="ui-icon-trash"></i></span>
           </div>
         </div>
       </div>
     </template>
     <template v-if="type=='file'||type=='files'">
       <div v-if="$slots.dragdrop" class="h-uploader-browse-button h-uploader-drop-element" :class="{'h-uploader-dragging': isdragging}" @dragover="isdragging=true" @dragleave="isdragging=false"  @drop="isdragging=false" ><slot name="dragdrop"></slot></div>
-      <div v-else><Button icon="h-icon-upload" class="h-uploader-browse-button" v-show="(!isSingle && (!limit || limit > files.length)) || (isSingle&&!files)">{{showUploadWord}}</Button></div>
+      <div v-else><Button icon="ui-icon-upload" class="h-uploader-browse-button" v-show="(!isSingle && (!limit || limit > files.length)) || (isSingle&&!files)">{{showUploadWord}}</Button></div>
       <div class="h-uploader-files">
         <div v-for="(file, index) in fileList" :key="file.id" class="h-uploader-file">
           <div class="h-uploader-file-progress" v-if="file.status==2">
             <Progress :percent="file.percent"  :stroke-width="5"><span slot="title">{{file[param.fileName]}}</span></Progress>
           </div>
           <div class="h-uploader-file-info" v-else>
-            <span class="link" @click="clickfile(file)">{{file.name}}</span><i class="h-icon-trash middle-right link" @click="deleteFile(index)"></i>
+            <span class="link" @click="clickfile(file)">{{file.name}}</span><i class="ui-icon-trash middle-right link" @click="deleteFile(index)"></i>
           </div>
         </div>
       </div>

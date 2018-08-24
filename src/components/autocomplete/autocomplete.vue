@@ -2,7 +2,7 @@
   <div :class="autocompleteCls">
     <div :class="showCls">
       <template v-if="multiple"><span v-for="(obj, index) of objects"
-              :key="index+''+obj.key"><span>{{obj.title}}</span><i class="h-icon-close"
+              :key="index+''+obj.key"><span>{{obj.title}}</span><i class="ui-icon-close"
            @click.stop="remove(obj)"
            v-if="!disabled"></i></span>
         <input :disabled="disabled"
@@ -16,7 +16,7 @@
                @keydown="keydownHandle"
                @keypress.enter="enterHandle"
                :placeholder="showPlaceholder" />
-        <i class="h-icon-loading"
+        <i class="ui-icon-loading"
            v-if="loading"></i>
       </template>
       <template v-if="!multiple">
@@ -30,9 +30,9 @@
                @keyup="handle"
                @keypress.enter="enterHandle"
                :placeholder="showPlaceholder" />
-        <i class="h-icon-loading"
+        <i class="ui-icon-loading"
            v-if="loading"></i>
-        <i class="h-icon-close text-hover" v-else-if="tempValue&&!disabled" @mousedown="clear"></i>
+        <i class="ui-icon-close text-hover" v-else-if="tempValue&&!disabled" @mousedown="clear"></i>
       </template>
     </div>
   

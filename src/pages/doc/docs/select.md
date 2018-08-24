@@ -1,9 +1,14 @@
 <script>
+  import {event as evt} from '@/common/util';
   export default {
     data() {
       return {
         list: null,
         options: [{
+          value: '选项0',
+          label: '食品',
+          isTag: true
+        }, {
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -18,24 +23,38 @@
         }, {
           value: '选项5',
           label: '北京烤鸭'
+        },{
+          label: '饮品',
+          isTag: true
+        },{
+          label: '香槟',
+          value: '选项6'
+        }, {
+          label: 'cola',
+          value: '选项7'
         }],
         options2: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕',
+          disabled: true
         }, {
           value: '选项2',
           label: '双皮奶',
-          disabled: true
+          disabled: false
         }, {
           value: '选项3',
-          label: '蚵仔煎'
+          label: '蚵仔煎',
+          disabled: false
         }, {
           value: '选项4',
-          label: '龙须面'
+          label: '龙须面',
+          disabled: false
         }, {
           value: '选项5',
-          label: '北京烤鸭'
+          label: '北京烤鸭',
+          disabled: false
         }],
+        status: false,
         options3: [{
           label: '热门城市',
           options: [{
@@ -63,34 +82,15 @@
         }],
         options4: [],
         options5: [{
-          value: 'HTML',
           label: 'HTML'
         }, {
-          value: 'CSS',
           label: 'CSS'
         }, {
-          value: 'JavaScript',
           label: 'JavaScript'
         }],
-        cities: [{
-          value: 'Beijing',
-          label: '北京'
-        }, {
-          value: 'Shanghai',
-          label: '上海'
-        }, {
-          value: 'Nanjing',
-          label: '南京'
-        }, {
-          value: 'Chengdu',
-          label: '成都'
-        }, {
-          value: 'Shenzhen',
-          label: '深圳'
-        }, {
-          value: 'Guangzhou',
-          label: '广州'
-        }],
+        cities: ['北京', '上海', '南京', '成都', '深圳', '广州'],
+        citiesLimit: ['北京', '上海', '南京', '成都', '深圳', '广州'],
+        valueLimit: [],
         value: '',
         value2: '',
         value3: '',
@@ -102,6 +102,22 @@
         value9: '',
         value10: [],
         value11: [],
+        searchCities: [
+            '[辽宁]沈阳市',
+            '[辽宁]葫芦岛市',
+            '[辽宁]大连市',
+            '[辽宁]盘锦市',
+            '[辽宁]鞍山市',
+            '[山西]太原市',
+            '[山西]大同市',
+            '[山西]阳泉市',
+            '[山西]长治市',
+            '[山西]临汾市',
+            '[山西]晋中市',
+            '[山西]运城市',
+        ].sort(_ => Math.random() - .5),
+        msg: '',
+        searchValue: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -109,6 +125,12 @@
 
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
+      evt.$on('exceedLimit', d => {
+        const msg = '限制最多选: ' + d.limit + '个';
+        this.$Message.error(msg);
+        this.msg = msg;
+        setTimeout(_ => this.msg = '', 3000);
+      })
     },
 
     methods: {
@@ -123,13 +145,20 @@
           this.options4 = [];
         }
       }
+    },
+    watch: {
+      status(n) {
+        this.options2.forEach(e => e.disabled = n);
+      }
     }
   };
 </script>
 
 <style>
-  .demo-select .ui-select {
+  .demo-select .ui-select-wdt {
     width: 240px;
+    display: inline-block;
+    margin-right: 20px;
   }
 </style>
 
@@ -143,14 +172,11 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <ui-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
+  <p>选中值： {{value}}</p>
+  <span>默认边框： </span>
+  <ui-select v-model="value" placeholder="请选择菜品" :datas="options" class="ui-select-wdt"></ui-select>
+  <span style="vertical-align: middle;">无边框： </span>
+  <ui-select v-model="value" :datas="options" no-border style="width: 120px; vertical-align: middle"></ui-select>
 </template>
 
 <script>
@@ -186,15 +212,9 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <ui-select v-model="value2" placeholder="请选择">
-    <el-option
-      v-for="item in options2"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled">
-    </el-option>
-  </ui-select>
+  <p>是否禁用所有选项： {{status ? '是' : '否'}}</p>
+  <ui-select v-model="value2" placeholder="请选择" :datas="options2" autosize class="ui-select-wdt"></ui-select>
+  <ui-switch v-model="status" style="margin-left: 10px;"><span slot="before">禁用所有选项</span></ui-switch>
 </template>
 
 <script>
@@ -203,11 +223,11 @@
       return {
         options2: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕',
+          disabled: true
         }, {
           value: '选项2',
           label: '双皮奶',
-          disabled: true
         }, {
           value: '选项3',
           label: '蚵仔煎'
@@ -218,7 +238,13 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
+        status: false,
         value2: ''
+      }
+    },
+    watch: {
+      status(n) {
+        this.options2.forEach(e => e.disabled = n);
       }
     }
   }
@@ -233,13 +259,7 @@
 :::demo 为`ui-select`设置`disabled`属性，则整个选择器不可用
 ```html
 <template>
-  <ui-select v-model="value3" disabled placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
+  <ui-select v-model="value3" disabled :datas="options2" class="ui-select-wdt">
   </ui-select>
 </template>
 
@@ -271,51 +291,6 @@
 ```
 :::
 
-### 可清空单选
-
-包含清空按钮，可将选择器清空为初始状态
-
-:::demo 为`ui-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
-```html
-<template>
-  <ui-select v-model="value4" clearable placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value4: ''
-      }
-    }
-  }
-</script>
-```
-:::
-
 ### 基础多选
 
 适用性较广的基础多选，用 Tag 展示已选项
@@ -323,28 +298,8 @@
 :::demo 为`ui-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
 ```html
 <template>
-  <ui-select v-model="value5" multiple placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
-
-  <ui-select
-    v-model="value11"
-    multiple
-    collapse-tags
-    style="margin-left: 20px;"
-    placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
+  <p>值是： {{value3}}</p>
+  <ui-select v-model="value3" :datas="cities" class="ui-select-wdt" multiple></ui-select>
 </template>
 
 <script>
@@ -376,6 +331,78 @@
 ```
 :::
 
+### 限制多选个数
+
+限制多选个数，回调函数exceedLimit,回调参数`{limit: 3}`
+
+:::demo 将自定义的 HTML 模板插入`el-option`的 slot 中即可。
+```html
+<template>
+  <p>值是： {{valueLimit}}</p>
+  <ui-select v-model="valueLimit" :datas="citiesLimit" class="ui-select-wdt" multiple :limit="3"></ui-select>
+  <span
+    :style="{
+      visiblity: msg ? 'visible' : 'hidden',
+      color: '#F95D5D'
+    }"
+  >{{msg}}</span>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        citiesLimit: ['北京', '上海', '南京', '成都', '深圳', '广州'],
+        value3: ''
+      }
+    },
+    mounted() {
+      this.list = this.states.map(item => { return { value: item, label: item }; });
+      evt.$on('exceedLimit', d => {
+        const msg = '限制最多选: ' + d.limit + '个';
+        this.$Message.error(msg);
+        this.msg = msg;
+        setTimeout(_ => this.msg = '', 3000);
+      })
+    }
+  }
+</script>
+```
+:::
+
+### 可搜索
+
+可以利用搜索功能快速查找选项
+
+:::demo 为`ui-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
+```html
+<template>
+  <p>值是： {{searchValue}}</p>
+  <ui-select v-model="searchValue" :datas="searchCities" filterable placeholder="请选择" class="ui-select-wdt">
+  </ui-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        searchCities: [
+          '[辽宁]沈阳市',
+          '[辽宁]葫芦岛市',
+          '[辽宁]大连市',
+          '[山西]太原市',
+          '[山西]大同市',
+          '[山西]阳泉市',
+          '[山西]长治市'
+           ].sort(_ => Math.random() - .5),
+        searchValue: '',
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 自定义模板
 
 可以自定义备选项
@@ -383,15 +410,14 @@
 :::demo 将自定义的 HTML 模板插入`el-option`的 slot 中即可。
 ```html
 <template>
-  <ui-select v-model="value6" placeholder="请选择">
-    <el-option
-      v-for="item in cities"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-      <span style="float: left">{{ item.label }}</span>
-      <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </el-option>
+  <p>值是： {{value11}}</p>
+  <ui-select v-model="value11" :datas="options2" placeholder="请选择" class="ui-select-wdt">
+    <template slot-scope="props" slot="item">
+      <div>标题：{{props.item.label}}
+          <span style="float:right" class='gray1-color'>{{'0' + props.item.value.charAt(props.item.value.length-1)}}</span>
+      </div>
+      <div class='gray1-color'>描述：{{props.item.value}}</div>
+    </template>
   </ui-select>
 </template>
 
@@ -426,229 +452,8 @@
 ```
 :::
 
-### 分组
-
-备选项进行分组展示
-
-:::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
-```html
-<template>
-  <ui-select v-model="value7" placeholder="请选择">
-    <el-option-group
-      v-for="group in options3"
-      :key="group.label"
-      :label="group.label">
-      <el-option
-        v-for="item in group.options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-option-group>
-  </ui-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options3: [{
-          label: '热门城市',
-          options: [{
-            value: 'Shanghai',
-            label: '上海'
-          }, {
-            value: 'Beijing',
-            label: '北京'
-          }]
-        }, {
-          label: '城市名',
-          options: [{
-            value: 'Chengdu',
-            label: '成都'
-          }, {
-            value: 'Shenzhen',
-            label: '深圳'
-          }, {
-            value: 'Guangzhou',
-            label: '广州'
-          }, {
-            value: 'Dalian',
-            label: '大连'
-          }]
-        }],
-        value7: ''
-      }
-    }
-  }
-</script>
-```
-:::
-
-### 可搜索
-
-可以利用搜索功能快速查找选项
-
-:::demo 为`ui-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
-```html
-<template>
-  <ui-select v-model="value8" filterable placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value8: ''
-      }
-    }
-  }
-</script>
-```
-:::
-
-### 远程搜索
-
-从服务器搜索数据，输入关键字进行查找
-:::demo 为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`el-option`是通过`v-for`指令渲染出来的，此时需要为`el-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
-```html
-<template>
-  <ui-select
-    v-model="value9"
-    multiple
-    filterable
-    remote
-    reserve-keyword
-    placeholder="请输入关键词"
-    :remote-method="remoteMethod"
-    :loading="loading">
-    <el-option
-      v-for="item in options4"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options4: [],
-        value9: [],
-        list: [],
-        loading: false,
-        states: ["Alabama", "Alaska", "Arizona",
-        "Arkansas", "California", "Colorado",
-        "Connecticut", "Delaware", "Florida",
-        "Georgia", "Hawaii", "Idaho", "Illinois",
-        "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota",
-        "Mississippi", "Missouri", "Montana",
-        "Nebraska", "Nevada", "New Hampshire",
-        "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Ohio",
-        "Oklahoma", "Oregon", "Pennsylvania",
-        "Rhode Island", "South Carolina",
-        "South Dakota", "Tennessee", "Texas",
-        "Utah", "Vermont", "Virginia",
-        "Washington", "West Virginia", "Wisconsin",
-        "Wyoming"]
-      }
-    },
-    mounted() {
-      this.list = this.states.map(item => {
-        return { value: item, label: item };
-      });
-    },
-    methods: {
-      remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.options4 = this.list.filter(item => {
-              return item.label.toLowerCase()
-                .indexOf(query.toLowerCase()) > -1;
-            });
-          }, 200);
-        } else {
-          this.options4 = [];
-        }
-      }
-    }
-  }
-</script>
-```
-:::
-
-### 创建条目
-可以创建并选中选项中不存在的条目
-:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
-```html
-<template>
-  <ui-select
-    v-model="value10"
-    multiple
-    filterable
-    allow-create
-    default-first-option
-    placeholder="请选择文章标签">
-    <el-option
-      v-for="item in options5"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </ui-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options5: [{
-          value: 'HTML',
-          label: 'HTML'
-        }, {
-          value: 'CSS',
-          label: 'CSS'
-        }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
-        }],
-        value10: []
-      }
-    }
-  }
-</script>
-```
-:::
+<br>
+<br>
 
 :::tip
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。

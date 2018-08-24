@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js",
-    "build": "webpack --mode production --progress --config build/webpack.prod.conf.js"
+    "build": "webpack --mode production --progress --config build/webpack.prod.conf.js",
+    "lint": "fecs check"
   },
   "dependencies": {
     "vue": "^2.5.16",

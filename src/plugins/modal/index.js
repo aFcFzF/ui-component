@@ -2,7 +2,7 @@ import Notify from '../notify';
 import utils from '../../utils/utils';
 import config from '../../utils/config';
 
-const prefixCls = 'h-modal';
+const prefixCls = 'ui-moda';
 const hasDivider = config.getOption('modal', 'hasDivider');
 
 let Vue = null;
@@ -18,7 +18,7 @@ function Modal(originalParam) {
   let param = utils.extend({ type: cls, hasMask: true, closeOnMask: true, buttons: ['cancel'] }, Default, originalParam, true);
 
   if (originalParam.hasDivider || Default.hasDivider) {
-    param.class = `h-notify-has-divider`;
+    param.class = `ui-notify-has-divider`;
   }
   param.Vue = Vue;
   return Notify(param);

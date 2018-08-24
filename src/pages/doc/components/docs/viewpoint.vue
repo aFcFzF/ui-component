@@ -63,6 +63,13 @@
             }
         }
 
+        .tip {
+            padding: 8px 16px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #457EFF;
+            margin: 20px 0;
+        }
+
         ul:not(.timeline) {
             margin: 10px 0;
             padding: 0 0 0 20px;

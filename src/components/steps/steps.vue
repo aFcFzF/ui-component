@@ -7,7 +7,7 @@
           <span v-if="a.icon" class="h-steps-icon-custom"><i :class="a.icon"></i></span>
           <span v-else class="h-steps-index">
             <i class="h-steps-index-num">{{index+1}}</i>
-            <i class="h-icon-check h-steps-success"></i>            
+            <i class="ui-icon-check h-steps-success"></i>            
           </span>
         </div>
         <div class="h-steps-words">

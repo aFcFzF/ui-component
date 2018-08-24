@@ -2,7 +2,7 @@
   <div :class="backtopCls" :style="backtopStyle">
     <div class="h-backtop-inner"
          @click="backtop">
-         <i class="h-icon-top" v-if="!$slots.default"></i>
+         <i class="ui-icon-top" v-if="!$slots.default"></i>
          <slot v-else></slot>
     </div>
   </div>

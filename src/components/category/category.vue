@@ -3,12 +3,12 @@
     <div class="h-category-show" @click="openPicker">
       <div v-if="multiple&&objects.length"
             class="h-category-multiple-tags"><span v-for="obj of objects"
-              :key="obj.key"><span>{{obj.title}}</span><i class="h-icon-close"
+              :key="obj.key"><span>{{obj.title}}</span><i class="ui-icon-close"
             @click.stop="remove(obj)" v-if="!disabled"></i></span>
       </div>
       <div v-else-if="!multiple&&object" class="h-category-value-single">{{object.title}}</div>
       <div v-else class="h-category-placeholder">{{showPlaceholder}}</div>
-      <i class="h-icon-down"></i>
+      <i class="ui-icon-down"></i>
     </div>
   </div>
 </template>

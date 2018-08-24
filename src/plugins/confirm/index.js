@@ -2,7 +2,7 @@ import Notify from '../notify';
 import utils from '../../utils/utils';
 import locale from '../../locale';
 
-const prefixCls = 'h-modal';
+const prefixCls = 'ui-moda';
 
 let Default = {
   middle: false
@@ -12,7 +12,7 @@ function Confirm(content, title) {
   return new Promise((resolve, reject) => {
     let param = {
       type: prefixCls,
-      content: `<div><i class="h-icon-warn yellow-color" style="font-size:28px;vertical-align: -8px;"></i>&nbsp;&nbsp;${content}</div>`,
+      content: `<div><i class="ui-icon-warn yellow-color" style="font-size:28px;vertical-align: -8px;"></i>&nbsp;&nbsp;${content}</div>`,
       buttons: ['cancel', 'ok'],
       events: {
         ok: (n) => {
@@ -25,7 +25,7 @@ function Confirm(content, title) {
         }
       },
       title,
-      class: 'h-modal-comfirm',
+      class: 'ui-moda-comfirm',
       hasMask: true,
       closeOnMask: true,
       hasCloseIcon: false,

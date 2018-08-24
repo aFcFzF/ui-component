@@ -3,10 +3,10 @@
     <div class="h-date-header"
          v-if="type != 'time'">
       <span class="h-date-year-left-picker"
-            @click.stop="updateView('default', -1)"><i class="h-icon-left"></i><i class="h-icon-left"></i></span>
+            @click.stop="updateView('default', -1)"><i class="ui-icon-left"></i><i class="ui-icon-left"></i></span>
       <span class="h-date-month-left-picker"
             @click.stop="updateView('month', -1)"
-            v-show="view=='date'||view=='week'"><i class="h-icon-left"></i></span>
+            v-show="view=='date'||view=='week'"><i class="ui-icon-left"></i></span>
       <span class="h-date-header-show"
             @click.stop="changeView('year')"
             v-if="view != 'year'">{{nowView.year()}}{{'h.date.header.year' | hlang}}</span>
@@ -19,19 +19,19 @@
             @click.stop="changeView('date')"
             v-show="view == 'hour' || view == 'minute'">{{nowView.date()}}{{'h.date.header.day' | hlang}}</span>
       <span class="h-date-year-right-picker"
-            @click.stop="updateView('default', 1)"><i class="h-icon-right"></i><i class="h-icon-right"></i></span>
+            @click.stop="updateView('default', 1)"><i class="ui-icon-right"></i><i class="ui-icon-right"></i></span>
       <span class="h-date-month-right-picker"
             @click.stop="updateView('month', 1)"
-            v-show="view=='date'||view=='week'"><i class="h-icon-right"></i></span>
+            v-show="view=='date'||view=='week'"><i class="ui-icon-right"></i></span>
     </div>
     <div class="h-date-header"
          v-show="view=='minute'">
       <span class="h-date-month-left-picker"
-            @click.stop="updateView('hour', -1)"><i class="h-icon-left"></i></span>
+            @click.stop="updateView('hour', -1)"><i class="ui-icon-left"></i></span>
       <span class="h-date-header-show"
             @click.stop="changeView('hour')">{{nowView | hoursString}}</span>
       <span class="h-date-month-right-picker"
-            @click.stop="updateView('hour', 1)"><i class="h-icon-right"></i></span>
+            @click.stop="updateView('hour', 1)"><i class="ui-icon-right"></i></span>
     </div>
     <div :class="dateBodyCls">
       <div class="h-date-body-weeks"

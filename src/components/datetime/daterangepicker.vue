@@ -8,7 +8,7 @@
              @change="changeEvent"
              :placeholder="showPlaceholder"
              :disabled="disabled" />
-      <i class="h-icon-calendar"></i>
+      <i class="ui-icon-calendar"></i>
     </div>
     <div :class="datePickerCls"
          class="h-date-picker">

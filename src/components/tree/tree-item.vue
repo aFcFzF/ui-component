@@ -5,9 +5,9 @@
       :class="{'h-tree-show-disabled':data.status.disabled, 'h-tree-show-choose': data.status.choose, 'h-tree-show-indeterminate': data.status.indeterminate}" v-show="!data.status.hide">
       <span class='h-tree-show-expand'>
         <span @click="toggleTree()"
-              v-if="data.status.isWait"><template v-if="!data.status.loading"><i class='h-icon-right'></i></template><template v-else><i class='h-icon-loading'></i></template></span>
+              v-if="data.status.isWait"><template v-if="!data.status.loading"><i class='ui-icon-right'></i></template><template v-else><i class='ui-icon-loading'></i></template></span>
         <span @click="toggleTree()"
-              v-else-if="data.children&&data.children.length>0"><i class='h-icon-right'></i></span>
+              v-else-if="data.children&&data.children.length>0"><i class='ui-icon-right'></i></span>
       </span>
       <Checkbox :disabled="data.status.disabled" v-if="multiple&&data.status.checkable" v-model="data.status.choose" :indeterminate="data.status.indeterminate" @input="choose(data)"></Checkbox>
       <div class='h-tree-show-desc' :class="{'selected': status.selected == data.key}" @click="select">

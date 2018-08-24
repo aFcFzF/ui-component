@@ -1,10 +1,10 @@
 <template>
   <div>
     <div :class="noticeCls">
-      <div class="h-notify-mask" v-if="hasMask" @click="setvalue(true)"></div>
-      <div class="h-notify-body" @click.self="setvalue(true)">
+      <div class="ui-notify-mask" v-if="hasMask" @click="setvalue(true)"></div>
+      <div class="ui-notify-body" @click.self="setvalue(true)">
         <div :class="containerCls" v-if="isShow">
-          <span class="h-notify-close h-icon-close" v-if="hasCloseIcon" @click="setvalue(false)"></span>
+          <span class="ui-notify-close ui-icon-close" v-if="hasCloseIcon" @click="setvalue(false)"></span>
           <header v-if="hasHeader"><slot name='header'></slot></header>
           <div :class="contentCls"><slot></slot></div>
           <footer v-if="hasFooter"><slot name='footer'></slot></footer>
@@ -16,8 +16,8 @@
 <script>
 import config from '../../utils/config';
 
-const prefix = 'h-modal';
-const notifyprefix = 'h-notify';
+const prefix = 'ui-moda';
+const notifyprefix = 'ui-notify';
 
 export default {
   name: 'hModal',

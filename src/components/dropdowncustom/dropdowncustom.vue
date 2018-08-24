@@ -2,7 +2,7 @@
   <div :class="dropdowncustomCls">
     <div :class="showCls">
       <div class="h-dropdowncustom-show-content"><slot></slot></div>
-      <i class="h-icon-down" v-if="toggleIcon"></i>
+      <i class="ui-icon-down" v-if="toggleIcon"></i>
     </div>
     <div :class="groupCls">
       <slot name='content' v-if="isShow"></slot>

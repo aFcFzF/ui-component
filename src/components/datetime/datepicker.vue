@@ -14,8 +14,8 @@
              :disabled="disabled"
              :readonly="readonly || type == 'week' || type == 'quarter'"
              :placeholder="showPlaceholder"/>
-      <i class="h-icon-calendar" v-if="!showDate||disabled"></i>
-      <i class="h-icon-close text-hover" v-else @click.stop="clear"></i>
+      <i class="ui-icon-calendar" v-if="!showDate||disabled"></i>
+      <i class="ui-icon-close text-hover" v-else @click.stop="clear"></i>
     </div>
     </template>
     <div :class="datePickerCls"

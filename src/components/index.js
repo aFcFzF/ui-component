@@ -7,7 +7,7 @@
 // import BackTop from './components/backtop';
 import Badge from './badge';
 // import Breadcrumb from './components/breadcrumb';
-// import Checkbox from './components/checkbox';
+import Checkbox from './checkbox';
 // import Circle from './components/circle';
 // import Category from './components/category';
 // import Datetime from './components/datetime';
@@ -50,7 +50,7 @@ import {Button, ButtonGroup} from './button';
 // import autosize from './directives/autosize';
 // import $Modal from './plugins/modal';
 // import $Confirm from './plugins/confirm';
-// import $Message from './plugins/message';
+import $Message from '../plugins/message';
 // import $Notice from './plugins/notice';
 // import $Loading from './plugins/loading';
 // import $LoadingBar from './plugins/loadingBar';
@@ -61,7 +61,6 @@ import {Button, ButtonGroup} from './button';
 
 // import locale from './locale';
 // import LocaleMinxin from './mixins/locale';
-console.log('menu', Menu, MenuItem);
 const components = {
     // Affix,
     // AutoComplete,
@@ -71,7 +70,7 @@ const components = {
     ButtonGroup,
     // Breadcrumb,
     // Category,
-    // Checkbox,
+    Checkbox,
     // hCircle: Circle,
     // DatePicker: Datetime.DatePicker,
     // DateRangePicker: Datetime.DateRangePicker,
@@ -128,13 +127,13 @@ const components = {
 //     wordlimit
 // };
 
-// let prototypes = {
-//     $Message,
-//     // $Modal,
-//     $Confirm,
-//     $Loading,
-//     $LoadingBar
-// };
+let prototypes = {
+    $Message,
+    // $Modal,
+    // $Confirm,
+    // $Loading,
+    // $LoadingBar
+};
 
 // const HeyUI = Object.assign({}, components, {
 //         $Modal: $Modal(),
@@ -160,6 +159,7 @@ const install = function (Vue, opts) {
         k.indexOf('ui') === -1 && Vue.component(`ui${k}`, v);
     });
 
+
     // Object.keys(filters).forEach(key => {
     //     Vue.filter(key, filters[key]);
     // });
@@ -169,7 +169,7 @@ const install = function (Vue, opts) {
     //     // that[key] = directives[key];
     // });
 
-    // Object.keys(prototypes).forEach(key => Vue.prototype[key] = prototypes[key]);
+    Object.entries(prototypes).forEach(([k, v]) => Vue.prototype[k] = v);
 
     // HeyUI.$Modal = Vue.prototype.$Modal = $Modal(Vue);
     // HeyUI.$Notice = Vue.prototype.$Notice = $Notice(Vue);

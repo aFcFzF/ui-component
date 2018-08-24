@@ -4,8 +4,8 @@
          :class="{'focusing':focusing}">
       <input type="text" :placeholder="placeholder" :disabled="disabled" class="h-numberinput-input" v-model="editValue" @input="input" @focus="focusing=true" @blur="blur"/>
       <div class="h-numberinput-operate" v-if="useOperate">
-        <span @click="minus"><i class="h-icon-minus"></i></span>
-        <span @click="plus"><i class="h-icon-plus"></i></span>
+        <span @click="minus"><i class="ui-icon-minus"></i></span>
+        <span @click="plus"><i class="ui-icon-plus"></i></span>
       </div>
     </div>
   </div>

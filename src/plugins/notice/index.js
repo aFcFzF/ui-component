@@ -2,7 +2,7 @@ import Notify from '../notify';
 import utils from '../../utils/utils';
 
 const prefixCls = 'h-notice';
-const iconPrefixCls = 'h-icon';
+const iconPrefixCls = 'ui-icon';
 let Vue = null;
 
 

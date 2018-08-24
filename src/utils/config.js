@@ -3,8 +3,8 @@ import utils from './utils';
 
 const config = {
   dict: {
-    keyName: "key",
-    titleName: "title",
+    keyName: "value",
+    titleName: "label",
     dicts: {}
   },
   tree: {

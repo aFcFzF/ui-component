@@ -1,17 +1,17 @@
 <template>
   <div :class="cls">
-    <i v-if="position=='front'" class="h-icon-search"></i>
+    <i v-if="position=='front'" class="ui-icon-search"></i>
     <div class="h-search-container">
       <div class="h-search-input">
         <input type="text" v-model="inputValue" :placeholder="showPlaceholder" @input="inputTrigger(inputValue)" @keyup.enter="search(inputValue)"/>
-        <i class="h-icon-close" @click="search('')"></i>
+        <i class="ui-icon-close" @click="search('')"></i>
       </div>
       <Button color="primary" v-if="showSearchButton" @click="search(inputValue)">
         <template v-if="$slots.default"><slot></slot></template>
         <template v-else>{{'h.search.searchText' | hlang(null, searchText)}}</template>
       </Button>
     </div>
-    <i v-if="position=='end'" class="h-icon-search h-icon-search-end" @click="search(inputValue)"></i>
+    <i v-if="position=='end'" class="ui-icon-search ui-icon-search-end" @click="search(inputValue)"></i>
   </div>
 </template>
 <script>

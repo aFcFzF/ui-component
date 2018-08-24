@@ -14,7 +14,7 @@
     <span class="h-page-pager-container"
           :style="{order:orders.pager}"
           v-if="orders.pager!=-1 && this.count>0">
-                      <span :class="prevCls" @click="prev()"><i class="h-icon-left"></i></span>
+                      <span :class="prevCls" @click="prev()"><i class="ui-icon-left"></i></span>
     <span @click="change(1)"
           :class="genPagerCls(1)">1</span>
     <span v-if="pagers.length > 0 && 1 < pagers[0] - 1"
@@ -29,7 +29,7 @@
           :class="genPagerCls(count)"
           v-if="this.count>1">{{count}}</span>
     <span :class="nextCls"
-          @click="next()"><i class="h-icon-right"></i></span>
+          @click="next()"><i class="ui-icon-right"></i></span>
     </span>
     <input type="text"
            :style="{order:orders.jumper}"

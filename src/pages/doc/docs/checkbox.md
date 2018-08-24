@@ -59,6 +59,15 @@
     }
   };
 </script>
+
+<style lang="less">
+  .ui-checkbox-group {
+    .ui-checkbox {
+      margin-right: 20px;
+    }
+  }
+</style>
+
 ## Checkbox 多选框
 一组备选项中进行多选
 
@@ -118,14 +127,39 @@
 ```html
 <template>
     <p>选择项： {{checkList.filter(e => e.value).map(e => e.label)}}</p>
-    <ui-checkbox v-for="(item, idx) of checkList" v-model="item.value" :key="'__check_list' + idx">{{item.label}}</ui-checkbox>
+    <div class="ui-checkbox-group">
+      <ui-checkbox
+        v-for="(item, idx) of checkList"
+        v-model="item.value"
+        :key="item.label"
+      >
+        {{item.label}}
+      </ui-checkbox>
+    </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        checkList: ['选中且禁用','复选框 A']
+        checkList: [
+          {
+            label: '选项A',
+            value: false
+          },{
+            label: '选项B',
+            value: true
+          },{
+            label: '选项C',
+            value: false
+          },{
+            label: '选项D',
+            value: false
+          },{
+            label: '选项E',
+            value: false
+          }
+        ]
       };
     }
   };
@@ -133,165 +167,6 @@
 ```
 :::
 
-### indeterminate 状态
-
-`indeterminate` 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
-
-:::demo
-
-```html
-<template>
-  <ui-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</ui-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <ui-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <ui-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</ui-checkbox>
-  </ui-checkbox-group>
-</template>
-<script>
-  const cityOptions = ['上海', '北京', '广州', '深圳'];
-  export default {
-    data() {
-      return {
-        checkAll: false,
-        checkedCities: ['上海', '北京'],
-        cities: cityOptions,
-        isIndeterminate: true
-      };
-    },
-    methods: {
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    }
-  };
-</script>
-```
-:::
-
-### 可选项目数量的限制
-
-使用 `min` 和 `max` 属性能够限制可以被勾选的项目的数量。
-
-:::demo
-
-```html
-<template>
-  <ui-checkbox-group
-    v-model="checkedCities1"
-    :min="1"
-    :max="2">
-    <ui-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</ui-checkbox>
-  </ui-checkbox-group>
-</template>
-<script>
-  const cityOptions = ['上海', '北京', '广州', '深圳'];
-  export default {
-    data() {
-      return {
-        checkedCities1: ['上海', '北京'],
-        cities: cityOptions
-      };
-    }
-  };
-</script>
-```
-
-:::
-
-### 按钮样式
-
-按钮样式的多选组合。
-
-:::demo 只需要把`ui-checkbox`元素替换为`ui-checkbox-button`元素即可。此外，Element 还提供了`size`属性。
-```html
-<template>
-  <div>
-    <ui-checkbox-group v-model="checkboxGroup1">
-      <ui-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</ui-checkbox-button>
-    </ui-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox-group v-model="checkboxGroup2" size="medium">
-      <ui-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</ui-checkbox-button>
-    </ui-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox-group v-model="checkboxGroup3" size="small">
-      <ui-checkbox-button v-for="city in cities" :label="city" :disabled="city === '北京'" :key="city">{{city}}</ui-checkbox-button>
-    </ui-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox-group v-model="checkboxGroup4" size="mini" disabled>
-      <ui-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</ui-checkbox-button>
-    </ui-checkbox-group>
-  </div>
-</template>
-<script>
-  const cityOptions = ['上海', '北京', '广州', '深圳'];
-  export default {
-    data () {
-      return {
-        checkboxGroup1: ['上海'],
-        checkboxGroup2: ['上海'],
-        checkboxGroup3: ['上海'],
-        checkboxGroup4: ['上海'],
-        cities: cityOptions
-      };
-    }
-  }
-</script>
-```
-:::
-
-### 带有边框
-
-:::demo 设置`border`属性可以渲染为带有边框的多选框。
-```html
-<template>
-  <div>
-    <ui-checkbox v-model="checked3" label="备选项1" border></ui-checkbox>
-    <ui-checkbox v-model="checked4" label="备选项2" border></ui-checkbox>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox v-model="checked5" label="备选项1" border size="medium"></ui-checkbox>
-    <ui-checkbox v-model="checked6" label="备选项2" border size="medium"></ui-checkbox>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox-group v-model="checkboxGroup5" size="small">
-      <ui-checkbox label="备选项1" border></ui-checkbox>
-      <ui-checkbox label="备选项2" border disabled></ui-checkbox>
-    </ui-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
-      <ui-checkbox label="备选项1" border></ui-checkbox>
-      <ui-checkbox label="备选项2" border></ui-checkbox>
-    </ui-checkbox-group>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        checkboxGroup5: [],
-        checkboxGroup6: []
-      };
-    }
-  }
-</script>
-```
-:::
 
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

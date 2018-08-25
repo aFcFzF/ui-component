@@ -20,7 +20,7 @@ import Menu, {MenuItem} from './menu';
 // import Pagination from './components/pagination';
 // import Poptip from './components/poptip';
 // import Progress from './components/progress';
-// import Radio from './components/radio';
+import Radio from './radio';
 // import Rate from './components/rate';
 // import Slider from './components/slider';
 // import Loading from './components/loading';
@@ -89,7 +89,7 @@ const components = {
     // Pagination,
     // Poptip,
     // Progress,
-    // Radio,
+    Radio,
     // Rate,
     Row,
     // Search,

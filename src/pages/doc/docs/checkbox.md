@@ -102,8 +102,10 @@
 
 ```html
 <template>
+<div class="ui-checkbox-group">
   <ui-checkbox v-model="checked1" disabled>备选项1</ui-checkbox>
   <ui-checkbox v-model="checked2" disabled>备选项</ui-checkbox>
+</div>
 </template>
 <script>
   export default {

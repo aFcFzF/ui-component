@@ -2,17 +2,21 @@
     <div class="ui-radio" :disabled="disabled" :class="{'ui-radio-disabled': disabled}">
         <template v-if="!isSingle">
             <label
-            v-for="option of arr"
-            :key="option[key]"
-            @click="setvalue(option)"
-            :class="{'ui-radio-checked': option[key]==selectStatus,
-            'ui-radio-un-checked': option[key] != selectStatus,
-            'ui-radio-label-disabled': disabled}">
+                v-for="option of arr"
+                :key="option[key]"
+                @click="setvalue(option)"
+                :class="{'ui-radio-checked': option[key]==selectStatus,
+                'ui-radio-un-checked': option[key] != selectStatus,
+                'ui-radio-label-disabled': disabled}"
+            >
                 <span class="radio-icon ui-radio-icon" :checked="option[key]==selectStatus" :disabled="disabled"></span>
                 <span class="ui-radio-text">{{option[title]}}</span>
             </label>
         </template>
-        <label v-else @click="setvalue()" :class="{'ui-radio-checked': value == selectStatus, 'ui-radio-un-checked': value != selectStatus, 'ui-radio-label-disabled': disabled}"><span class="radio-icon ui-radio-icon" :checked="value == selectStatus" :disabled="disabled"></span><span><slot></slot></span></label>
+        <label v-else @click="setvalue()" :class="{'ui-radio-checked': value == selectStatus, 'ui-radio-un-checked': value != selectStatus, 'ui-radio-label-disabled': disabled}">
+            <span class="radio-icon ui-radio-icon" :checked="value == selectStatus" :disabled="disabled"></span>
+            <span class="ui-radio-content" :disabled="disabled"><slot></slot></span>
+        </label>
     </div>
 </template>
 <script>

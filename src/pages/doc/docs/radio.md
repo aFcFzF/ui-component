@@ -2,14 +2,15 @@
   module.exports = {
     data() {
       return {
-        radio: '',
+        radio: 'sel4',
         options: [
-          { title: '选择1', key: 'a1'},
-          { title: '选择2', key: 'a2'},
-          { title: '选择3', key: 'a3'},
-          {label: '选项4', key: 'aa'}
+          {label: '选项1', value: 'sel1'},
+          {label: '选项2', value: 'sel2'},
+          {label: '选项3', value: 'sel3'},
+          {label: '选项4', value: 'sel4'}
         ],
-        radio1: '选中且禁用',
+        options1: ['选项1', '选项2', '选项3', '选项4', '选项5'],
+        radio1: '选项2',
         radio2: 3,
         radio3: '上海',
         radio4: '上海',
@@ -18,14 +19,38 @@
         radio7: '1',
         radio8: '1',
         radio9: '1',
-        radio10: '1'
+        radio10: '1',
+        radioDts: ['a', 'b', 'c', 'd', 'e'],
+        radioValue: 'a',
+        radioSize: '',
+        sizeDesc: '',
+        radioDisable: [
+          {label: '正常', value: false},
+          {label: '禁用', value: true}
+        ],
+        disableState: false
       };
+    },
+    methods: {
+      btnHdl() {
+        this.radio1 = '选项4';
+      },
+      sizeHdl(idx) {
+        this.radioSize = ['l', '', 's', 'xs'][idx],
+        this.sizeDesc = ['大', '中（默认）', '小', '超小'][idx]
+      },
+      disableHdl() {
+
+      }
     }
   };
 </script>
 
 <style lang="less">
+  .ui-btn-group,
   .ui-radio-group {
+    display: flex;
+    align-items: center;
     .ui-radio {
       margin-right: 20px;
     }
@@ -47,7 +72,13 @@
 <template>
   <p>值是： {{radio}}</p>
   <div class="ui-radio-group" v-model="radio2">
-    <ui-radio v-model="radio" v-for="(item, idx) of options" :key="item.key" :value="item">选项1</ui-radio>
+    <ui-radio v-model="radio" v-for="(item, idx) of options" :key="item.key" :value="item.value">选项{{idx+1}}</ui-radio>
+  </div>
+  <br>
+  <p>值是： {{radio1}}</p>
+  <div class="ui-radio-group" v-model="radio2">
+    <ui-radio v-model="radio1" v-for="(item, idx) of options1" :key="item.key" :value="item">{{item}}</ui-radio>
+    <ui-button class="ui-btn-primary" size="s" @click="btnHdl">手动设置</ui-button>
   </div>
 </template>
 
@@ -57,6 +88,11 @@
       return {
         radio: '1'
       };
+    },
+    methods: {
+      btnHdl() {
+        this.radio1 = '选项4';
+      }
     }
   }
 </script>
@@ -71,8 +107,7 @@
 ```html
 <template>
   <div class="ui-radio-group" v-model="radio2">
-    <ui-radio disabled v-model="radio1" label="禁用">备选项</ui-radio>
-    <ui-radio disabled v-model="radio1" label="选中且禁用">备选项</ui-radio>
+    <ui-radio v-model="radio1" disabled v-for="(item, idx) of options1" :key="item.key" :value="item">{{item}}</ui-radio>
   </div>
 </template>
 
@@ -88,18 +123,74 @@
 ```
 :::
 
-### 单选框组
+### 扩展样式
 
-适用于在多个互斥的选项中选择的场景
-
-:::demo 结合`div class="ui-radio-group"`元素和子元素`ui-radio`可以实现单选组，在`div class="ui-radio-group"`中绑定`v-model`，在`ui-radio`中设置好`label`即可，无需再给每一个`ui-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
-
+:::demo 设置`border`属性可以渲染为带有边框的单选框；设置`class为ui-radio-text` 样式可渲染为纯文字选项。
 ```html
 <template>
-  <div class="ui-radio-group" v-model="radio2">
-    <ui-radio :label="3">备选项</ui-radio>
-    <ui-radio :label="6">备选项</ui-radio>
-    <ui-radio :label="9">备选项</ui-radio>
+    <ui-button-group>
+        <span style="margin-right: 10px">radio大小：</span>
+        <ui-button class="ui-btn-primary" @click="sizeHdl(0)" size="xs">大</ui-button>
+        <ui-button class="ui-btn-primary" @click="sizeHdl(1)" size="xs">中</ui-button>
+        <ui-button class="ui-btn-primary" @click="sizeHdl(2)" size="xs">小</ui-button>
+        <ui-button class="ui-btn-primary" @click="sizeHdl(3)" size="xs">超小</ui-button>
+    </ui-button-group>
+    <br>
+    <div class="ui-radio-group">
+      <span style="margin-right: 10px">radio状态：</span>
+      <ui-radio
+          v-model="disableState"
+          v-for="(item, idx) of radioDisable"
+          :key="item.label"
+          :value="item.value"
+      >
+        {{item.label}}
+      </ui-radio>
+  </div>
+    <br>
+    <br>
+    <div class="ui-radio-group">
+      <span style="margin-right: 10px">默认样式：</span>
+      <ui-radio
+        :class="radioSize ? `ui-radio-${radioSize}` : ''"
+        :disabled="disableState"
+        v-model="radio1"
+        v-for="(item, idx) of options1"
+        :key="item.key"
+        :value="item"
+      >
+        {{item}}
+      </ui-radio>
+    </div>
+    <br>
+    <br>
+    <div class="ui-radio-group">
+    <span style="margin-right: 10px">边框样式：</span>
+    <ui-radio
+      :class="['ui-radio-border', radioSize ? `ui-radio-${radioSize}` : '']"
+      :disabled="disableState"
+      v-model="radio1"
+      v-for="(item, idx) of options1"
+      :key="item.key"
+      :value="item"
+    >
+      {{item}}
+    </ui-radio>
+  </div>
+   <br>
+    <br>
+    <div class="ui-radio-group">
+    <span style="margin-right: 10px">纯文字样式：</span>
+    <ui-radio
+      :class="['ui-radio-text', radioSize ? `ui-radio-${radioSize}` : '']"
+      :disabled="disableState"
+      v-model="radio1"
+      v-for="(item, idx) of options1"
+      :key="item.key"
+      :value="item"
+    >
+      {{item}}
+    </ui-radio>
   </div>
 </template>
 
@@ -107,105 +198,11 @@
   export default {
     data () {
       return {
-        radio2: 3
-      };
-    }
-  }
-</script>
-```
-:::
-
-### 按钮样式
-
-按钮样式的单选组合。
-
-:::demo 只需要把`ui-radio`元素换成`ui-radio-button`元素即可，此外，Element 还提供了`size`属性。
-```html
-<template>
-  <div>
-    <div class="ui-radio-group" v-model="radio3">
-      <ui-radio type="button" label="上海"></ui-radio>
-      <ui-radio type="button" label="北京"></ui-radio>
-      <ui-radio type="button" label="广州"></ui-radio>
-      <ui-radio type="button" label="深圳"></ui-radio>
-    </div>
-  </div>
-  <div style="margin-top: 20px">
-    <div class="ui-radio-group" v-model="radio4" size="medium">
-      <ui-radio type="button" label="上海" ></ui-radio>
-      <ui-radio type="button" label="北京"></ui-radio>
-      <ui-radio type="button" label="广州"></ui-radio>
-      <ui-radio type="button" label="深圳"></ui-radio>
-    </div>
-  </div>
-  <div style="margin-top: 20px">
-    <div class="ui-radio-group" v-model="radio5" size="small">
-      <ui-radio type="button" label="上海"></ui-radio>
-      <ui-radio type="button" label="北京" disabled ></ui-radio>
-      <ui-radio type="button" label="广州"></ui-radio>
-      <ui-radio type="button" label="深圳"></ui-radio>
-    </div>
-  </div>
-  <div style="margin-top: 20px">
-    <div class="ui-radio-group" v-model="radio6" disabled size="mini">
-      <ui-radio type="button" label="上海"></ui-radio>
-      <ui-radio type="button" label="北京"></ui-radio>
-      <ui-radio type="button" label="广州"></ui-radio>
-      <ui-radio type="button" label="深圳"></ui-radio>
-    </div>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        radio3: '上海',
-        radio4: '上海',
-        radio5: '上海',
-        radio6: '上海'
-      };
-    }
-  }
-</script>
-```
-:::
-
-### 带有边框
-
-:::demo 设置`border`属性可以渲染为带有边框的单选框。
-```html
-<template>
-  <div>
-    <ui-radio v-model="radio7" label="1" border>备选项1</ui-radio>
-    <ui-radio v-model="radio7" label="2" border>备选项2</ui-radio>
-  </div>
-  <div style="margin-top: 20px">
-    <ui-radio v-model="radio8" label="1" border size="medium">备选项1</ui-radio>
-    <ui-radio v-model="radio8" label="2" border size="medium">备选项2</ui-radio>
-  </div>
-  <div style="margin-top: 20px">
-    <div class="ui-radio-group" v-model="radio9" size="small">
-      <ui-radio label="1" border>备选项1</ui-radio>
-      <ui-radio label="2" border disabled>备选项2</ui-radio>
-    </div>
-  </div>
-  <div style="margin-top: 20px">
-    <div class="ui-radio-group" v-model="radio10" size="mini" disabled>
-      <ui-radio label="1" border>备选项1</ui-radio>
-      <ui-radio label="2" border>备选项2</ui-radio>
-    </div>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
+        radioDisable: [
+          {label: '正常', value: false},
+          {label: '禁用', value: true}
+        ],
+        disableState: false
       };
     }
   }

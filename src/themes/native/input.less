@@ -3,161 +3,164 @@ input[type=text],
 input[type=password],
 input[type=search],
 textarea {
-  min-width: 1px;
-  position: relative;
-  background-color: @white-color;
-  border-radius: @border-radius;
-  border: @border;
-  display: inline-block;
-  padding: 4px 6px;
-  // line-height: @font-size-input;
-  line-height: 1.5;
-  // width: 200px;
-  font-size: @font-size-input;
-  transition: all linear @transition-time;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  font-family: inherit;
-  vertical-align: top;
-  outline: none;
-  &:hover {
-    border-color: lighten(@primary-color, 10%);
-  }
-  &:focus {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 2px fade(@primary-color, 20%);
-  }
-  &[disabled],
-  &[readonly] {
-    border-color: @disabled-border-color;
+    min-width: 1px;
+    position: relative;
+    background-color: @white-color;
+    border-radius: @border-radius;
+    border: @border;
+    display: inline-block;
+    padding: 4px 6px;
+    // line-height: @font-size-input;
+    line-height: 1.5;
+    // width: 200px;
+    font-size: @font-size-input;
+    transition: all linear @transition-time;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    font-family: inherit;
+    vertical-align: top;
+    outline: none;
+    &:hover {
+        border-color: lighten(@primary-color, 10%);
+    }
     &:focus {
-      box-shadow: none;
+        border-color: @primary-color;
+        box-shadow: 0 0 0 2px fade(@primary-color, 20%);
     }
-  }
-  &[readonly]{
-    color: @secondary-color;
-    box-shadow: none;
-    cursor: default;
-  }
-  &[disabled] {
-    color: @disabled-color;
-    background-color: @disabled-background-color;
-    pointer-events: painted;
-    cursor: @disabled-cursor;
-  }
-  .@{prefix}form-item-valid-error &{
-    border-color: @red-color;
-    &:focus{
-      box-shadow: 0 0 0 2px fade(@red-color, 20%);
+    &[disabled],
+    &[readonly] {
+        border-color: @disabled-border-color;
+        &:focus {
+            box-shadow: none;
+        }
     }
-  }
+    &[readonly] {
+        color: @secondary-color;
+        box-shadow: none;
+        cursor: default;
+    }
+    &[disabled] {
+        color: @disabled-color;
+        background-color: @disabled-background-color;
+        pointer-events: painted;
+        cursor: @disabled-cursor;
+    }
+    .@{prefix}form-item-valid-error & {
+        border-color: @red-color;
+        &:focus {
+            box-shadow: 0 0 0 2px fade(@red-color, 20%);
+        }
+    }
 }
 
 input[type=text],
-input[type=password]{
-  height: @input-height;
+input[type=password] {
+    height: @input-height;
 }
 
-textarea{
-  line-height: 1.4;
+textarea {
+    line-height: 1.4;
 }
 
 .@{input-prefix} {
-  position: relative;
-  display: inline-block;
-
-  >[class^="@{icon-prefix}"],
-  >[class*=" @{icon-prefix}"] {
-    position: absolute;
-    right: 8px;
-    .middle;
-    z-index: 3;
-    color: @describe-color;
-  }
-  >input{
-    width: 100%;
     position: relative;
-    z-index: 2;
-  }
+    display: inline-block;
 
-  &.h-input-prefix-icon {
     >[class^="@{icon-prefix}"],
-    >[class*=" @{icon-prefix}"]{
-      right: auto;
-      left: 8px;
+    >[class*=" @{icon-prefix}"] {
+        position: absolute;
+        right: 8px;
+        .middle;
+        z-index: 3;
+        color: @describe-color;
     }
-    >input{
-      padding-left: 25px;
+    >input {
+        width: 100%;
+        position: relative;
+        z-index: 2;
     }
-  }
 
-  &.h-input-suffix-icon {
-    >input{
-      padding-right: 25px;
-    }
-  }
-  &-group {
-    position: relative;
-    display: flex;
-    >input,>div {
-      display: inline-block;
-      position: relative;
-      z-index: 2;
-      margin:0;
-      flex: 1;
-    }
-    >div{
-      padding: 0 !important;
-    }
-    >input:not(:last-child),>div:not(:last-child) input{
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    >span{
-        line-height: @input-height - 2px;
-    }
-    >.@{input-prefix}-addon {
-      line-height: @input-height - 2px;
-      flex: inherit;
-      text-align: center;
-      background-color: @fill-color;
-      border-top: @border;
-      border-bottom: @border;
-      height: @input-height;
-      vertical-align: middle;
-      padding: 0px 5px;
-      min-width: 24px;
-      white-space: nowrap;
-      color: @describe-color;
-      display: inline-block;
-      &:first-child {
-        border-radius: @border-radius 0 0 @border-radius;
-        border-left: @border;
-      }
-      &:last-child,
-      &.last-child {
-        border-radius: 0 @border-radius @border-radius 0;
-        border-right: @border;
-      }
-      +input,
-      +div input {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      > .h-select {
-        display: block;
-        .h-select-placeholder, .h-select-value-single {
-          height: @input-height - 2px;
-          line-height: @input-height - 2px;
+    &.h-input-prefix-icon {
+        >[class^="@{icon-prefix}"],
+        >[class*=" @{icon-prefix}"] {
+            right: auto;
+            left: 8px;
         }
-      }
+        >input {
+            padding-left: 25px;
+        }
     }
-  }
+
+    &.h-input-suffix-icon {
+        >input {
+            padding-right: 25px;
+        }
+    }
+    &-group {
+        position: relative;
+        display: flex;
+        >input,
+        >div {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            margin: 0;
+            flex: 1;
+        }
+        >div {
+            padding: 0 !important;
+        }
+        >input:not(:last-child),
+        >div:not(:last-child) input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        >span {
+            line-height: @input-height - 2px;
+        }
+        >.@{input-prefix}-addon {
+            line-height: @input-height - 2px;
+            flex: inherit;
+            text-align: center;
+            background-color: @fill-color;
+            border-top: @border;
+            border-bottom: @border;
+            height: @input-height;
+            vertical-align: middle;
+            padding: 0 5px;
+            min-width: 24px;
+            white-space: nowrap;
+            color: @describe-color;
+            display: inline-block;
+            &:first-child {
+                border-radius: @border-radius 0 0 @border-radius;
+                border-left: @border;
+            }
+            &:last-child,
+            &.last-child {
+                border-radius: 0 @border-radius @border-radius 0;
+                border-right: @border;
+            }
+            +input,
+            +div input {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+            > .h-select {
+                display: block;
+                .h-select-placeholder,
+                .h-select-value-single {
+                    height: @input-height - 2px;
+                    line-height: @input-height - 2px;
+                }
+            }
+        }
+    }
 }
 
-input[type=text]::-ms-clear{
-  display: none;
+input[type=text]::-ms-clear {
+    display: none;
 }
-input::-webkit-search-cancel-button{
-  display: none;
+input::-webkit-search-cancel-button {
+    display: none;
 }

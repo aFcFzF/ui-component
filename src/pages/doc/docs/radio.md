@@ -23,7 +23,7 @@
         radioDts: ['a', 'b', 'c', 'd', 'e'],
         radioValue: 'a',
         radioSize: '',
-        sizeDesc: '',
+        sizeDesc: '中（默认）',
         radioDisable: [
           {label: '正常', value: false},
           {label: '禁用', value: true}
@@ -148,6 +148,7 @@
       </ui-radio>
   </div>
     <br>
+    <p>值是： {{radio1}} - 大小:  {{sizeDesc}} - 禁用： {{disableState ? '是' : '否'}}</p>
     <br>
     <div class="ui-radio-group">
       <span style="margin-right: 10px">默认样式：</span>

@@ -1,3 +1,7 @@
-import Steps from './steps';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Steps;
+export {default} from './steps';
+

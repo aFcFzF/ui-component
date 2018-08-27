@@ -242,7 +242,7 @@ class Pop {
     }
 
     this.popNode.style.display = '';
-    utils.addClass(this.reference, 'h-pop-trigger');
+    utils.addClass(this.reference, 'ui-pop-trigger');
     if (this.timeout) clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.popNode.setAttribute('aria-hidden', 'false');
@@ -279,7 +279,7 @@ class Pop {
     }
     this.isOpen = false;
     this.popNode.setAttribute('aria-hidden', 'true');
-    utils.removeClass(this.reference, 'h-pop-trigger');
+    utils.removeClass(this.reference, 'ui-pop-trigger');
     if (this.timeout) clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       if (this.popNode) {

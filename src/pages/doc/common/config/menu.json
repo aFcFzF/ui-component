@@ -32,13 +32,13 @@
                 "disabled": true,
                 "subList": {
                     "checkbox": "Checkbox",
-                    "checkbox-group": "CheckboxGroup",
                     "radio": "Radio",
                     "input": "Input",
-                    "textarea": "Textarea",
                     "select": "Select",
                     "switch": "Switch",
                     "rate": "Rate",
+                    "slider": "Slider",
+                    "steps": "Steps",
                     "validator": "Validator",
                     "upload": "Upload",
                     "form": "Form"
@@ -66,7 +66,6 @@
                 "disabled": true,
                 "subList": {
                     "scroll": "Scroll",
-                    "slide": "Slide",
                     "index-list": "IndexList",
                     "swipe": "Swipe",
                     "sticky": "Sticky",

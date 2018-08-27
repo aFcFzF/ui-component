@@ -5,7 +5,8 @@
         value: '',
         value2: '',
         value3: '',
-        value4: 0
+        value4: 0,
+        value5: '',
       }
     },
     methods: {
@@ -18,16 +19,40 @@
       minus() {
         this.value4--;
       }
+    },
+    computed: {
+      serialLength() {
+        return this.value5.replace(/-/g, '').length;
+      }
     }
   }
 </script>
 
-<style>
+<style lang="less">
   .close-input {
     cursor: pointer;
   }
   .ui-input-group {
     width: 200px;
+  }
+  .serial-number-tip {
+    .ui-tooltip-inner {
+      max-width: none;
+      .user-ipt {
+        word-wrap: break-word;
+      }
+      .ref-img {
+        width: 300px;
+      }
+      .error {
+        color: #F95D5D;
+        font-weight: 700;
+      }
+      .success {
+        color: #63CE81;
+        font-weight: 700;
+      }
+    }
   }
 </style>
 
@@ -93,16 +118,19 @@ export default {
 ```
 :::
 
-### 图标输入框
+### 复合输入框
 
 :::demo 结合icon即可得到一个可清空的输入框
 
+
 ```html
+<p>带清空按钮的输入框</p>
 <p>input value：{{value3}}</p>
 <div class="ui-input ui-input-suffix-icon close-input">
   <input type="text" v-model="value3" placeholder="请输入内容">
   <i class="ui-icon-close" v-show="!!value3" @click="emptyHdl"/>
 </div>
+<p>带加减按钮的输入框</p>
 <p>input value：{{value4}}</p>
 <div class="ui-input-group">
   <input type="text" v-model="value4" placeholder="请输入内容" readonly>
@@ -115,6 +143,24 @@ export default {
   </ui-button>
   </ui-button-group>
 </div>
+<p>带参考区域的输入框</p>
+<p>input value：{{value5}}</p>
+  <div>
+    <ui-tooltip class-name="serial-number-tip" theme="white" placement="top-start">
+      <div class="ui-input-group">
+        <input type="text" v-model="value5" placeholder="请输入内容" :error="serialLength > 25">
+      </div>
+      <div slot="content">
+        <p>序列号：</p>
+        <img class="ref-img" src="../common/img/serialNumber.jpg">
+        <p>要求格式：XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</p>
+        <p class="user-ipt">当前输入：{{value5}}</p>
+        <p :class="serialLength > 25 ? 'error' : serialLength === 25 ? 'success' : ''">
+          字符长度: {{serialLength}}/25
+        </p>
+      </div>
+    </ui-tooltip>
+  </div>
 
 <script>
   export default {

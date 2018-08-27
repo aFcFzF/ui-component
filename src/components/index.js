@@ -21,10 +21,10 @@ import Menu, {MenuItem} from './menu';
 // import Poptip from './components/poptip';
 // import Progress from './components/progress';
 import Radio from './radio';
-// import Rate from './components/rate';
-// import Slider from './components/slider';
+import Rate from './rate';
+import Slider from './slider';
 // import Loading from './components/loading';
-// import Steps from './components/steps';
+import Steps from './steps';
 // import Search from './components/search';
 import Select from './select';
 import Switch from './switch';
@@ -90,12 +90,12 @@ const components = {
     // Poptip,
     // Progress,
     Radio,
-    // Rate,
+    Rate,
     Row,
     // Search,
     Select,
-    // Slider,
-    // Steps,
+    Slider,
+    Steps,
     uiSwitch: Switch,
     SwitchList,
     Col,

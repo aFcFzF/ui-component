@@ -12,7 +12,7 @@ const prefix = 'ui-tooltip';
 export default {
     props: {
         trigger: {
-            type: String, // click orhover
+            type: String, // click or hover
             default: 'hover'
         },
         content: String,
@@ -35,6 +35,7 @@ export default {
     },
     mounted() {
         this.init();
+        console.log('className: ', this.className);
     },
     methods: {
         show() {
@@ -67,12 +68,8 @@ export default {
                     disabled: this.disabled,
                     delay: this.delay,
                     events: {
-                        show: () => {
-                            this.$emit('show');
-                        },
-                        hide: () => {
-                            this.$emit('hide');
-                        }
+                        show: () => this.$emit('show'),
+                        hide: () => this.$emit('hide')
                     }
                 });
             });
@@ -83,7 +80,8 @@ export default {
             if (!this.tooltip) {
                 return;
             }
-            !this.disabled ? this.tooltip.enabled() : this.tooltip.disabled();
+            // disabled 切换时应该立刻显示
+            !this.disabled ? (this.tooltip.enabled(), this.show()) : (this.tooltip.disabled(), this.hide());
         },
         content() {
             if (!this.tooltip) {

@@ -20,10 +20,10 @@ const getContent = function (el, vnode) {
     param.content = refNode;
     param.html = true;
   } else if (param.content) {
-    param.content = `<div class="h-tooltip-inner-content">${param.content}</div>`;
+    param.content = `<div class="ui-tooltip-inner-content">${param.content}</div>`;
     param.html = true;
   } else if (el.innerText) {
-    param.content = `<div class="h-tooltip-inner-content">${el.innerText}</div>`;
+    param.content = `<div class="ui-tooltip-inner-content">${el.innerText}</div>`;
     param.html = true;
   }
   return param

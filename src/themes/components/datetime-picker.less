@@ -3,186 +3,192 @@
 @datetime-picker-prefix: ~"@{prefix}datetime";
 @date-picker-cells-width: 196px;
 .@{datetime-picker-prefix}-range {
-  .@{datetime-picker-prefix}-show{
-    min-width: 200px;
-  }
+    .@{datetime-picker-prefix}-show {
+        min-width: 200px;
+    }
 }
 
 .@{datetime-picker-prefix}-full-range {
-  .@{datetime-picker-prefix}-show{
-    min-width: 220px;
-  }
+    .@{datetime-picker-prefix}-show {
+        min-width: 220px;
+    }
 }
 
 .@{date-picker-prefix} {
-  &-picker {
-    border: @border;
-    .@{date-picker-prefix} {
-      &-shortcut {
-        border-radius: @border-radius 0 0 @border-radius;
-        width: 100px;
-        font-size: 12px;
-        line-height: 28px;
-        background: lighten(@fill-color, 1%);
-        border-right: @border;
-        padding: 10px 0;
-        >div {
-          padding: 3px 10px;
-          .li-hover();
-        }
-      }
-      &-container {
-        display: flex
-      }
-      &-full-range-container{
-        display: block;
-        .h-tabs{
-          padding: 0;
-          > div + div{
-            margin-left: 5px;
-          }
-        }
-      }
-      &-range-container{
-        >.@{date-picker-prefix}-content:last-child{
-          border-left: @border;
-        }
-      }
-      &-content {
-        padding: 10px;
-      }
-      &-self-defined{
-        padding: 15px;
-        text-align: center;
-        .@{prefix}input{
-          width: 110px;
-        }
-      }
-      &-footer {
-        padding: 5px 10px;
-        text-align: right;
-        border-top: @border;
-      }
-      &-header {
-        text-align: center;
-        line-height: @input-height;
-        >span {
-          .text-hover();
-          display: inline-block;
-        }
-        &-show {
-          margin: 0 3px;
-        }
+    &-picker {
+        border: @border;
         .@{date-picker-prefix} {
-          &-year-left-picker,
-          &-year-right-picker {
-            >i+i {
-              margin-left: -7px;
+            &-shortcut {
+                border-radius: @border-radius 0 0 @border-radius;
+                width: 100px;
+                font-size: 12px;
+                line-height: 28px;
+                background: lighten(@fill-color, 1%);
+                border-right: @border;
+                padding: 10px 0;
+                >div {
+                    padding: 3px 10px;
+                    .li-hover(tint(@primary-color, 90));
+                }
             }
-          }
-          &-month-left-picker,
-          &-year-left-picker,
-          &-month-right-picker,
-          &-year-right-picker {
-            color: @describe-color;
-            font-size: 12px;
-            margin: 0 3px;
-          }
-          &-month-left-picker,
-          &-year-left-picker {
-            float: left;
-          }
-          &-month-right-picker,
-          &-year-right-picker {
-            float: right;
-          }
-        }
-      }
-      &-body {
-        margin: 8px auto 0;
-        font-size: @font-size-mini;
-        width: 224px;
-        >div>span {
-          width: 32px;
-          height: 32px;
-          line-height: 32px;
-          display: inline-block;
-          text-align: center;
-        }
-        &-weeks {
-          font-weight: bold;
-        }
-        &-pickers {
-          >span {
-            cursor: default;
-            &:hover {
-              background-color: @hover-background-color;
+            &-container {
+                display: flex
             }
-            &.@{date-picker-prefix} {
-              &-today {
-                color: @primary-color;
-              }
-              &-selected {
-                background-color: @primary-color;
-                color: @white-color;
-              }
-              &-range-selected {
-                background-color: lighten(@primary-color, 40%);
-              }
-              &-not-now-day {
-                color: @weakest-color;
-                background-color: @white-color;
-              }
-              &-disabled {
-                background-color: @fill-color;
-                color: @disabled-color;
-                pointer-events: none;
-              }
+            &-full-range-container {
+                display: block;
+                .ui-tabs {
+                    padding: 0;
+                    > div + div {
+                        margin-left: 5px;
+                    }
+                }
             }
-          }
+            &-range-container {
+                >.@{date-picker-prefix}-content:last-child {
+                    border-left: @border;
+                }
+            }
+            &-content {
+                padding: 10px;
+            }
+            &-self-defined {
+                padding: 15px;
+                text-align: center;
+                .@{prefix}input {
+                    width: 110px;
+                }
+            }
+            &-footer {
+                padding: 5px 10px;
+                text-align: right;
+                border-top: @border;
+            }
+            &-header {
+                text-align: center;
+                line-height: @input-height;
+                >span {
+                    .text-hover();
+                    display: inline-block;
+                }
+                &-show {
+                    margin: 0 3px;
+                }
+                .@{date-picker-prefix} {
+                    &-year-left-picker,
+                    &-year-right-picker {
+                        >i+i {
+                            margin-left: -7px;
+                        }
+                    }
+                    &-month-left-picker,
+                    &-year-left-picker,
+                    &-month-right-picker,
+                    &-year-right-picker {
+                        color: @describe-color;
+                        font-size: 12px;
+                        margin: 0 3px;
+                    }
+                    &-month-left-picker,
+                    &-year-left-picker {
+                        float: left;
+                    }
+                    &-month-right-picker,
+                    &-year-right-picker {
+                        float: right;
+                    }
+                }
+            }
+            &-body {
+                margin: 8px auto 0;
+                font-size: @font-size-mini;
+                width: 224px;
+                >div>span {
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    display: inline-block;
+                    text-align: center;
+                }
+                &-weeks {
+                    font-weight: bold;
+                    color: @info-color;
+                    border-bottom: solid 1px @split-color;
+                    margin-bottom: 15px;
+                }
+                &-pickers {
+                    >span {
+                        cursor: default;
+                        border-radius: @border-radius;
+                        &:hover {
+                            background-color: tint(@primary-color, 90);
+                        }
+                        &.@{date-picker-prefix} {
+                            &-today {
+                                color: @primary-color;
+                            }
+                            &-selected {
+                                background-color: @primary-color;
+                                color: @white-color;
+                            }
+                            &-range-selected {
+                                background-color: tint(@primary-color, 90);
+                                border-radius: 0;
+                            }
+                            &-not-now-day {
+                                color: @weakest-color;
+                                background-color: @white-color;
+                            }
+                            &-disabled {
+                                background-color: @fill-color;
+                                color: @disabled-color;
+                                pointer-events: none;
+                            }
+                        }
+                    }
+                }
+                &-month,
+                &-year {
+                    >div>span {
+                        height: 50px;
+                        width: 50px;
+                        line-height: 50px;
+                        margin: 3px;
+                    }
+                }
+                &-week,
+                &-quarter {
+                    min-width: 200px;
+                    width: auto;
+                    >div>span {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+                &-minute,
+                &-hour {
+                    >div>span {
+                        height: 30px;
+                        width: 50px;
+                        line-height: 30px;
+                        margin: 3px;
+                    }
+                }
+            }
         }
-        &-month,
-        &-year {
-          >div>span {
-            height: 50px;
-            width: 50px;
-            line-height: 50px;
-            margin: 3px;
-          }
-        }
-        &-week, &-quarter{
-          min-width: 200px;
-          width: auto;
-          >div>span {
-            width: 100%;
-            display: block;
-          }
-        }
-        &-minute,
-        &-hour {
-          >div>span {
-            height: 30px;
-            width: 50px;
-            line-height: 30px;
-            margin: 3px;
-          }
-        }
-      }
     }
-  }
 }
 
 
-.@{datetime-picker-prefix}{
-  &-input-border {
-    display: inline-block;
-    vertical-align: middle;
-    .@{prefix}input{
-      width: 100%;
+.@{datetime-picker-prefix} {
+    &-input-border {
+        display: inline-block;
+        vertical-align: middle;
+        .@{prefix}input {
+            width: 100%;
+        }
+        .@{pop-ref-prefix} >input {
+            border-color: @primary-color;
+            box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+        }
     }
-    .@{pop-ref-prefix} >input {
-      border-color: @primary-color;
-      box-shadow: 0 0 0 2px fade(@primary-color, 20%);
-    }
-  }
 }

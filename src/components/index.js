@@ -10,7 +10,7 @@ import Badge from './badge';
 import Checkbox from './checkbox';
 // import Circle from './components/circle';
 // import Category from './components/category';
-// import Datetime from './components/datetime';
+import Datetime from './datetime';
 // import Dropdown from './plugins/dropdown';
 // import DropdownCustom from './components/dropdowncustom';
 // import DropdownMenu from './components/dropdownmenu';
@@ -36,7 +36,7 @@ import SwitchList from './switchlist';
 // import TreePicker from './components/treepicker';
 // import NumberInput from './components/numberinput';
 import Tooltip from './tooltip';
-// import Uploader from './components/uploader';
+import Uploader from './uploader';
 // import AutoComplete from './components/autocomplete';
 import {Row, Col} from './layout';
 // import Timeline from './components/timeline';
@@ -72,8 +72,8 @@ const components = {
     // Category,
     Checkbox,
     // hCircle: Circle,
-    // DatePicker: Datetime.DatePicker,
-    // DateRangePicker: Datetime.DateRangePicker,
+    DatePicker: Datetime.DatePicker,
+    DateRangePicker: Datetime.DateRangePicker,
     // DateFullRangePicker: Datetime.DateFullRangePicker,
     // DropdownCustom,
     // DropdownMenu,
@@ -109,7 +109,7 @@ const components = {
     Tooltip,
     // Tree,
     // TreePicker,
-    // Uploader,
+    Uploader,
     // TextEllipsis
 };
 

@@ -39,6 +39,7 @@
                     "rate": "Rate",
                     "slider": "Slider",
                     "steps": "Steps",
+                    "datePicker": "DatePicker",
                     "validator": "Validator",
                     "upload": "Upload",
                     "form": "Form"

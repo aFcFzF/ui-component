@@ -1151,7 +1151,7 @@
   ],
   "height": 1024,
   "metadata": {
-    "name": "heyui"
+    "name": "iconfont"
   },
   "preferences": {
     "showGlyphs": true,
@@ -1161,7 +1161,7 @@
     "fontPref": {
       "prefix": "ui-icon-",
       "metadata": {
-        "fontFamily": "heyui",
+        "fontFamily": "iconfont",
         "majorVersion": 1,
         "minorVersion": 0
       },

@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'heyui';
-  src:  url('fonts/heyui.eot?g7zctz');
-  src:  url('fonts/heyui.eot?g7zctz#iefix') format('embedded-opentype'),
-    url('fonts/heyui.ttf?g7zctz') format('truetype'),
-    url('fonts/heyui.woff?g7zctz') format('woff'),
-    url('fonts/heyui.svg?g7zctz#heyui') format('svg');
+  font-family: 'iconfont';
+  src:  url('fonts/iconfont.eot?g7zctz');
+  src:  url('fonts/iconfont.eot?g7zctz#iefix') format('embedded-opentype'),
+    url('fonts/iconfont.ttf?g7zctz') format('truetype'),
+    url('fonts/iconfont.woff?g7zctz') format('woff'),
+    url('fonts/iconfont.svg?g7zctz#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="ui-icon-"], [class*=" ui-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'heyui' !important;
+  font-family: 'iconfont' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;

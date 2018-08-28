@@ -2,12 +2,13 @@
 <div :class="stepsCls">
     <div
         v-for="(a, index) of arr"
-        :class="{
+        :class="[{
             'ui-steps-actived':index <= stepIndex,
             'ui-steps-item': true,
             'ui-steps-item-first': index==0,
-            'ui-steps-item-last': index+1 == arr.length
-        }"
+            'ui-steps-item-last': index+1 == arr.length,
+            'ui-steps-current': index === stepIndex
+        }, status ? `ui-steps-${status}` : '']"
         :key="'_step' + index"
     >
         <div class="ui-steps-tail" :class="{'ui-steps-tail-actived': index+1 <= stepIndex}"></div>
@@ -16,7 +17,7 @@
             <span v-if="a.icon" class="ui-steps-icon-custom"><i :class="a.icon"></i></span>
             <span v-else class="ui-steps-index">
                 <i class="ui-steps-index-num">{{index+1}}</i>
-                <i class="ui-icon-check ui-steps-success"></i>
+                <i class="ui-icon-check ui-steps-complete"></i>
             </span>
             </div>
             <div class="ui-steps-words">
@@ -53,6 +54,10 @@ export default {
         titleName: {
             type: String,
             default: () => config.getOption('dict', 'titleName')
+        },
+        status: {
+            type: String,
+            default: ''
         }
     },
     data() {

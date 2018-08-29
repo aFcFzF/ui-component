@@ -1,58 +1,58 @@
 @tag-prefix: ~"@{prefix}tag";
 
 .@{tag-prefix} {
-  &, &-circle{
-    display: inline-block;
-    padding: 4px 10px;
-    border: @border;
-    line-height: 1;
-    border-radius: @border-radius;
-    background: @white-color;
-    font-size: @font-size-mini;
-    vertical-align: middle;
-    cursor: default;
-    margin-right: 5px;
-  }
-  &-circle {
-    padding: 4px 4px;
-    border-radius: 50%;
-  }
-  &-primary{
-    .h-tag-color(@primary-color);
-  }
-  &-red{
-    .h-tag-color(@red-color);
-  }
-  &-blue{
-    .h-tag-color(@primary-color);
-  }
-  &-yellow{
-    .h-tag-color(@yellow-color);
-  }
-  &-green{
-    .h-tag-color(@green-color);
-  }
-  &-gray{
-    .h-tag-color(@describe-color);
-  }
+    &, &-circle{
+        display: inline-block;
+        padding: 4px 10px;
+        border: @border;
+        line-height: 1.6;
+        border-radius: @border-radius;
+        background: @white-color;
+        font-size: @font-size-mini;
+        vertical-align: middle;
+        cursor: default;
+        margin-right: 5px;
+    }
+    &-circle {
+        padding: 4px 4px;
+        border-radius: 50%;
+    }
+    &-primary {
+        .ui-tag-color(@primary-color);
+    }
+    &-error {
+        .ui-tag-color(@red-color);
+    }
+    &-blue {
+        .ui-tag-color(@primary-color);
+    }
+    &-warn {
+        .ui-tag-color(@yellow-color);
+    }
+    &-success {
+        .ui-tag-color(@green-color);
+    }
+    &-info {
+        .ui-tag-color(@info-color);
+    }
 
 
-  &-bg-primary{
-    .h-tag-bg-color(@primary-color);
-  }
-  &-bg-red{
-    .h-tag-bg-color(@red-color);
-  }
-  &-bg-blue{
-    .h-tag-bg-color(@primary-color);
-  }
-  &-bg-yellow{
-    .h-tag-bg-color(@yellow-color);
-  }
-  &-bg-green{
-    .h-tag-bg-color(@green-color);
-  }
-  &-bg-gray{
-    .h-tag-bg-color(@describe-color);
-  }
+    &-bg-primary {
+        .ui-tag-bg-color(@primary-color);
+    }
+    &-bg-error {
+        .ui-tag-bg-color(@red-color);
+    }
+    &-bg-blue {
+        .ui-tag-bg-color(@primary-color);
+    }
+    &-bg-warn {
+        .ui-tag-bg-color(@yellow-color);
+    }
+    &-bg-success {
+        .ui-tag-bg-color(@green-color);
+    }
+    &-bg-info {
+        .ui-tag-bg-color(@info-color);
+    }
 }

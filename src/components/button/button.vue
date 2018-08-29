@@ -1,6 +1,9 @@
 <template>
     <button :class="buttonCls" :disabled="!!this.disabled" @click="trigger">
-        <i :class="iconCls" v-if="!!iconCode"></i><template v-if="hasText"><slot></slot></template>
+        <i :class="iconCls" v-if="!!iconCode"></i>
+        <template v-if="hasText">
+            <slot></slot>
+        </template>
     </button>
 </template>
 <script>

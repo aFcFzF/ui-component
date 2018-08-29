@@ -27,7 +27,7 @@
 <script>
 import config from '../../utils/config';
 
-const prefix = 'ui-moda';
+const prefix = 'ui-modal';
 const notifyprefix = 'ui-notify';
 
 export default {

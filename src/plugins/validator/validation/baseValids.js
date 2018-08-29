@@ -1,37 +1,39 @@
-import locale from '../../../locale';
+/**
+*@file: baseValids.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-let valids = {
-  required(value) {
-    let result = value !== null && value !== undefined && String(value).length > 0;
-    return result === true ? true : locale.t('h.validation.base.required');
-  },
-  maxLen(value, configValue) {
-    if (configValue === null || configValue === undefined) {
-      return true;
+export default { // valids
+    required(value) {
+        let result = value !== null && value !== undefined && String(value).length > 0;
+        return result === true ? true : '不能为空';
+    },
+    maxLen(value, configValue) {
+        if (configValue === null || configValue === undefined) {
+            return true;
+        }
+        let result = value !== null && value !== undefined && String(value).length <= configValue;
+        return result === true ? true : '文字长度不能超过' + configValue + '个字';
+    },
+    minLen(value, configValue) {
+        if (configValue === null || configValue === undefined) {
+            return true;
+        }
+        let result = value !== null && value !== undefined && String(value).length >= configValue;
+        return result === true ? true : '文字长度不能少于' + configValue + '个字';
+    },
+    max(value, configValue) {
+        if (configValue === null || configValue === undefined) {
+            return true;
+        }
+        let result = value !== null && value !== undefined && Number(value) <= configValue;
+        return result === true ? true : '不能大于' + configValue;
+    },
+    min(value, configValue) {
+        if (configValue === null || configValue === undefined) {
+            return true;
+        }
+        let result = value !== null && value !== undefined && Number(value) >= configValue;
+        return result === true ? true : '不能小于' + configValue;
     }
-    let result = value !== null && value !== undefined && String(value).length <= configValue;
-    return result === true ? true : locale.t('h.validation.base.maxLen', { value: configValue });
-  },
-  minLen(value, configValue) {
-    if (configValue === null || configValue === undefined) {
-      return true;
-    }
-    let result = value !== null && value !== undefined && String(value).length >= configValue;
-    return result === true ? true : locale.t('h.validation.base.minLen', { value: configValue });
-  },
-  max(value, configValue) {
-    if (configValue === null || configValue === undefined) {
-      return true;
-    }
-    let result = value !== null && value !== undefined && Number(value) <= configValue;
-    return result === true ? true : locale.t('h.validation.base.max', { value: configValue });
-  },
-  min(value, configValue) {
-    if (configValue === null || configValue === undefined) {
-      return true;
-    }
-    let result = value !== null && value !== undefined && Number(value) >= configValue;
-    return result === true ? true : locale.t('h.validation.base.min', { value: configValue });
-  }
 };
-module.exports = valids;

@@ -1,20 +1,21 @@
 <template>
-  <div><slot></slot></div>
+<div>
+    <slot></slot>
+</div>
 </template>
+
 <script>
 export default {
-  name: 'hFormItemList',
-  data() {
-    return {
-    };
-  },
-  computed: {
-    labelWidth() {
-      return this.$parent.labelWidth;
+    data() {
+        return {};
     },
-    mode() {
-      return this.$parent.mode;
+    computed: {
+        labelWidth() {
+            return this.$parent.labelWidth;
+        },
+        mode() {
+            return this.$parent.mode;
+        }
     }
-  }
 };
 </script>

@@ -17,9 +17,9 @@
         <Tree ref="tree" @loadDataSuccess="loadDataSuccess" :toggleOnSelect="toggleOnSelect" :option="option" :multiple="multiple" v-model="valuebak" :chooseMode="chooseMode" @select="select" @choose="choose" :filterable="filterable" :config="config"></Tree>
       </div>
       <div class="h-treepicker-footer">
-        <button class="h-btn h-btn-text h-btn-s"
+        <button class="ui-btn ui-btn-text ui-btn-s"
                 @click="clear">{{'h.common.clear' | hlang}}</button>
-        <button class="h-btn h-btn-primary h-btn-s"
+        <button class="ui-btn ui-btn-primary ui-btn-s"
                 @click="confirm">{{'h.common.confirm' | hlang}}</button>
       </div>
     </div>

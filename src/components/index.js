@@ -14,9 +14,9 @@ import Datetime from './datetime';
 // import Dropdown from './plugins/dropdown';
 // import DropdownCustom from './components/dropdowncustom';
 // import DropdownMenu from './components/dropdownmenu';
-// import Form from './components/form';
+import Form from './form';
 import Menu, {MenuItem} from './menu';
-// import modal from './components/modal';
+import modal from './modal';
 // import Pagination from './components/pagination';
 // import Poptip from './components/poptip';
 // import Progress from './components/progress';
@@ -48,8 +48,8 @@ import {Button, ButtonGroup} from './button';
 // import wordcount from './directives/wordcount';
 // import wordlimit from './directives/wordlimit';
 // import autosize from './directives/autosize';
-// import $Modal from './plugins/modal';
-// import $Confirm from './plugins/confirm';
+import $Modal from '../plugins/modal';
+import $Confirm from '../plugins/confirm';
 import $Message from '../plugins/message';
 // import $Notice from './plugins/notice';
 // import $Loading from './plugins/loading';
@@ -77,14 +77,14 @@ const components = {
     // DateFullRangePicker: Datetime.DateFullRangePicker,
     // DropdownCustom,
     // DropdownMenu,
-    // Form,
-    // FormItem: Form.Item,
-    // FormItemList: Form.ItemList,
+    Form,
+    FormItem: Form.Item,
+    FormItemList: Form.ItemList,
     Menu,
     MenuItem,
     // hMenuItem: Menu.menuItem,
-    // Modal: modal.Modal,
-    // ModalComponent: modal.ModalComponent,
+    Modal: modal.Modal,
+    ModalComponent: modal.ModalComponent,
     // NumberInput,
     // Pagination,
     // Poptip,
@@ -129,8 +129,8 @@ const components = {
 
 let prototypes = {
     $Message,
-    // $Modal,
-    // $Confirm,
+    $Modal,
+    $Confirm,
     // $Loading,
     // $LoadingBar
 };

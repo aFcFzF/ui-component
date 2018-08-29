@@ -40,30 +40,30 @@
                     "slider": "Slider",
                     "steps": "Steps",
                     "datePicker": "DatePicker",
-                    "validator": "Validator",
                     "upload": "Upload",
                     "form": "Form"
                 }
             },
-            "comp-popup": {
-                "name": "弹出层",
+            "comp-dialog": {
+                "name": "会话层",
                 "disabled": true,
                 "subList": {
                     "popup": "Popup",
                     "toast": "Toast",
                     "picker": "Picker",
+                    "tag": "tag",
                     "cascade-picker": "CascadePicker",
                     "date-picker": "DatePicker",
                     "time-picker": "TimePicker",
                     "segment-picker": "SegmentPicker",
-                    "dialog": "Dialog",
+                    "modal": "Modal",
                     "action-sheet": "ActionSheet",
                     "drawer": "Drawer",
                     "image-preview": "ImagePreview"
                 }
             },
             "comp-scroll": {
-                "name": "滚动",
+                "name": "展示组件",
                 "disabled": true,
                 "subList": {
                     "scroll": "Scroll",

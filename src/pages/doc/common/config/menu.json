@@ -22,9 +22,7 @@
                 "subList": {
                     "button": "Button",
                     "loading": "Loading",
-                    "tip": "Tip",
-                    "toolbar": "Toolbar",
-                    "tab-bar": "TabBar"
+                    "icon": "icon"
                 }
             },
             "comp-form": {
@@ -48,42 +46,21 @@
                 "name": "会话层",
                 "disabled": true,
                 "subList": {
-                    "popup": "Popup",
-                    "toast": "Toast",
-                    "picker": "Picker",
+                    "modal": "modal",
                     "tag": "tag",
-                    "cascade-picker": "CascadePicker",
-                    "date-picker": "DatePicker",
-                    "time-picker": "TimePicker",
-                    "segment-picker": "SegmentPicker",
-                    "modal": "Modal",
-                    "action-sheet": "ActionSheet",
-                    "drawer": "Drawer",
-                    "image-preview": "ImagePreview"
+                    "message": "message",
+                    "notice": "notice",
+                    "tooltip": "tooltip",
+                    "poptip": "poptip"
                 }
             },
             "comp-scroll": {
                 "name": "展示组件",
                 "disabled": true,
                 "subList": {
-                    "scroll": "Scroll",
-                    "index-list": "IndexList",
-                    "swipe": "Swipe",
-                    "sticky": "Sticky",
-                    "scroll-nav-bar": "ScrollNavBar",
-                    "scroll-nav": "ScrollNav"
+                    "table": "table"
                 }
             }
-        }
-    },
-    "modules": {
-        "name": "模块",
-        "angle": "03",
-        "emphasis" : true,
-        "subList": {
-            "style": "style",
-            "create-api": "create-api",
-            "better-scroll": "better-scroll"
         }
     }
 }

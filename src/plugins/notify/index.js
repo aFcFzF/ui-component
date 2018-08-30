@@ -119,7 +119,6 @@ class Notify {
         if (param.component !== undefined && param.Vue) {
             this.vue = new param.Vue({
                 el: $content,
-                i18n: param.$i18n,
                 router: param.$router,
                 // template: `<div><plugin @event='trigger' :param="propsData" @close="close"></plugin></div>`,
                 render(createElement) {

@@ -34,7 +34,7 @@ function Modal(originalParam) {
     return Notify(param);
 }
 
-export default function modal(param) {
+function modal(param) {
     if (this.$router) {
         param.$router = this.$router;
     }
@@ -45,5 +45,10 @@ modal.config = options => {
     if (options.middle) {
         Default.middle = options.middle;
     }
+};
+
+export default vue => {
+    Vue = vue;
+    return modal;
 };
 

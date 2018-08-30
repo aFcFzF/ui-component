@@ -4,14 +4,20 @@
 */
 import {event} from '@/common/util.js';
 import menuCfg from '../common/config/menu.json';
+import loadBar from '@/plugins/loadingBar';
 
-event.$on('begin-loading', () => console.log('哈哈哈哈哈'));
-event.$on('finish-loading', () => console.log('结束了'));
+event.$on('begin-loading', () => loadBar.start());
+event.$on('finish-loading', () => loadBar.success());
+event.$on('error-loading', () => loadBar.fail());
+
 const notifyLoad = p => {
     event.$emit('begin-loading');
     return p.then(({default: r}) => {
         event.$emit('finish-loading');
         return r.default || r;
+    }).catch(e => {
+        event.$emit('error-loading');
+        console.error('错误信息：' + e.message);
     });
 };
 

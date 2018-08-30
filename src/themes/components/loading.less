@@ -22,55 +22,56 @@
 }
 
 .@{loading-cls} {
-  .absolute();
-  background-color: fade(@white-color, 60%);
-  z-index: -1;
-  visibility: hidden;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.5s;
-  & &-circular {
-    .middle-center();
-    // width: 42px;
-    height: 42px;
-    >svg {
-      opacity: 0;
-      width: 42px;
-      height: 42px;
-      transition: opacity 0.5s;
-      transform-origin: center center;
-      .circle {
-        stroke-dasharray: 90, 150;
-        stroke-dashoffset: 0;
-        stroke-width: 2;
-        stroke: @primary-color;
-        stroke-linecap: round;
-      }
+    .absolute();
+    background-color: fade(@white-color, 60%);
+    z-index: -1;
+    visibility: hidden;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .5s;
+    line-height: 1.6;
+    & &-circular {
+        .middle-center();
+        // width: 42px;
+        height: 42px;
+        >svg {
+            opacity: 0;
+            width: 42px;
+            height: 42px;
+            transition: opacity .5s;
+            transform-origin: center center;
+            .circle {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: 0;
+                stroke-width: 2;
+                stroke: @primary-color;
+                stroke-linecap: round;
+            }
+        }
     }
-  }
 
-  &&-loading{
-    opacity: 1;
-    &.@{loading-cls}-full-screen{
-      z-index: @zindex-loading-fullscreen;
-      position: fixed;
+    &&-loading {
+        opacity: 1;
+        &.@{loading-cls}-full-screen {
+            z-index: @zindex-loading-fullscreen;
+            position: fixed;
+        }
     }
-  }
 
-  &&-visible {
-    visibility: visible;
-    z-index: @zindex-loading;
-    svg{
-      opacity: 1;
-      animation: loading-rotate 2s linear infinite;
-      .circle{
-        animation: loading-path-rotate 1.5s ease-in-out infinite;
-      }
+    &&-visible {
+        visibility: visible;
+        z-index: @zindex-loading;
+        svg {
+            opacity: 1;
+            animation: loading-rotate 2s linear infinite;
+            .circle {
+                animation: loading-path-rotate 1.5s ease-in-out infinite;
+            }
+        }
     }
-  }
 }
 
 .h-loading-parent {
-  position: relative;
-  min-height: 200px;
+    position: relative;
+    min-height: 200px;
 }

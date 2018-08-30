@@ -35,7 +35,6 @@ export default {
     },
     mounted() {
         this.init();
-        console.log('className: ', this.className);
     },
     methods: {
         show() {

@@ -2,7 +2,36 @@
   module.exports = {
     data() {
       return {
-
+        showModal1: false,
+        switchOpen: false,
+        showModal2: false,
+        switchOpen2: false,
+        chkOpt: [
+          {
+            label: '去掉遮罩',
+            value: false
+          },
+          {
+            label: '点击遮罩关闭',
+            value: false
+          },
+          {
+            label: '居中',
+            value: false
+          },
+          {
+            label: '显示关闭按钮',
+            value: false
+          },
+          {
+            label: '分割线',
+            value: false
+          },
+          {
+            label: '全屏',
+            value: false
+          }
+        ]
       };
     },
     methods: {
@@ -24,24 +53,57 @@
           content: `
             <p class="内容">按钮</p>
           `,
-          buttons: [{
-            type: 'ensure',
-            name: '确认',
-            color: 'primary'
-          }],
+          buttons: [
+            {
+              type: 'ensure',
+              name: '是',
+              color: 'primary'
+            },
+            {
+              type: 'deny',
+              name: '否',
+              color: 'text-red'
+            },
+            {
+              type: 'cancal',
+              name: '取消',
+              color: 'text-yellow'
+            },
+          ],
           events: {
-            ensure(mod) {
+            ensure: mod => {
               mod.close();
+              this.$Message.success('操作成功！');
+            },
+            deny: mod => {
+              mod.close();
+              this.$Message.error('拒绝！');
+            },
+            cancal: mod => {
+              mod.close();
+              this.$Message.warn('最终还是选择取消！');
             }
           }
         };
         this.$Modal(param);
+      },
+      closeHdl() {
+        this.showModal1 = false;
+      },
+      showTplModal() {
+        this.showModal1 = true;
+      },
+      closeHdl2() {
+        this.showModal2 = false;
+      },
+      showTplModal2() {
+        this.showModal2 = true;
       }
     }
   };
 </script>
 
-<style>
+<style lang="less">
   .demo-box.demo-Modal {
     .Modal-footer button:first-child {
       margin-right: 10px;
@@ -62,16 +124,20 @@
       margin-right: 15px;
     }
   }
+  .ui-checkbox-group {
+    .ui-checkbox {
+      margin-right: 10px;
+    }
+  }
 </style>
 ## Modal 对话框
 在保留当前页面状态的情况下，告知用户并承载相关操作。
 
-### 基本用法
+### 全局调用
 
-Modal 弹出一个对话框，适合需要定制性更大的场景。
+将modal绑定在Vue.prototype上，便于在任何地方弹出对话框。
 
-:::demo 需要设置`visible`属性，它接收`Boolean`，当为`true`时显示 Modal。Modal 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了`before-close`的用法。
-
+:::demo js对modal的操作，类似于moye的定义方法，只不过看起来更灵活，不失为一种更好的定义方式。
 ```html
 <ui-button @click="showConfirm">调用Confirm</ui-button>
 <ui-button @click="showModal">调用Model</ui-button>
@@ -97,6 +163,100 @@ Modal 弹出一个对话框，适合需要定制性更大的场景。
             done();
           })
           .catch(_ => {});
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 模板调用
+
+将modal绑定在Vue.prototype上，便于在任何地方弹出对话框。
+
+:::demo js对modal的操作，类似于moye的定义方法，只不过看起来更灵活，不失为一种更好的定义方式。
+```html
+<ui-button @click="showTplModal">打开模板Modal</ui-button>
+<ui-modal v-model="showModal1">
+  <div slot="header">自定义标题</div>
+  <ui-switch v-model="switchOpen">
+    <template slot="before">开启麽</template>
+  </ui-switch>
+  <ui-button @click="closeHdl" slot="footer">关闭</ui-button>
+</ui-modal>
+
+
+<script>
+  export default {
+    data() {
+      return {
+        ModalVisible: false
+      };
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
+      showTplModal() {
+        this.showModal1 = true;
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 模板参数
+
+将modal绑定在Vue.prototype上，便于在任何地方弹出对话框。
+
+:::demo js对modal的操作，类似于moye的定义方法，只不过看起来更灵活，不失为一种更好的定义方式。
+```html
+<div class="ui-checkbox-group">
+  <ui-checkbox v-for="(item, idx) of chkOpt" v-model="item.value" :key="item.label">
+    {{item.label}}
+  </ui-checkbox>
+</div>
+<br>
+<ui-button @click="showTplModal2">弹出</ui-button>
+<ui-modal
+  v-model="showModal2"
+  :has-mask="!chkOpt[0].value"
+  :close-on-mask="chkOpt[1].value"
+  :middle="chkOpt[2].value"
+  :has-close-icon="chkOpt[3].value"
+  :has-divider="chkOpt[4].value"
+  :full-screen="chkOpt[5].value"
+>
+  <div slot="header">自定义标题</div>
+  <ui-switch v-model="switchOpen2">
+    <template slot="before">开启麽</template>
+  </ui-switch>
+  <ui-button class="ui-btn-s" @click="closeHdl2" slot="footer">关闭</ui-button>
+</ui-modal>
+
+
+<script>
+  export default {
+    data() {
+      return {
+        ModalVisible: false
+      };
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
+      showTplModal() {
+        this.showModal1 = true;
       }
     }
   };

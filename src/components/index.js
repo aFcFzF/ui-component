@@ -18,12 +18,12 @@ import Form from './form';
 import Menu, {MenuItem} from './menu';
 import modal from './modal';
 // import Pagination from './components/pagination';
-// import Poptip from './components/poptip';
+import Poptip from './poptip';
 // import Progress from './components/progress';
 import Radio from './radio';
 import Rate from './rate';
 import Slider from './slider';
-// import Loading from './components/loading';
+import Loading from './loading';
 import Steps from './steps';
 // import Search from './components/search';
 import Select from './select';
@@ -51,9 +51,9 @@ import {Button, ButtonGroup} from './button';
 import $Modal from '../plugins/modal';
 import $Confirm from '../plugins/confirm';
 import $Message from '../plugins/message';
-// import $Notice from './plugins/notice';
-// import $Loading from './plugins/loading';
-// import $LoadingBar from './plugins/loadingBar';
+import $Notice from '../plugins/notice';
+import $Loading from '../plugins/loading';
+import $LoadingBar from '../plugins/loadingBar';
 // import $ScrollIntoView from './plugins/scrollIntoView';
 
 // import filters from './filters';
@@ -87,7 +87,7 @@ const components = {
     ModalComponent: modal.ModalComponent,
     // NumberInput,
     // Pagination,
-    // Poptip,
+    Poptip,
     // Progress,
     Radio,
     Rate,
@@ -101,7 +101,7 @@ const components = {
     Col,
     // Timeline,
     // TimelineItem: Timeline.Item,
-    // Loading,
+    Loading,
     // TagInput,
     // Table,
     // TableItem,
@@ -129,13 +129,12 @@ const components = {
 
 let prototypes = {
     $Message,
-    $Modal,
     $Confirm,
-    // $Loading,
-    // $LoadingBar
+    $Loading,
+    $LoadingBar
 };
 
-// const HeyUI = Object.assign({}, components, {
+//      Object.assign({}, components, {
 //         $Modal: $Modal(),
 //         $Notice: $Notice(),
 //         // locale: locale.use,
@@ -159,27 +158,13 @@ const install = function (Vue, opts) {
         k.indexOf('ui') === -1 && Vue.component(`ui${k}`, v);
     });
 
-
-    // Object.keys(filters).forEach(key => {
-    //     Vue.filter(key, filters[key]);
-    // });
-
-    // Object.keys(directives).forEach(key => {
-    //     Vue.directive(key, directives[key]);
-    //     // that[key] = directives[key];
-    // });
-
     Object.entries(prototypes).forEach(([k, v]) => Vue.prototype[k] = v);
 
-    // HeyUI.$Modal = Vue.prototype.$Modal = $Modal(Vue);
-    // HeyUI.$Notice = Vue.prototype.$Notice = $Notice(Vue);
-    // HeyUI.$ScrollIntoView = Vue.prototype.$ScrollIntoView = $ScrollIntoView;
+    Vue.prototype.$Modal = $Modal(Vue);
+    Vue.prototype.$Notice = $Notice(Vue);
 };
 
 typeof window !== 'undefined' && window.Vue && install(window.Vue);
 
-// HeyUI.install = install;
-
-// module.exports = HeyUI;
 
 export default Object.assign(components, {install});

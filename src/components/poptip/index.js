@@ -1,3 +1,6 @@
-import Poptip from './poptip';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Poptip;
+export {default} from './poptip';

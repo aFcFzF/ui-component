@@ -4,7 +4,9 @@
         <slot name="title"></slot>
     </div>
     <div class="ui-progress-inner" :style="progressInnerStyle">
-        <div class="ui-progress-bg" :style="progressBgStyle" :class="progressBgClass"></div>
+        <div class="ui-progress-bg" :style="progressBgStyle" :class="progressBgClass">
+            <span class="ui-progress-inner-text"><slot name="progress-text"></slot></span>
+        </div>
     </div>
     <div class="ui-progress-text" v-if="$slots.text">
         <slot name="text"></slot>

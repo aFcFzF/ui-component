@@ -38,19 +38,13 @@ export default {
     },
     methods: {
         show() {
-            if (this.tooltip) {
-                this.tooltip.show();
-            }
+            this.tooltip && this.tooltip.show();
         },
         hide() {
-            if (this.tooltip) {
-                this.tooltip.hide();
-            }
+            this.tooltip && this.tooltip.hide();
         },
         update() {
-            if (this.tooltip) {
-                this.tooltip.update();
-            }
+            this.tooltip && this.tooltip.update();
         },
         init() {
             this.$nextTick(() => {

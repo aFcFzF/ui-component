@@ -1,3 +1,9 @@
-import Radio from './radio';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Radio;
+import Radio from './radio';
+import RadioGroup from './radioGroup';
+
+export {Radio, RadioGroup};

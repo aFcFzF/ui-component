@@ -64,9 +64,7 @@ function notice(param, timeout) {
         });
     }
     else if (utils.isObject(param)) {
-        if (this.$router) {
-            param.$router = this.$router;
-        }
+        this.$router && (param.$router = this.$router);
         return Notice(param);
     }
     console.error('Notice params are incorrect:', param);

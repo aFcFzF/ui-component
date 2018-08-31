@@ -28,7 +28,7 @@
           {label: '正常', value: false},
           {label: '禁用', value: true}
         ],
-        disableState: false
+        disableState: false,
       };
     },
     methods: {
@@ -48,7 +48,7 @@
 
 <style lang="less">
   .ui-btn-group,
-  .ui-radio-group {
+  .ui-radio-container {
     display: flex;
     align-items: center;
     .ui-radio {
@@ -71,12 +71,12 @@
 ```html
 <template>
   <p>值是： {{radio}}</p>
-  <div class="ui-radio-group" v-model="radio2">
+  <div class="ui-radio-container" v-model="radio2">
     <ui-radio v-model="radio" v-for="(item, idx) of options" :key="item.key" :value="item.value">选项{{idx+1}}</ui-radio>
   </div>
   <br>
   <p>值是： {{radio1}}</p>
-  <div class="ui-radio-group" v-model="radio2">
+  <div class="ui-radio-container" v-model="radio2">
     <ui-radio v-model="radio1" v-for="(item, idx) of options1" :key="item.key" :value="item">{{item}}</ui-radio>
     <ui-button class="ui-btn-primary" size="s" @click="btnHdl">手动设置</ui-button>
   </div>
@@ -106,7 +106,7 @@
 :::demo 只要在`ui-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <template>
-  <div class="ui-radio-group" v-model="radio2">
+  <div class="ui-radio-container" v-model="radio2">
     <ui-radio v-model="radio1" disabled v-for="(item, idx) of options1" :key="item.key" :value="item">{{item}}</ui-radio>
   </div>
 </template>
@@ -136,7 +136,7 @@
         <ui-button class="ui-btn-primary" @click="sizeHdl(3)" size="xs">超小</ui-button>
     </ui-button-group>
     <br>
-    <div class="ui-radio-group">
+    <div class="ui-radio-container">
       <span style="margin-right: 10px">radio状态：</span>
       <ui-radio
           v-model="disableState"
@@ -150,7 +150,7 @@
     <br>
     <p>值是： {{radio1}} - 大小:  {{sizeDesc}} - 禁用： {{disableState ? '是' : '否'}}</p>
     <br>
-    <div class="ui-radio-group">
+    <div class="ui-radio-container">
       <span style="margin-right: 10px">默认样式：</span>
       <ui-radio
         :class="radioSize ? `ui-radio-${radioSize}` : ''"
@@ -165,7 +165,7 @@
     </div>
     <br>
     <br>
-    <div class="ui-radio-group">
+    <div class="ui-radio-container">
     <span style="margin-right: 10px">边框样式：</span>
     <ui-radio
       :class="['ui-radio-border', radioSize ? `ui-radio-${radioSize}` : '']"
@@ -178,9 +178,9 @@
       {{item}}
     </ui-radio>
   </div>
-   <br>
-    <br>
-    <div class="ui-radio-group">
+  <br>
+  <br>
+  <div class="ui-radio-container">
     <span style="margin-right: 10px">纯文字样式：</span>
     <ui-radio
       :class="['ui-radio-text', radioSize ? `ui-radio-${radioSize}` : '']"
@@ -192,6 +192,12 @@
     >
       {{item}}
     </ui-radio>
+  </div>
+  <br>
+  <br>
+  <div class="ui-radio-container">
+    <span style="margin-right: 10px">group样式：</span>
+    <ui-radio-group :datas="options1" v-model="radio1" :disabled="disableState"></ui-radio-group>
   </div>
 </template>
 

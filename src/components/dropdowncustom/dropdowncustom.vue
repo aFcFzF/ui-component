@@ -53,8 +53,8 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      let el = this.el = this.$el.querySelector('.h-dropdowncustom-show');
-      let content = this.$el.querySelector('.h-dropdowncustom-group');
+      let el = this.el = this.$el.querySelector('.ui-dropdowncustom-show');
+      let content = this.$el.querySelector('.ui-dropdowncustom-group');
       let that = this;
       this.dropdown = new Dropdown(el, {
         content,

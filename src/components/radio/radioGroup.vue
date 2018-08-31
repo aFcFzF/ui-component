@@ -1,5 +1,5 @@
 <template>
-    <div class="h-switchlist" :class="{'h-switchlist-small':small}" :disabled="disabled">
+    <div class="ui-radio-group" :class="{'ui-radio-group-small':small}" :disabled="disabled">
         <span
             :checked="option[key]==value"
             :disabled="disabled"
@@ -57,7 +57,7 @@ export default {
     computed: {
         arr() {
             if (!this.datas && !this.dict) {
-                console.error('Switchlist Component: Dts or dict parameters need to be defined at least.');
+                console.error('RadioGroup Component: Dts or dict parameters need to be defined at least.');
                 return [];
             }
             let datas = this.datas;

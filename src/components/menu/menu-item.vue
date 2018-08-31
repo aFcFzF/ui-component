@@ -1,5 +1,9 @@
 <template>
-    <li class="ui-menu-li" :class="{'ui-menu-li-opened':(status.opened.indexOf(data.key) != -1)}">
+    <li class="ui-menu-li"
+        :class="{
+            'ui-menu-li-opened': (status.opened.indexOf(data.key) != -1)
+        }"
+    >
         <div class="ui-menu-show"
             @click="!data.status.disabled && togglemenu(data)"
             :class="{

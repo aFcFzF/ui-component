@@ -25,7 +25,7 @@ const docsChildrenRoute = [];
 
 const getSubList = group => {
     let subList = [];
-    Object.keys(group.subList).forEach(key => {
+    group.subList && Object.keys(group.subList).forEach(key => {
         const item = group.subList[key];
         if (typeof item === 'string') {
             subList.push(key);
@@ -46,9 +46,11 @@ Object.keys(menuCfg).forEach(name => {
     });
 });
 
-export default {
-    path: '/docs',
-    redirect: '/docs/introduction',
-    component: () => notifyLoad(import('../components/docs/viewpoint.vue')),
-    children: docsChildrenRoute
-};
+export default [
+    {
+        path: '/docs',
+        redirect: '/docs/introduction',
+        component: () => notifyLoad(import('../components/docs/viewpoint.vue')),
+        children: docsChildrenRoute
+    }
+];

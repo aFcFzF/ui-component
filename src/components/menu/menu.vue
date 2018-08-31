@@ -72,7 +72,14 @@ export default {
         },
         className: {
             type: String,
-            default: 'ui-menu-dark'
+            default: 'ui-menu-black'
+        },
+        /**
+         * 当赋值的时候，自动折叠
+        */
+        autoCollapseOnSet: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -123,7 +130,10 @@ export default {
             let selected = this.menuobj[key];
             if (selected) {
                 this.status.selected = key;
-                this.status.opened = updateOpened(selected);
+                const opened = this.status.opened;
+                const parentNode = updateOpened(selected);
+                !this.autoCollapseOnSet && opened.forEach(e => parentNode.indexOf(e) === -1 && parentNode.push(e));
+                this.status.opened = parentNode;
             }
         },
 

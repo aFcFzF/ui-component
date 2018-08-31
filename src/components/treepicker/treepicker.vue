@@ -99,8 +99,8 @@ export default {
     this.parse();
     this.$nextTick(() => {
       if(this.inline) return;
-      let el = this.el = this.$el.querySelector(`.${prefix}>.h-treepicker-show`);
-      let content = this.$el.querySelector(`.h-treepicker-group`);
+      let el = this.el = this.$el.querySelector(`.${prefix}>.ui-treepicker-show`);
+      let content = this.$el.querySelector(`.ui-treepicker-group`);
       
       this.dropdown = new Dropdown(el, {
         trigger: 'click',

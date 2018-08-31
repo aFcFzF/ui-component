@@ -1,6 +1,5 @@
 <script>
   import iconList from '../common/config/icon.json';
-  console.log('图标合集： ', iconList);
   export default {
     data() {
       return {

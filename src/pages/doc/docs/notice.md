@@ -6,7 +6,13 @@
 
         this.$Notice({
           title: '标题名称',
-          content: h('i', { style: 'color: teal'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
+          content: `
+          <p style="color: #333">这是提示文案这是提示文案这是提示文案这是
+          <br>
+          第二行文字： 提示文案这是提示文案这是提示文案这是提示文案这是提示文案
+          <br>
+          第三行文字： 这是第三行
+          </p>`
         });
       },
 
@@ -159,6 +165,11 @@
     @click="open2">
     不会自动关闭
     </ui-button>
+    <p>
+      <span class="ui-tag ui-tag-warn">
+        当前content仍然无法渲染vue-template,但可以渲染DOMString,如有需求，请扩展tooltip
+      </span>
+    </p>
 </template>
 
 <script>
@@ -169,7 +180,13 @@
 
         this.$Notice({
           title: '标题名称',
-          content: h('i', { style: 'color: teal'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
+          content: `
+          <p style="color: #333">这是提示文案这是提示文案这是提示文案这是
+          <br>
+          第二行文字： 提示文案这是提示文案这是提示文案这是提示文案这是提示文案
+          <br>
+          第三行文字： 这是第三行
+          </p>`
         });
       },
 

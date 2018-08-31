@@ -20,7 +20,7 @@ import modal from './modal';
 // import Pagination from './components/pagination';
 import Poptip from './poptip';
 // import Progress from './components/progress';
-import Radio from './radio';
+import {Radio, RadioGroup} from './radio';
 import Rate from './rate';
 import Slider from './slider';
 import Loading from './loading';
@@ -28,8 +28,7 @@ import Steps from './steps';
 // import Search from './components/search';
 import Select from './select';
 import Switch from './switch';
-import SwitchList from './switchlist';
-// import {Table, TableItem} from './components/table';
+import {Table, TableItem} from './table';
 // import Tabs from './components/tabs';
 // import TagInput from './components/taginput';
 // import Tree from './components/tree';
@@ -82,7 +81,6 @@ const components = {
     FormItemList: Form.ItemList,
     Menu,
     MenuItem,
-    // hMenuItem: Menu.menuItem,
     Modal: modal.Modal,
     ModalComponent: modal.ModalComponent,
     // NumberInput,
@@ -90,6 +88,7 @@ const components = {
     Poptip,
     // Progress,
     Radio,
+    RadioGroup,
     Rate,
     Row,
     // Search,
@@ -97,14 +96,13 @@ const components = {
     Slider,
     Steps,
     uiSwitch: Switch,
-    SwitchList,
     Col,
     // Timeline,
     // TimelineItem: Timeline.Item,
     Loading,
     // TagInput,
-    // Table,
-    // TableItem,
+    Table,
+    TableItem,
     // Tabs,
     Tooltip,
     // Tree,

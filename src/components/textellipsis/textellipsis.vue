@@ -49,7 +49,7 @@ export default {
     init() {
       this.oversize = false;
       this.keyIndex += 1;
-      let more = this.$el.querySelector('.h-text-ellipsis-more');
+      let more = this.$el.querySelector('.ui-text-ellipsis-more');
       more.style.display = 'none';
       if(this.isLimitHeight) {
         this.limitShow();
@@ -59,7 +59,7 @@ export default {
       this.$nextTick(() => {
         let textDom = this.$el.querySelector('.text-ellipsis-limit-text');
         let title = this.$el;
-        let more = this.$el.querySelector('.h-text-ellipsis-more');
+        let more = this.$el.querySelector('.ui-text-ellipsis-more');
         let n = 1000;
         if(textDom) {
           if(title.offsetHeight > this.height) {

@@ -6,7 +6,7 @@
     // position: absolute;
     position: static;
     .@{notify-cls} {
-        &-body{
+        &-body {
             position: relative;
             overflow: initial;
         }
@@ -26,34 +26,33 @@
         }
         &-content {
             padding: 10px @modal-padding;
-            &.@{notify-cls}-content-component{
+            &.@{notify-cls}-content-component {
                 padding: 0;
             }
         }
     }
 
-    
-    &-full-screen{
-      .ui-notify-container{
-        margin-bottom: 0;
-        transform: none;
-        top: 30px !important;
-        bottom: 30px;
-        left: 30px;
-        right: 30px;
-        display: flex;
-        flex-direction: column;
-        .ui-notify-content{
-          flex: 1;
-          overflow: auto;
+    &-full-screen {
+        .ui-notify-container {
+            margin-bottom: 0;
+            transform: none;
+            top: 30px !important;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            .ui-notify-content {
+                flex: 1;
+                overflow: auto;
+            }
         }
-      }
     }
 
     &.@{notify-cls} {
-        &-has-mask{
+        &-has-mask {
             .@{notify-cls} {
-                &-body{
+                &-body {
                     position: fixed;
                     overflow: auto;
                 }
@@ -70,11 +69,11 @@
             }
         }
 
-        &-has-divider{
-            header{
+        &-has-divider {
+            header {
                 border-bottom: 1px solid @border-color;
             }
-            footer{
+            footer {
                 border-top: 1px solid @border-color;
             }
         }
@@ -83,13 +82,13 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
             }
-            &.@{modal-cls}-full-screen{
-              .ui-notify-container{
-                top: 0 !important;
-                bottom: 0;
-                left: 0;
-                right: 0;
-              }
+            &.@{modal-cls}-full-screen {
+                .ui-notify-container {
+                    top: 0 !important;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
             }
         }
     }

@@ -139,10 +139,6 @@ export default {
         };
     },
 
-    mounted() {
-        console.log('component- option: ', this.option);
-    },
-
     methods: {
         clickfile(file) {
             this.$emit('fileclick', file);
@@ -207,7 +203,7 @@ export default {
             else if (this.files) {
                 list.push(parse(this.files, this.param));
             }
-            console.log('uploadList: ', this.uploadList);
+
             if (this.uploadList.length > 0) {
                 if (this.isSingle) {
                     list = [this.uploadList[0]];

@@ -17,48 +17,49 @@
         "emphasis" : true,
         "subList": {
             "basic": {
-                "name": "基础",
+                "name": "全局",
                 "disabled": true,
                 "subList": {
-                    "button": "Button",
-                    "loading": "Loading",
-                    "icon": "icon"
+                    "button": "Button 按钮",
+                    "loading": "Loading 加载动画",
+                    "icon": "Icon 图标"
                 }
             },
             "comp-form": {
                 "name": "表单",
                 "disabled": true,
                 "subList": {
-                    "checkbox": "Checkbox",
-                    "radio": "Radio",
-                    "input": "Input",
-                    "select": "Select",
-                    "switch": "Switch",
-                    "rate": "Rate",
-                    "slider": "Slider",
-                    "steps": "Steps",
-                    "datePicker": "DatePicker",
-                    "upload": "Upload",
-                    "form": "Form"
+                    "checkbox": "Checkbox 多选框",
+                    "radio": "Radio 单选框",
+                    "input": "Input 输入框",
+                    "select": "Select 选择器",
+                    "switch": "Switch 开关",
+                    "rate": "Rate 评分",
+                    "slider": "Slider 滑块",
+                    "steps": "Steps 步骤条",
+                    "datePicker": "DatePicker 时间选择器",
+                    "upload": "Upload 上传组件",
+                    "form": "Form 表单"
                 }
             },
             "comp-dialog": {
                 "name": "会话层",
                 "disabled": true,
                 "subList": {
-                    "modal": "modal",
-                    "tag": "tag",
-                    "message": "message",
-                    "notice": "notice",
-                    "tooltip": "tooltip",
-                    "poptip": "poptip"
+                    "modal": "Modal 模态框",
+                    "tag": "Tag 标签",
+                    "message": "Message 全局提示",
+                    "notice": "Notice 通知通知",
+                    "tooltip": "Tooltip 文字提示",
+                    "poptip": "Poptip 气泡提示"
                 }
             },
             "comp-scroll": {
                 "name": "展示组件",
                 "disabled": true,
                 "subList": {
-                    "table": "table"
+                    "table": "Table 信息列表",
+                    "menulist": "MenuList 侧边栏"
                 }
             }
         }

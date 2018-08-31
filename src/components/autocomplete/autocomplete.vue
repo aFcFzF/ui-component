@@ -148,8 +148,8 @@ export default {
     nowSelected() {
       this.$nextTick(() => {
         if (this.content && this.nowSelected > -1) {
-          let dom = this.content.querySelector('.h-autocomplete-item-selected')
-          let uldom = this.content.querySelector('.h-autocomplete-ul')
+          let dom = this.content.querySelector('.ui-autocomplete-item-selected')
+          let uldom = this.content.querySelector('.ui-autocomplete-ul')
           if (dom && uldom) {
             if (
               dom.offsetTop + dom.offsetHeight - this.content.scrollTop >
@@ -180,8 +180,8 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      let el = (this.el = this.$el.querySelector('.h-autocomplete-show'))
-      this.content = this.$el.querySelector('.h-autocomplete-group')
+      let el = (this.el = this.$el.querySelector('.ui-autocomplete-show'))
+      this.content = this.$el.querySelector('.ui-autocomplete-group')
       let that = this
       this.dropdown = new Dropdown(el, {
         trigger: '',

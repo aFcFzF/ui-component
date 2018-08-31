@@ -1,12 +1,12 @@
 <template>
     <div class="doc-page">
-        <!-- <p>我是viewpoint额</p> -->
-        <!-- <Button>按钮</Button> -->
         <div class="component-list">
-            <ui-menu :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
+            <ui-menu ref="sideList" :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
         </div>
         <div class="component-doc">
-            <router-view></router-view>
+            <transition name="component-fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@
 .doc-page {
     margin-top: 50px;
     .component-list {
-        width: 200px;
+        width: 260px;
         float: left;
         border-right: solid 1px #eee;
     }
@@ -26,7 +26,7 @@
             margin: 55px 0 20px;
         }
 
-        table {
+        .table {
             border-collapse: collapse;
             width: 100%;
             background-color: #fff;
@@ -70,12 +70,23 @@
             margin: 20px 0;
         }
 
-        ul:not(.timeline) {
+        > ul:not(.timeline) {
             margin: 10px 0;
             padding: 0 0 0 20px;
             font-size: 14px;
             color: #5e6d82;
             line-height: 2em;
+        }
+
+        .component-fade-enter-active,
+        .component-fade-leave-active {
+            transition: opacity .1s ease;
+        }
+
+        .component-fade-enter,
+        .component-fade-leave-to
+        {
+            opacity: 0;
         }
   }
 }
@@ -86,11 +97,12 @@ import list from '@/pages/doc/common/config/menu.json';
 const convertDts = o =>
 Object.entries(o).map(([k, v]) => {
     const d = {
-        title: v.name || k,
+        title: v.name || v,
         key: k,
         disabled: v.disabled,
         open: v.open,
-        emphasis: v.emphasis
+        emphasis: v.emphasis,
+        icon: v.icon
     };
     let child = null;
     v.subList && (child = convertDts(v.subList));
@@ -103,42 +115,19 @@ export default {
     data() {
         return {
             menuList
-            // menuList: [{
-            //     title: '收藏',
-            //     key: 'favor',
-            //     icon: 'ui-icon-star',
-            //     count: 20,
-            //     open: true,
-            //     children: [
-            //         {
-            //             title: '类型-1',
-            //             count: 100,
-            //             key: '2-1'
-            //         },
-            //         {
-            //             title: '类型-2',
-            //             key: '3-2',
-            //             open: true,
-            //             disabled: true,
-            //             children: [
-            //                 {
-            //                     title: '类型-2-3',
-            //                     key: '2-3'
-            //                 },
-            //                 {
-            //                     title: '类型-2-4',
-            //                     key: '3-4'
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // }]
         };
     },
     methods: {
         menuSelHdl(e) {
             this.$router.push(e.key);
         }
+    },
+    beforeRouteUpdate(to, from, next) {
+        const m = to.path.match(/\/docs\/(\w+)/);
+        const compName = m && m[1];
+        const sideList = this.$refs.sideList;
+        sideList && sideList.status.selected !== compName && sideList.select(compName);
+        next();
     }
 };
 </script>

@@ -14,18 +14,17 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
+        redirect: '/index',
         component: Home,
         children: [
             {
-                path: '',
+                path: 'index',
                 component: Index
             },
-            docRoute
+            ...docRoute
         ]
     }
 ];
-
-console.log('router: ', routes);
 
 export default new VueRouter({
     routes

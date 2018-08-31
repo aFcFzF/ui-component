@@ -70,11 +70,15 @@
 :::demo Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形进度条中，还可以通过 `width` 属性来设置其大小。
 
 ```html
-<ui-progress type="circle" :percent="0"></ui-progress>
-<ui-progress type="circle" :percent="25"></ui-progress>
-<ui-progress type="circle" :percent="80" color="#8e71c7"></ui-progress>
-<ui-progress type="circle" :percent="100" status="success"></ui-progress>
-<ui-progress type="circle" :percent="50" status="exception"></ui-progress>
+  <ui-circle :percent="progValue" :stroke-width="18" :size="200">
+    <p class="gray-color" v-font="28">122,332,98</p>
+    <div v-height="5"></div>
+    <p class="dark-color" v-font="13">目前达成比例</p>
+    <p class="gray-color"><span class="primary-color" v-font="16">{{parseInt(progValue/100)}}</span>/<span>123</span></p>
+  </ui-circle>
+  <ui-circle :percent="progValue" :stroke-width="8" :size="80">
+    <span v-font="12">占比: {{progValue}}%</span>
+  </ui-circle>
 ```
 :::
 

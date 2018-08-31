@@ -67,7 +67,11 @@
 
 <p>
   <div class="ui-tag ui-tag-error">
-    文件/图片上传。。todo. 需要查看webuploader源码
+    文件/图片上传。。todo.
+    <br>
+    还不会做，之前做过jquery版的，比较复杂
+    <br>
+    有空看webuploader源码
   </div>
 </p>
 

@@ -1,3 +1,6 @@
-import Circle from './circle';
+/**
+*@file: index.js
+*@author: afcfzf (9301462@qq.com)
+*/
 
-export default Circle;
+export {default} from './circle';

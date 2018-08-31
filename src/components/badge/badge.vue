@@ -1,6 +1,9 @@
 <template>
     <div :class="badgeCls">
-        <sup :class="badgeCountCls">{{showCount}}</sup>
+        <span :class="badgeCountCls">
+            <slot name="content" v-if="$slots.content"></slot>
+            <template v-else>{{showCount}}</template>
+        </span>
         <slot></slot>
     </div>
 </template>

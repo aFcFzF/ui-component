@@ -8,7 +8,7 @@
 import Badge from './badge';
 // import Breadcrumb from './components/breadcrumb';
 import Checkbox from './checkbox';
-// import Circle from './components/circle';
+import Circle from './circle';
 // import Category from './components/category';
 import Datetime from './datetime';
 // import Dropdown from './plugins/dropdown';
@@ -19,7 +19,7 @@ import Menu, {MenuItem} from './menu';
 import modal from './modal';
 // import Pagination from './components/pagination';
 import Poptip from './poptip';
-// import Progress from './components/progress';
+import Progress from './progress';
 import {Radio, RadioGroup} from './radio';
 import Rate from './rate';
 import Slider from './slider';
@@ -29,7 +29,7 @@ import Steps from './steps';
 import Select from './select';
 import Switch from './switch';
 import {Table, TableItem} from './table';
-// import Tabs from './components/tabs';
+import Tabs from './tabs';
 // import TagInput from './components/taginput';
 // import Tree from './components/tree';
 // import TreePicker from './components/treepicker';
@@ -70,7 +70,7 @@ const components = {
     // Breadcrumb,
     // Category,
     Checkbox,
-    // hCircle: Circle,
+    uiCircle: Circle,
     DatePicker: Datetime.DatePicker,
     DateRangePicker: Datetime.DateRangePicker,
     // DateFullRangePicker: Datetime.DateFullRangePicker,
@@ -86,7 +86,7 @@ const components = {
     // NumberInput,
     // Pagination,
     Poptip,
-    // Progress,
+    Progress,
     Radio,
     RadioGroup,
     Rate,
@@ -103,7 +103,7 @@ const components = {
     // TagInput,
     Table,
     TableItem,
-    // Tabs,
+    Tabs,
     Tooltip,
     // Tree,
     // TreePicker,
@@ -163,6 +163,5 @@ const install = function (Vue, opts) {
 };
 
 typeof window !== 'undefined' && window.Vue && install(window.Vue);
-
 
 export default Object.assign(components, {install});

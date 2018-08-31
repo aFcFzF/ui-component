@@ -59,7 +59,10 @@
                 "disabled": true,
                 "subList": {
                     "table": "Table 信息列表",
-                    "menulist": "MenuList 侧边栏"
+                    "menulist": "MenuList 侧边栏",
+                    "badge": "Badage 徽标数",
+                    "tabs": "Tabs 标签页",
+                    "progress": "Progress 进度条"
                 }
             }
         }

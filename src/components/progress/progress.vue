@@ -1,64 +1,60 @@
 <template>
-  <div class="h-progress">
-    <div class="h-progress-title" v-if="$slots.title">
-      <slot name="title"></slot>
+<div class="ui-progress">
+    <div class="ui-progress-title" v-if="$slots.title">
+        <slot name="title"></slot>
     </div>
-    <div class="h-progress-inner"
-         :style="progressInnerStyle">
-      <div class="h-progress-bg"
-         :style="progressBgStyle"
-         :class="progressBgClass"></div>     
+    <div class="ui-progress-inner" :style="progressInnerStyle">
+        <div class="ui-progress-bg" :style="progressBgStyle" :class="progressBgClass"></div>
     </div>
-    <div class="h-progress-text" v-if="$slots.text">
-      <slot name="text"></slot>
+    <div class="ui-progress-text" v-if="$slots.text">
+        <slot name="text"></slot>
     </div>
-  </div>
+</div>
 </template>
+
 <script>
-const prefix = 'h-progress';
+const prefix = 'ui-progress';
 const colors = ['red', 'blue', 'primary', 'gray', 'yellow', 'green'];
 
 export default {
-  name: 'hProgress',
-  props: {
-    color: {
-      type: String,
-      default: 'primary'
+    name: 'hProgress',
+    props: {
+        color: {
+            type: String,
+            default: 'primary'
+        },
+        percent: {
+            type: Number,
+            default: 0
+        },
+        strokeWidth: {
+            type: Number,
+            default: 10
+        }
     },
-    percent: {
-      type: Number,
-      default: 0
+    data() {
+        return {};
     },
-    strokeWidth: {
-      type: Number,
-      default: 10
+    computed: {
+        progressInnerStyle() {
+            let s = {
+                height: `${this.strokeWidth}px`
+            };
+            return s;
+        },
+        progressBgStyle() {
+            let s = {
+                width: `${this.percent}%`,
+                height: `${this.strokeWidth}px`
+            };
+            !colors.includes(this.color) && (s['background-color'] = this.color);
+            return s;
+        },
+        progressBgClass() {
+            let s = {};
+            colors.includes(this.color) && (s[`bg-${this.color}-color`] = true);
+            return s;
+        }
     }
-  },
-  data() {
-    return {}
-  },
-  computed: {
-    progressInnerStyle() {
-      let s = {};
-      s.height = `${this.strokeWidth}px`;
-      return s;
-    },
-    progressBgStyle() {
-      let s = {};
-      if (!colors.includes(this.color)) {
-        s['background-color'] = this.color;
-      }
-      s.width = `${this.percent}%`;
-      s.height = `${this.strokeWidth}px`;
-      return s;
-    },
-    progressBgClass() {
-      let s = {};
-      if (colors.includes(this.color)) {
-        s[`bg-${this.color}-color`] = true
-      }
-      return s;
-    }
-  }
 };
 </script>

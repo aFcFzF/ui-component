@@ -12,7 +12,17 @@
 <script>
   export default {
     data() {
-      progValue: 10;
+      return {
+        progValue: 10
+      };
+    },
+    methods: {
+      add10() {
+        this.progValue < 100 && (this.progValue += 10);
+      },
+      sub10() {
+        this.progValue > 0 && (this.progValue -= 10);
+      }
     }
   }
 </script>
@@ -26,9 +36,9 @@
 :::demo Progress 组件设置`percent`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。
 
 ```html
-<ui-progress :percent="10">
+<ui-progress :percent="progValue">
   <span slot="title">当前进度： </span>
-  <span slot="text" class="primary-color">10%</span>
+  <span slot="text" class="primary-color">{{progValue}}</span>
 </ui-progress>
 <br>
 <ui-progress :percent="30" color="green"></ui-progress>
@@ -46,8 +56,8 @@
 :::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
 
 ```html
-<ui-progress :stroke-width="18" :percent="10" color="#eed2ee">
-  <span slot="progress-text">10%</span>
+<ui-progress :stroke-width="18" :percent="progValue" color="#eed2ee">
+  <span slot="progress-text">{{progValue}}%</span>
 </ui-progress>
 <br>
 <ui-progress :stroke-width="18" :percent="70" color="#f08080">
@@ -70,14 +80,30 @@
 :::demo Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形进度条中，还可以通过 `width` 属性来设置其大小。
 
 ```html
+  <div style="padding: 0 60px 60px 0">
+    <p>
+      当前值是： {{progValue}}
+    </p>
+    <ui-button-group class="ui-btn-group-xs">
+      <ui-button class="ui-btn-primary" @click="sub10">-10%</ui-button>
+      <ui-button class="ui-btn-primary" @click="add10">+10%</ui-button>
+    </ui-button-group>
+  </div>
   <ui-circle :percent="progValue" :stroke-width="18" :size="200">
-    <p class="gray-color" v-font="28">122,332,98</p>
-    <div v-height="5"></div>
-    <p class="dark-color" v-font="13">目前达成比例</p>
-    <p class="gray-color"><span class="primary-color" v-font="16">{{parseInt(progValue/100)}}</span>/<span>123</span></p>
+    <p class="secondary-color">122,332,98</p>
+    <p class="importance-color" >目前达成比例</p>
+    <p class="secondary-color">
+    <span class="primary-color">
+    {{parseInt(progValue/100, 10)}}
+    </span>
+    /
+    <span>100</span></p>
   </ui-circle>
-  <ui-circle :percent="progValue" :stroke-width="8" :size="80">
-    <span v-font="12">占比: {{progValue}}%</span>
+  <ui-circle :percent="progValue" color="#43CD80" :stroke-width="20" :size="120">
+    <span>占比: {{progValue}}%</span>
+  </ui-circle>
+  <ui-circle :percent="progValue" color="red" :stroke-width="8" :size="80">
+    <span>占比: {{progValue}}%</span>
   </ui-circle>
 ```
 :::

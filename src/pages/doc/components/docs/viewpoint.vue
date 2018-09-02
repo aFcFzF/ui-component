@@ -1,26 +1,35 @@
 <template>
     <div class="doc-page">
-        <div class="component-list">
+        <div class="component-list" >
             <ui-menu ref="sideList" :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
         </div>
         <div class="component-doc">
             <transition name="component-fade" mode="out-in">
                 <router-view></router-view>
             </transition>
+            <div class="footer-info">
+                © 2017-2018 SAU. All Rights Reserved.
+            </div>
         </div>
     </div>
 </template>
 <style lang="less">
 .doc-page {
-    margin-top: 50px;
+    height: calc(~"100% - 70px");
+    margin-top: 70px;
+
     .component-list {
         width: 260px;
         float: left;
         border-right: solid 1px #eee;
+        height: 100%;
+        padding-bottom: 120px;
+        overflow-y: scroll;
     }
     .component-doc {
         padding: 0 40px;
-        overflow: hidden;
+        height: 100%;
+        overflow-y: scroll;
 
         h3 {
             margin: 55px 0 20px;
@@ -88,6 +97,12 @@
         {
             opacity: 0;
         }
+
+        .footer-info {
+            padding: 80px;
+            text-align: center;
+            width: 100%
+        }
   }
 }
 </style>
@@ -110,11 +125,14 @@ Object.entries(o).map(([k, v]) => {
     return d;
 });
 const menuList = convertDts(list);
+let binded = false;
+
 
 export default {
     data() {
         return {
-            menuList
+            menuList,
+            hgt: 0
         };
     },
     methods: {
@@ -128,6 +146,29 @@ export default {
         const sideList = this.$refs.sideList;
         sideList && sideList.status.selected !== compName && sideList.select(compName);
         next();
-    }
+    },
+    // mounted() {
+    //     const listenHeight = _ => {
+    //         console.log('mounted!');
+    //         binded = true;
+    //         let timer = null;
+    //         const getHgt = _ => {
+    //             this.hgt = window.innerHeight;
+    //             this.$nextTick(_ => console.log('获取了高度', this.hgt));
+    //         };
+    //         getHgt();
+    //         window.addEventListener('resize', _ => {
+    //             clearTimeout(timer);
+    //             timer = setTimeout(getHgt, 500);
+    //         });
+    //     };
+    //     !binded && listenHeight();
+    // },
+    // computed: {
+    //     hgtSyl() {
+    //         console.log('哈哈计算了');
+    //         return this.hgt ? `height: ${this.hgt}px` : '';
+    //     }
+    // }
 };
 </script>

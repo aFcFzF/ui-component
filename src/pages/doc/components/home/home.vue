@@ -13,10 +13,9 @@
             </div>
         </div>
         <div class="router-view">
-            <router-view></router-view>
-        </div>
-        <div class="home-footer">
-            © 2017-2018 SAU. All Rights Reserved.
+            <ui-scrollbar style="height: 100%">
+                <router-view></router-view>
+            </ui-scrollbar>
         </div>
     </div>
 </template>
@@ -27,20 +26,27 @@ body {
 }
 .home-page {
     height: 100%;
+    overflow: hidden;
 
     .navigator {
         height: 70px;
         line-height: 70px;
         background: #ffffff;
         min-width: 1200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
 
         &.doc {
-            box-shadow: 0 2px 10px #eee;
+            box-shadow: 0 2px 2px #eee;
         }
 
         &-wrapper {
-            width: 1200px;
-            margin: 0 auto;
+            // width: 1200px;
+            // margin: 0 auto;
+            padding: 0 30px;
             font-size: 0;
 
             .logo {
@@ -88,14 +94,9 @@ body {
     }
 
     .router-view {
-        width: 1200px;
-        margin: 0 auto;
-        min-height: 100%;
-    }
-
-    .home-footer {
-        padding: 80px;
-        text-align: center;
+        // width: 1200px;
+        // margin: 0 auto;
+        height: 100%;
     }
 }
 </style>

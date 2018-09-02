@@ -26,7 +26,7 @@ export default utils.extend({}, utils, {
 
             curValue = getClass(elem);
             cur = elem.nodeType === 1
-            && (` ${curValue} `).replace(rclass, '');
+                && (` ${curValue} `).replace(rclass, '');
 
             if (cur) {
                 j = 0;
@@ -248,3 +248,35 @@ export default utils.extend({}, utils, {
         return result;
     }
 });
+
+export const dom = {
+    on: (function () {
+        if (document.addEventListener) {
+            return function (element, event, handler) {
+                if (element && event && handler) {
+                    element.addEventListener(event, handler, false);
+                }
+            };
+        }
+        return function (element, event, handler) {
+            if (element && event && handler) {
+                element.attachEvent('on' + event, handler);
+            }
+        };
+    })(),
+
+    off: (function () {
+        if (document.removeEventListener) {
+            return function (element, event, handler) {
+                if (element && event) {
+                    element.removeEventListener(event, handler, false);
+                }
+            };
+        }
+        return function (element, event, handler) {
+            if (element && event) {
+                element.detachEvent('on' + event, handler);
+            }
+        };
+    })()
+};

@@ -1,0 +1,101 @@
+@scrollbar-prefix: ~"@{prefix}scroll-bar";
+
+@thumb-background: @info-color;
+@track-background: @white-color;
+
+&::-webkit-scrollbar {
+    z-index: 11;
+    width: 6px;
+
+    &:horizontal {
+        height: 6px;
+    }
+
+    &-thumb {
+        border-radius: 5px;
+        width: 6px;
+        background: @thumb-background;
+    }
+
+    &-corner {
+        background: @track-background;
+    }
+
+    &-track {
+        background: @track-background;
+
+        &-piece {
+            background: @track-background;
+            width: 6px;
+        }
+    }
+}
+
+.@{scrollbar-prefix} {
+    overflow: hidden;
+    position: relative;
+
+    &:hover,
+    &:active,
+    &:focus {
+        > .el-scrollbar__bar {
+            opacity: 1;
+            transition: opacity 340ms ease-out;
+        }
+    }
+
+    &__wrapper {
+        overflow: scroll;
+        height: 100%;
+
+        &__hidden-default {
+            &::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+        }
+    }
+
+    &__thumb {
+        position: relative;
+        display: block;
+        width: 0;
+        height: 0;
+        cursor: pointer;
+        border-radius: inherit;
+        background-color: @yellow-color;
+        transition: .3s @hover-color;
+
+        &:hover {
+            background-color: @secondary-color;
+        }
+    }
+
+    &__bar {
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        z-index: 1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 120ms ease-out;
+
+        &__vertical {
+            width: 6px;
+            top: 2px;
+
+            > div {
+                width: 100%;
+            }
+        }
+
+        &__horizontal {
+            height: 6px;
+            left: 2px;
+
+            > div {
+                height: 100%;
+            }
+        }
+    }
+}

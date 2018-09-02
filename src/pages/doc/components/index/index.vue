@@ -41,8 +41,9 @@
 <style lang="less">
 .index-page {
     text-align: center;
-    min-height: 100%;
-    padding-top: 60px;
+    margin-top: 70px;
+    height: calc(~"100% - 70px");
+    overflow-y: scroll;
 
     .index-title {
         color: #555;

@@ -26,6 +26,7 @@ import Slider from './slider';
 import Loading from './loading';
 import Steps from './steps';
 // import Search from './components/search';
+import Scrollbar from './scrollbar';
 import Select from './select';
 import Switch from './switch';
 import {Table, TableItem} from './table';
@@ -92,6 +93,7 @@ const components = {
     Rate,
     Row,
     // Search,
+    Scrollbar,
     Select,
     Slider,
     Steps,

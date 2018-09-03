@@ -1,4 +1,4 @@
-@scrollbar-prefix: ~"@{prefix}scroll-bar";
+@scrollbar-prefix: ~"@{prefix}scrollbar";
 
 @thumb-background: @info-color;
 @track-background: @white-color;
@@ -38,7 +38,7 @@
     &:hover,
     &:active,
     &:focus {
-        > .el-scrollbar__bar {
+        > .ui-scrollbar__bar {
             opacity: 1;
             transition: opacity 340ms ease-out;
         }
@@ -63,11 +63,12 @@
         height: 0;
         cursor: pointer;
         border-radius: inherit;
-        background-color: @yellow-color;
-        transition: .3s @hover-color;
+        // background-color: @yellow-color;
+        background-color: @weakest-color;
+        transition: .3s backgroundColor;
 
         &:hover {
-            background-color: @secondary-color;
+            background-color: @describe-color;
         }
     }
 
@@ -80,7 +81,7 @@
         opacity: 0;
         transition: opacity 120ms ease-out;
 
-        &__vertical {
+        &.is-vertical {
             width: 6px;
             top: 2px;
 
@@ -89,7 +90,7 @@
             }
         }
 
-        &__horizontal {
+        &.is-horizontal {
             height: 6px;
             left: 2px;
 

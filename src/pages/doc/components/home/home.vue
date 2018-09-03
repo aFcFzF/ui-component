@@ -13,9 +13,7 @@
             </div>
         </div>
         <div class="router-view">
-            <ui-scrollbar style="height: 100%">
-                <router-view></router-view>
-            </ui-scrollbar>
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -96,7 +94,9 @@ body {
     .router-view {
         // width: 1200px;
         // margin: 0 auto;
-        height: 100%;
+        // height: 100%;
+        height: calc(~"100% - 70px");
+        margin-top: 70px;
     }
 }
 </style>

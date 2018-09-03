@@ -82,7 +82,7 @@ export default {
                 ref="wrap"
                 style={style}
                 onScroll={this.handleScroll}
-                class={[this.wrapClass, 'ui-scrollbar__wrap', gutter ? '' : 'ui-scrollbar__wrap--hidden-default']}>
+                class={[this.wrapClass, 'ui-scrollbar__wrapper', gutter ? '' : 'ui-scrollbar__wrap__hidden-default']}>
                 {[view]}
             </div>
         );

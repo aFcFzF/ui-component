@@ -1,35 +1,49 @@
 <template>
     <div class="doc-page">
         <div class="component-list" >
-            <ui-menu ref="sideList" :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
+            <ui-scrollbar style="height: 100%">
+                <ui-menu ref="sideList" :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
+            </ui-scrollbar>
         </div>
         <div class="component-doc">
-            <transition name="component-fade" mode="out-in">
-                <router-view></router-view>
-            </transition>
-            <div class="footer-info">
-                © 2017-2018 SAU. All Rights Reserved.
-            </div>
+            <ui-scrollbar style="height: 100%">
+                <transition name="component-fade" mode="out-in">
+                    <router-view class="comp-section"></router-view>
+                </transition>
+                <div class="footer-info">
+                    © 2017-2018 SAU. All Rights Reserved.
+                </div>
+            </ui-scrollbar>
         </div>
     </div>
 </template>
 <style lang="less">
 .doc-page {
-    height: calc(~"100% - 70px");
-    margin-top: 70px;
-
+    height: 100%;
     .component-list {
-        width: 260px;
+        width: 300px;
         float: left;
         border-right: solid 1px #eee;
         height: 100%;
-        padding-bottom: 120px;
-        overflow-y: scroll;
+        // padding-bottom: 120px;
+        .ui-scrollbar__bar {
+            &.is-vertical {
+                right: 0;
+            }
+        }
+
+        .ui-menu {
+            padding-top: 40px;
+            padding-bottom: 100px;
+        }
     }
     .component-doc {
-        padding: 0 40px;
         height: 100%;
-        overflow-y: scroll;
+        overflow: hidden;
+        .comp-section {
+            padding: 0 40px;
+            margin-top: 40px;
+        }
 
         h3 {
             margin: 55px 0 20px;

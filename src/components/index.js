@@ -9,6 +9,7 @@ import Badge from './badge';
 // import Breadcrumb from './components/breadcrumb';
 import Checkbox from './checkbox';
 import Circle from './circle';
+import ColorPicker from './colorpicker';
 // import Category from './components/category';
 import Datetime from './datetime';
 // import Dropdown from './plugins/dropdown';
@@ -71,6 +72,7 @@ const components = {
     // Breadcrumb,
     // Category,
     Checkbox,
+    ColorPicker,
     uiCircle: Circle,
     DatePicker: Datetime.DatePicker,
     DateRangePicker: Datetime.DateRangePicker,

@@ -39,6 +39,7 @@
                     "steps": "Steps 步骤条",
                     "datePicker": "DatePicker 时间选择器",
                     "upload": "Upload 上传组件",
+                    "colorPicker": "ColorPicker 颜色选择器",
                     "form": "Form 表单"
                 }
             },

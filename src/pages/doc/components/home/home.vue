@@ -29,7 +29,7 @@ body {
     .navigator {
         height: 70px;
         line-height: 70px;
-        background: #ffffff;
+        background: @white-color;
         min-width: 1200px;
         position: fixed;
         top: 0;
@@ -38,7 +38,7 @@ body {
         z-index: 1;
 
         &.doc {
-            box-shadow: 0 2px 2px #eee;
+            box-shadow: 0 2px 2px @split-color;
         }
 
         &-wrapper {
@@ -63,7 +63,7 @@ body {
                     display: inline-block;
                     padding-left: 10px;
                     text-decoration: none;
-                    color: #555;
+                    color: @secondary-color;
                 }
             }
 
@@ -74,16 +74,16 @@ body {
                 .tab {
                     font-size: 18px;
                     text-decoration: none;
-                    color: #555;
+                    color: @secondary-color;
                     margin-left: 10px;
                     transition: color .3s;
 
                     &:hover {
-                        color: #4C8EFF;
+                        color: @primary-color;
                     }
 
                     &.router-link-active {
-                        color: #4C8EFF;
+                        color: @primary-color;
                         font-weight: 700;
                     }
                 }

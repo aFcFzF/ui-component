@@ -3,7 +3,7 @@
 *@author: afcfzf (9301462@qq.com)
 */
 
-const { join, resolve } = require('path');
+const {join, resolve} = require('path');
 const webpack = require('webpack');
 const glob = require('glob');
 
@@ -84,12 +84,22 @@ const cssOptions = [
     }
 ];
 
-const lessOptions = [...cssOptions, {
-    loader: 'less-loader',
-    options: {
-        sourceMap: true
+const lessOptions = [
+    ...cssOptions,
+    {
+        loader: 'less-loader',
+        options: {
+            sourceMap: true
+        }
+    },
+    {
+        loader: 'sass-resources-loader',
+        options: {
+            // resolve 必须是绝对路径，绝对路径！！
+            resources: [resolve(__dirname, '../src/themes/var.less')]
+        }
     }
-}];
+];
 
 const stylOptions = [...cssOptions, {
     loader: 'stylus-loader',

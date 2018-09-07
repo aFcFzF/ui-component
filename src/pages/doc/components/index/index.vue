@@ -44,15 +44,13 @@
 .index-page {
     text-align: center;
     margin-top: 70px;
-    // height: calc(~"100% - 70px");
-    // overflow-y: scroll;
 
     .index-title {
-        color: #555;
+        color: @secondary-color;
     }
 
     .title-desc {
-        color: #999;
+        color: @describe-color;
         line-height: 18px;
         font-size: 18px;
         margin-bottom: 60px;
@@ -65,7 +63,7 @@
     .feature-title {
         margin-top: 120px;
         margin-bottom: 50px;
-        color: #555;
+        color: @secondary-color;
     }
 
     .feature-section {

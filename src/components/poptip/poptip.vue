@@ -2,7 +2,6 @@
 <Tooltip ref="tooltip" :theme="theme" :placement="placement" trigger="click">
     <slot></slot>
     <div slot="content" class="ui-poptip">
-    <template v-if="!$slots.innerContent">
         <div class="ui-poptip-content"><i class="yellow-color ui-icon-warn"></i>
             <i class="ui-split"></i>
             {{content}}
@@ -13,12 +12,7 @@
                 <Button @click="trigger" size="xs" color="primary">确定</Button>
             </div>
         </div>
-    </template>
-    <template v-else>
-        <div class="ui-poptip-content">
-            <slot name="innerContent"></slot>
-        </div>
-    </template>
+    </div>
 </Tooltip>
 </template>
 

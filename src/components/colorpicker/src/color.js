@@ -180,7 +180,7 @@ export default class Color {
 
     set(prop, value) {
         if (arguments.length === 1 && typeof prop === 'object') {
-            for (let [k, v] of prop) {
+            for (let [k, v] of Object.entries(prop)) {
                 prop.hasOwnProperty(k) && this.set(k, v);
             }
             return;

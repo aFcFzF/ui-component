@@ -9,19 +9,16 @@
         <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
         <div class="ui-color-dropdown__btns">
             <span class="ui-color-dropdown__value">
-          <input
-            v-model="customInput"
-            @keyup.native.enter="handleConfirm"
-            @blur="handleConfirm"
-            size="mini">
-          </input>
-        </span>
-            <ui-button size="xs" type="text" class="ui-color-dropdown__link-btn" @click="$emit('clear')">
-                清空
-            </ui-button>
-            <ui-button plain size="xs" class="ui-color-dropdown__btn" @click="confirmValue">
-                确认
-            </ui-button>
+                <input
+                    type="text"
+                    v-model="customInput"
+                    @keyup.enter="handleConfirm"
+                    @blur="handleConfirm"
+                    size="s">
+                </input>
+            </span>
+            <ui-button size="xs" type="text" class="ui-color-dropdown__link-btn" @click="$emit('clear')">清空</ui-button>
+            <ui-button plain size="xs" class="ui-color-dropdown__btn" @click="confirmValue">确认</ui-button>
         </div>
     </div>
 <!-- </transition> -->
@@ -50,7 +47,9 @@ export default {
             required: true
         },
         showAlpha: Boolean,
-        predefine: Array
+        predefine: Array,
+        showPanelColor: Boolean,
+        value: String
     },
 
     data() {
@@ -61,8 +60,12 @@ export default {
 
     computed: {
         currentColor() {
-            const parent = this.$parent;
-            return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
+            // const parent = this.$parent;
+            // console.log('parent.color', parent);
+            // return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
+
+            return !this.value && !this.showPanelColor ? '' : this.color.value;
+            // console.log('选择组件： ', this.$controlPanel);
         }
     },
 
@@ -77,9 +80,9 @@ export default {
     },
 
     mounted() {
-        // debugger;
         // this.$parent.popperElm = this.popperElm = this.$el;
         // this.referenceElm = this.$parent.$el;
+        // console.log('选择组件： ', this.$controlPanel);
     },
 
     watch: {

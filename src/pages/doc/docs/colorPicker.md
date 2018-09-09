@@ -22,7 +22,9 @@
           'hsl(181, 100%, 37%)',
           'hsla(209, 100%, 56%, 0.73)',
           '#c7158577'
-        ]
+        ],
+        options1: ['hsl', 'hsv', 'hex', 'rgb'],
+        radio1: 'hex'
       };
     },
     mounted() {
@@ -30,29 +32,29 @@
         const demos = document.querySelectorAll('.source');
         demos[0].style.padding = '0';
       });
-    },
+    }
   }
 </script>
 
-<style>
-  .demo-color-picker .block {
+<style lang="less">
+  .demo-colorPicker .block {
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
     display: inline-block;
-    width: 50%;
+    width: 49%;
     box-sizing: border-box;
     &:last-child {
       border-right: none;
     }
   }
-  .demo-color-picker .demonstration {
+  .demo-colorPicker .demonstration {
     display: block;
     color: #8492a6;
     font-size: 14px;
     margin-bottom: 20px;
   }
-  .demo-color-picker .ui-color-picker + .ui-color-picker {
+  .demo-colorPicker .ui-color-picker + .ui-color-picker {
     margin-left: 20px;
   }
 </style>
@@ -66,12 +68,24 @@
 :::demo 使用 v-model 与 Vue 实例中的一个变量进行双向绑定，绑定的变量需要是字符串类型。
 ```html
 <div class="block">
+  <div>
+    <ui-radio-group :datas="options1" v-model="radio1"></ui-radio-group>
+    <br>
+    {{radio1}}
+  </div>
+  <br>
   <span class="demonstration">有默认值</span>
-  <ui-color-picker v-model="color1"></ui-color-picker>
+  <ui-color-picker
+    v-model="color1"
+    :color-format="radio1"
+  >
+  </ui-color-picker>
+  <p style="text-align: center">值： {{color1}}</p>
 </div>
 <div class="block">
   <span class="demonstration">无默认值</span>
   <ui-color-picker v-model="color2"></ui-color-picker>
+  <p style="text-align: center">值： {{color2}}</p>
 </div>
 
 <script>
@@ -87,11 +101,88 @@
 ```
 :::
 
+### 选择透明度
+
+:::demo ColorPicker 支持普通颜色，也支持带 Alpha 通道的颜色，通过`show-alpha`属性即可控制是否支持透明度的选择。
+```html
+<ui-color-picker v-model="color3" show-alpha></ui-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color3: 'rgba(19, 206, 102, 0.8)'
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 预定义颜色
+
+:::demo ColorPicker 支持预定义颜色
+```html
+<ui-color-picker
+  v-model="color5"
+  show-alpha
+  :predefine="predefineColors">
+</ui-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color5: 'rgba(255, 69, 0, 0.68)',
+        predefineColors: [
+          '#ff4500',
+          '#ff8c00',
+          '#ffd700',
+          '#90ee90',
+          '#00ced1',
+          '#1e90ff',
+          '#c71585',
+          'rgba(255, 69, 0, 0.68)',
+          'rgb(255, 120, 0)',
+          'hsv(51, 100, 98)',
+          'hsva(120, 40, 94, 0.5)',
+          'hsl(181, 100%, 37%)',
+          'hsla(209, 100%, 56%, 0.73)',
+          '#c7158577'
+        ]
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 不同尺寸
+
+:::demo
+```html
+<ui-color-picker v-model="color4"></ui-color-picker>
+<ui-color-picker v-model="color4" size="m"></ui-color-picker>
+<ui-color-picker v-model="color4" size="s"></ui-color-picker>
+<ui-color-picker v-model="color4" size="xs"></ui-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color4: '#409EFF'
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | disabled | 是否禁用 | boolean | — | false |
-| size | 尺寸 | string | — | medium / small / mini |
+| size | 尺寸 | string | — | m / s / xs |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 | popper-class | ColorPicker 下拉框的类名 | string | — | — |

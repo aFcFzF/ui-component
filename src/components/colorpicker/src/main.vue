@@ -1,38 +1,38 @@
 <template>
-    <div :class="[
+    <ui-tooltip ref="tooltip" theme="white" placement="bottom" trigger="click" className="ui-color-picker-content-container">
+        <div :class="[
             'ui-color-picker',
             colorDisabled ? 'is-disabled' : '',
             colorSize ? `ui-color-picker--${colorSize}` : ''
             ]"
-            v-clickoutside="hide"
-    >
-        <div class="ui-color-picker__mask" v-if="colorDisabled"></div>
-        <div class="ui-color-picker__trigger" @click="handleTrigger">
-            <span class="ui-color-picker__color" :class="{ 'is-alpha': showAlpha }">
-                <span class="ui-color-picker__color-inner"
-                :style="{
-                    backgroundColor: displayedColor
-                }"></span>
-            <span class="ui-color-picker__empty ui-icon-close" v-if="!value && !showPanelColor"></span>
-            </span>
-            <span class="ui-color-picker__icon ui-icon-arrow-down" v-show="value || showPanelColor"></span>
+        >
+            <div class="ui-color-picker__mask" v-if="colorDisabled"></div>
+            <div class="ui-color-picker__trigger" @click="handleTrigger">
+                <span class="ui-color-picker__color" :class="{ 'is-alpha': showAlpha }">
+                    <span class="ui-color-picker__color-inner"
+                    :style="{
+                        backgroundColor: displayedColor
+                    }"></span>
+                <span class="ui-color-picker__empty ui-icon-close" v-if="!value && !showPanelColor"></span>
+                </span>
+                <span class="ui-color-picker__icon ui-icon-arrow-down" v-show="value || showPanelColor"></span>
+            </div>
         </div>
-        <ui-tooltip>
-            <template slot="content">
-                <picker-dropdown
-                    ref="dropdown"
-                    :class="['ui-color-picker__panel', popperClass || '']"
-                    v-show="showPicker"
-                    @pick="confirmValue"
-                    @clear="clearValue"
-                    :color="color"
-                    :show-alpha="showAlpha"
-                    :predefine="predefine"
-                >
-                </picker-dropdown>
-            </template>
-        </ui-tooltip>
-    </div>
+        <template slot="content">
+            <picker-dropdown
+                ref="dropdown"
+                :class="['ui-color-picker__panel', popperClass || '']"
+                @pick="confirmValue"
+                @clear="clearValue"
+                :color="color"
+                :show-alpha="showAlpha"
+                :predefine="predefine"
+                :value="value"
+                :show-panel-color="showPanelColor"
+            >
+            </picker-dropdown>
+        </template>
+    </ui-tooltip>
 </template>
 
 <script>
@@ -116,6 +116,13 @@ export default {
             if (val !== currentValueColorRgb) {
                 this.$emit('active-change', val);
             }
+        },
+        colorFormat(val) {
+            this.color.format = val;
+            this.$nextTick(_ => {
+                const value = this.value;
+                value && this.color.fromString(value);
+            });
         }
     },
 
@@ -129,17 +136,17 @@ export default {
         confirmValue(value) {
             this.$emit('input', this.color.value);
             this.$emit('change', this.color.value);
-            this.showPicker = false;
+            this.$refs.tooltip.hide();
         },
         clearValue() {
             this.$emit('input', null);
             this.$emit('change', null);
             this.showPanelColor = false;
-            this.showPicker = false;
+            this.$refs.tooltip.hide();
             this.resetColor();
         },
         hide() {
-            this.showPicker = false;
+            this.$refs.tooltip.hide();
             this.resetColor();
         },
         resetColor() {
@@ -173,7 +180,8 @@ export default {
         if (value) {
             this.color.fromString(value);
         }
-        this.popperElm = this.$refs.dropdown.$el;
+        // this.popperElm = this.$refs.dropdown.$el;
+        // this.$refs.dropdown.$controlPanel = this;
     },
 
     data() {

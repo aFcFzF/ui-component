@@ -68,6 +68,7 @@
 <div class="block">
   <span class="demonstration">有默认值</span>
   <ui-color-picker v-model="color1"></ui-color-picker>
+  <span class="demonstration">选定的颜色： {{color1}}</span>
 </div>
 <div class="block">
   <span class="demonstration">无默认值</span>
@@ -80,83 +81,6 @@
       return {
         color1: '#409EFF',
         color2: null
-      }
-    }
-  };
-</script>
-```
-:::
-
-### 选择透明度
-
-:::demo ColorPicker 支持普通颜色，也支持带 Alpha 通道的颜色，通过`show-alpha`属性即可控制是否支持透明度的选择。
-```html
-<ui-color-picker v-model="color3" show-alpha></ui-color-picker>
-
-<script>
-  export default {
-    data() {
-      return {
-        color3: 'rgba(19, 206, 102, 0.8)'
-      }
-    }
-  };
-</script>
-```
-:::
-
-### 预定义颜色
-
-:::demo ColorPicker 支持预定义颜色
-```html
-<ui-color-picker
-  v-model="color5"
-  show-alpha
-  :predefine="predefineColors">
-</ui-color-picker>
-
-<script>
-  export default {
-    data() {
-      return {
-        color5: 'rgba(255, 69, 0, 0.68)',
-        predefineColors: [
-          '#ff4500',
-          '#ff8c00',
-          '#ffd700',
-          '#90ee90',
-          '#00ced1',
-          '#1e90ff',
-          '#c71585',
-          'rgba(255, 69, 0, 0.68)',
-          'rgb(255, 120, 0)',
-          'hsv(51, 100, 98)',
-          'hsva(120, 40, 94, 0.5)',
-          'hsl(181, 100%, 37%)',
-          'hsla(209, 100%, 56%, 0.73)',
-          '#c7158577'
-        ]
-      }
-    }
-  };
-</script>
-```
-:::
-
-### 不同尺寸
-
-:::demo
-```html
-<ui-color-picker v-model="color4"></ui-color-picker>
-<ui-color-picker v-model="color4" size="medium"></ui-color-picker>
-<ui-color-picker v-model="color4" size="small"></ui-color-picker>
-<ui-color-picker v-model="color4" size="mini"></ui-color-picker>
-
-<script>
-  export default {
-    data() {
-      return {
-        color4: '#409EFF'
       }
     }
   };

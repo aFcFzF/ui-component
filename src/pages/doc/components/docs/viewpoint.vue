@@ -6,27 +6,7 @@
             </ui-scrollbar>
         </div>
         <div class="component-doc">
-            <div :class="{
-                'side-toolbar': true,
-                'open': sidebarOpen
-                }"
-            >
-                <button class="switch-btn ui-btn ui-btn-text-primary ui-btn-no-border" @click="openSidebar">
-                    <i
-                        :class="{
-                            'ui-icon-left': true,
-                            'open': sidebarOpen
-                        }"
-                    />
-                </button>
-                <header class="title">全局设置</header>
-                <article class="main-options">
-                    <section class="style-opt">
-                        <p class="caption">边框设置</p>
-                        <ui-slider v-model="borderValue"/>
-                    </section>
-                </article>
-            </div>
+            <setting-bar></setting-bar>
             <ui-scrollbar style="height: 100%">
                 <transition name="component-fade" mode="out-in">
                     <router-view class="comp-section"></router-view>
@@ -64,59 +44,6 @@
         .comp-section {
             padding: 0 40px;
             margin-top: 40px;
-        }
-
-        .side-toolbar {
-            position: relative;
-            float: right;
-            height: 100%;
-            width: 0;
-            right: 0;
-            z-index: 0;
-            padding-left: 40px;
-            background: @white-color;
-            transition: width .3s ease-in-out;
-
-            &.open {
-                width: 300px;
-                border-left: solid 1px @split-color;
-                padding: 20px 40px;
-            }
-
-            .switch-btn {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                height: 40px;
-                line-height: 40px;
-                padding: 0 5px;
-                font-size: 20px;
-                color: @primary-color;
-                transform: translateY(-50%);
-
-                &.hover {
-                    background: @primary-color;
-                    color: @white-color;
-                }
-
-                .ui-icon-left {
-                    transition: transform 300ms ease-in-out;
-                    &.open {
-                        transform: rotate(180deg);
-                    }
-                }
-            }
-
-            .title {
-                font-size: 16px;
-                font-weight: bold;
-            }
-
-            .main-options {
-
-            }
-
-
         }
 
         h3 {
@@ -187,9 +114,10 @@
         }
 
         .footer-info {
-            padding: 80px;
+            padding: 60px;
             text-align: center;
-            width: 100%
+            width: 100%;
+            overflow: hidden;
         }
   }
 }
@@ -197,6 +125,7 @@
 
 <script>
 import list from '@/pages/doc/common/config/menu.json';
+import SettingBar from './settingBar';
 const convertDts = o =>
 Object.entries(o).map(([k, v]) => {
     const d = {
@@ -220,17 +149,12 @@ export default {
     data() {
         return {
             menuList,
-            hgt: 0,
-            sidebarOpen: false,
-            borderValue: 3
+            hgt: 0
         };
     },
     methods: {
         menuSelHdl(e) {
             this.$router.push(e.key);
-        },
-        openSidebar() {
-            this.sidebarOpen = !this.sidebarOpen;
         }
     },
     beforeRouteUpdate(to, from, next) {
@@ -239,6 +163,9 @@ export default {
         const sideList = this.$refs.sideList;
         sideList && sideList.status.selected !== compName && sideList.select(compName);
         next();
+    },
+    components: {
+        SettingBar
     }
 };
 </script>

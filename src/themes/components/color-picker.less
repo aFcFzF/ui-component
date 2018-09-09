@@ -250,13 +250,22 @@
     line-height: normal;
     height: 40px;
 
+    &-content-container {
+        .@{prefix}tooltip-inner {
+            max-width: none;
+            &-content {
+                padding: 0;
+            }
+        }
+    }
+
     &.is-disabled {
         .ui-color-picker__trigger {
             cursor: not-allowed;
         }
     }
 
-    &--l {
+    &--m {
         height: 36px;
 
         .ui-color-picker__trigger {
@@ -379,7 +388,7 @@
     }
 
     &__panel {
-        position: absolute;
+        // position: absolute;
         z-index: 10;
         padding: 6px;
         box-sizing: content-box;

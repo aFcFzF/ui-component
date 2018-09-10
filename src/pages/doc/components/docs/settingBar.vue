@@ -183,7 +183,7 @@
 
 import {functions, tree} from 'less';
 const lessColor = functions.functionRegistry;
-const {darken, tint, shade, lighten, color} = lessColor._data;
+const {darken, tint, shade, lighten} = lessColor._data;
 const Color = tree.Color;
 // console.log('less: ', less);
 

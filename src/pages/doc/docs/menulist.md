@@ -88,7 +88,8 @@
             ]
           }
         ],
-        autoCollapse: true
+        autoCollapse: true,
+        whiteTheme: false
       }
     },
     methods: {
@@ -119,12 +120,17 @@
   </ui-switch>
   <br>
   <br>
+  <ui-switch v-model="whiteTheme">
+      <span slot="before">白色主题</span>
+  </ui-switch>
+  <br>
+  <br>
   <div>
     <ui-button class="ui-btn-primary ui-btn-xs" @click="clkHdl">选中"收藏2-4"</ui-button>
   </div>
   <div class="list">
     <p>黑色样式： </p>
-    <ui-menu :datas="menuData1" @select="selHdl" ref="blackMenu" :auto-collapse-on-set="autoCollapse"></ui-menu>
+    <ui-menu :datas="menuData1" @select="selHdl" ref="blackMenu" :auto-collapse-on-set="autoCollapse" :class-name="whiteTheme ? 'ui-menu-white' : 'ui-menu-black'"></ui-menu>
   </div>
 </div>
 
@@ -133,92 +139,6 @@
     data() {
       return {
         menuData1: [
-          {
-            title: '首页',
-            key: 'welcome',
-            icon: 'ui-icon-home'
-          },
-          {
-            title: '查询',
-            key: 'search',
-            icon: 'ui-icon-search'
-          },
-          {
-            title: '收藏',
-            key: 'favor',
-            icon: 'ui-icon-star',
-            count: 100,
-            open: true,
-            children: [
-              {
-                title: '收藏-1',
-                key: 'favor2-1',
-                count: 20,
-              },
-              {
-                title: '收藏-2',
-                key: 'favor3-2',
-                children: [
-                  {
-                    title: '收藏-2-3',
-                    key: 'favor2-3'
-                  },
-                  {
-                    title: '收藏-2-4',
-                    key: 'favor3-4'
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            title: '任务',
-            icon: 'h-icon-task',
-            key: 'task',
-            children: [
-              {
-                title: '任务-1',
-                icon: 'ui-icon-bell',
-                key: 'task1-1'
-              },
-              {
-                title: '任务-2',
-                icon: 'ui-icon-home',
-                key: 'task1-2'
-              }
-            ]
-          }
-        ]
-      };
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
-```
-:::
-
-### 侧边栏
-
-适用广泛的基础用法。
-
-:::demo 导航菜单默认为垂直模式，通过`mode`属性可以使导航菜单变更为水平模式。另外，在菜单中通过`submenu`组件可以生成二级菜单。Menu 还提供了`background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
-
-```html
-<div class="list-container">
-  <div class="list">
-    <p>白色样式： </p>
-    <ui-menu :datas="menuData1" class-name="ui-menu-white"/>
-  </div>
-</div>
-<script>
-  export default {
-    data() {
-      return {
-                menuData1: [
           {
             title: '首页',
             key: 'welcome',

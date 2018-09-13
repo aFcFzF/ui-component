@@ -96,6 +96,7 @@ export default {
             document.body.addEventListener('mousemove', this.mousemove);
             document.body.addEventListener('mouseup', this.mouseup);
             this.tooltip[type] && this.tooltip[type].show();
+            this.$emit('dragstart', this.value);
         },
         mousemove(event) {
             if (this.readonly) {
@@ -179,9 +180,8 @@ export default {
                 'ui-slider-node-dragging'
             );
             let type = this.eventControl.type;
-            if (this.tooltip[type]) {
-                this.tooltip[type].hide();
-            }
+            this.tooltip[type] && this.tooltip[type].hide();
+            this.$emit('dragend', this.value);
         }
     },
     computed: {

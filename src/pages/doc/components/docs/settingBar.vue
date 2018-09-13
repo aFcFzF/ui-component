@@ -18,25 +18,21 @@
                 <article class="main-options">
                     <section class="style-opt">
                         <div class="border-slider">
+                            <ui-loading
+                                text="加载中..."
+                                :loading="loadingOpen"
+                            />
                             <p class="caption">边框圆角：</p>
-                            <ui-slider v-model="borderValue" :show="show"/>
+                            <ui-slider
+                                v-model="borderValue"
+                                :show="show"
+                                @dragend="dragend"
+                            />
                             <span class="border-radius-text primary-color" >{{transBorderVal}}px</span>
                         </div>
                     </section>
                     <section class="color-opts">
                         <p class="caption">全局颜色设定：</p>
-                        <div class="ui-radio-group">
-                            <div class="caption">格式：</div>
-                                <ui-radio
-                                    :class="['ui-radio-border', 'ui-radio-xs']"
-                                    v-model="formatVal"
-                                    v-for="item of colorFormat"
-                                    :key="item"
-                                    :value="item"
-                                >
-                                {{item}}
-                                </ui-radio>
-                        </div>
                         <div class="ui-tag ui-tag-primary">*提示： 颜色格式为hex则无法设置透明通道</div>
                         <ul class="picker-list">
                             <li v-for="(item, idx) of colorOpts" :key="item.label">
@@ -49,7 +45,6 @@
                                         :color-format="formatVal"
                                         :predefine="formatVal !== 'hex' ? predefineColors : []"
                                         @change="val => colorChanged(val, idx)"
-                                        @click.native="saveOldColors(idx)"
                                     >
                                     </ui-color-picker>
                                     <div class="color-text">{{item.color}}</div>
@@ -183,12 +178,12 @@
 
 import {functions, tree} from 'less';
 const lessColor = functions.functionRegistry;
-const {darken, tint, shade, lighten} = lessColor._data;
-const Color = tree.Color;
+const colorCope = lessColor._data;
+const {Color} = tree;
 // console.log('less: ', less);
 
 let rules = '';
-let oldColors = [];
+let oldColors = ['#457EFF', '#8a95af', '#63CE81', '#FFD735', '#F95D5D'];
 
 export default {
     data() {
@@ -196,6 +191,7 @@ export default {
             sidebarOpen: false,
             borderValue: 0,
             transBorderVal: 0,
+            loadingOpen: false,
             colorFormat: ['hsl', 'hsv', 'hex', 'rgb'],
             formatVal: 'hex',
             predefineColors: [
@@ -220,8 +216,8 @@ export default {
                     color: '#457EFF'
                 },
                 {
-                    label: '悬浮',
-                    color: '#1D59E0'
+                    label: '信息',
+                    color: '#8a95af'
                 },
                 {
                     label: '成功',
@@ -248,12 +244,12 @@ export default {
         colorChanged(val, idx) {
             console.log('取到了', val, idx);
             console.log('主颜色', this.colorOpts[0]);
-            this.replaceColor(val, idx);
+            this.sideBarConfig('color', val, idx);
         },
-        saveOldColors(idx) {
-            oldColors[idx] = this.colorOpts[idx].color;
+        dragend(val) {
+            this.sideBarConfig('radius', '3px', this.borderValue);
         },
-        replaceColor(val, idx) {
+        sideBarConfig(val, idx) {
             const getRules = src => {
                 const xhr = new XMLHttpRequest();
                 return Reflect.construct(Promise, [(resolve, reject) => {
@@ -269,51 +265,96 @@ export default {
 
             const createStyle = rules => {
                 const syl = document.createElement('style');
-                syl.innerText = rules;
+                syl.innerHTML = rules;
                 syl.setAttribute('id', 'replaced-style');
                 document.head.appendChild(syl);
             };
 
             const replaceText = (text, oldColor, newColor) => {
-                const genColorReg = (oldColor, newColor) => {
+                const genColorReg = (oldColor, newColor, colorTable) => {
                     const colorMap = {
                         ori: [],
                         dest: []
                     };
 
                     colorMap.ori.push(oldColor);
-                    colorMap.ori.push(shade(oldColor, 10)); // hover
-                    colorMap.ori.push(shade(oldColor, 20)); // active
-                    colorMap.ori.push(darken(oldColor, 2)); // border
-                    colorMap.ori.push(tint(oldColor, 60)); // disabled
-                    // text
-                    colorMap.ori.push(lighten(oldColor, 10)); // text-hover
-                    colorMap.ori.push(darken(oldColor, 10)); // border
-                    colorMap.ori.push(tint(oldColor, 90)); // hover
-                    colorMap.ori.push(tint(oldColor, 50)); // active
-                    colorMap.ori.push(tint(oldColor, 70)); // active-color
+                    colorTable.forEach(e => {
+                        const item = colorCope[e.type](oldColor, ...e.value.map(color => new tree.Dimension(color)));
+                        colorMap.ori.push(item);
+                    });
 
                     // newColor
 
                     colorMap.dest.push(newColor);
-                    colorMap.dest.push(shade(oldColor, 10)); // hover
-                    colorMap.dest.push(shade(oldColor, 20)); // active
-                    colorMap.dest.push(darken(oldColor, 2)); // border
-                    colorMap.dest.push(tint(oldColor, 60)); // disabled
-                    // text
-                    colorMap.dest.push(lighten(oldColor, 10)); // text-hover
-                    colorMap.dest.push(darken(oldColor, 10)); // border
-                    colorMap.dest.push(tint(oldColor, 90)); // hover
-                    colorMap.dest.push(tint(oldColor, 50)); // active
-                    colorMap.dest.push(tint(oldColor, 70)); // active-color
+                    colorTable.forEach(e => colorMap.dest.push(colorCope[e.type](newColor, ...e.value.map(color => new tree.Dimension(color)))));
 
                     return colorMap;
                 };
 
-                const map = genColorReg(new Color(oldColor), new Color(newColor));
-                map.ori.forEach((_, idx) => {
-                    text = text.replace(new RegExp(map.ori[idx], 'gmt'), map.dest[idx]);
-                });
+                const colorTable = [
+                    {
+                        type: 'shade',
+                        value: [10]
+                    },
+                    {
+                        type: 'shade',
+                        value: [20]
+                    },
+                    {
+                        type: 'darken',
+                        value: [2]
+                    },
+                    {
+                        type: 'tint',
+                        value: [60]
+                    },
+                    {
+                        type: 'lighten',
+                        value: [10]
+                    },
+                    {
+                        type: 'darken',
+                        value: [10]
+                    },
+                    {
+                        type: 'tint',
+                        value: [90]
+                    },
+                    {
+                        type: 'tint',
+                        value: [60]
+                    },
+                    {
+                        type: 'tint',
+                        value: [50]
+                    },
+                    {
+                        type: 'tint',
+                        value: [70]
+                    },
+                    {
+                        type: 'tint',
+                        value: [95]
+                    },
+                    { // ui-tag-color
+                        type: 'tint',
+                        value: [80]
+                    },
+                    { // input
+                        type: 'fade',
+                        value: [20]
+                    }
+                ];
+
+                const re = /^#([a-f0-9]{6}|[a-f0-9]{3})$/i;
+                oldColor = re.test(oldColor) ? oldColor.slice(1) : oldColor;
+                newColor = re.test(newColor) ? newColor.slice(1) : newColor;
+
+
+                const map = genColorReg(new Color(oldColor), new Color(newColor), colorTable);
+                map.ori.forEach((_, idx) =>
+                    text = text.replace(new RegExp(map.ori[idx].toRGB(), 'gmi'), map.dest[idx].toRGB())
+                );
 
                 return text;
             };
@@ -328,9 +369,9 @@ export default {
                 }
                 getRules(sht)
                 .then(text => {
-                    // rules = text.replace(new RegExp(oldColors[idx], 'gmi'), val);
-                    rules = replaceText(text, oldColors[idx], val);
-                    createStyle(rules);
+                    rules = text;
+                    const r = replaceText(rules, oldColors[idx], val);
+                    createStyle(r);
                 })
                 .catch(e => {
                     throw new Error(e);
@@ -338,10 +379,9 @@ export default {
             }
             else {
                 const elSyl = document.head.querySelector('#replaced-style');
-                // const rules = elSyl.innerText.replace(new RegExp(oldColors[idx], 'gmi'), val);
-                rules = replaceText(elSyl.innerText, oldColors[idx], val);
+                const r = replaceText(rules, oldColors[idx], val);
+                createStyle(r);
                 elSyl.remove();
-                createStyle(rules);
             }
         }
     },

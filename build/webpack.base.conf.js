@@ -178,7 +178,11 @@ const config = {
                                     var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
                                     var script = striptags.fetch(content, 'script');
                                     var style = striptags.fetch(content, 'style');
-                                    var jsfiddle = {html: html, script: script, style: style};
+                                    var jsfiddle = {
+                                        html: html,
+                                        script: script,
+                                        style: style
+                                    };
                                     var descriptionHTML = description
                                         ? md.render(description)
                                         : '';

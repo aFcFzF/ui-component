@@ -228,9 +228,9 @@
 
 .ui-tag-color(@color) {
     color: darken(@color, 10%);
-    background: lighten(average(@color, #FFF), 10%);
-    border-color: lighten(average(@color, #FFF), 10%);
-    }
+    background: tint(@color, 80);
+    border-color: tint(@color, 80);
+}
 
 .ui-tag-bg-color(@color) {
     color: @white-color;

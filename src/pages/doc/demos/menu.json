@@ -1,0 +1,12 @@
+{
+    "demos": {
+        "name": "全部例子",
+        "emphasis" : true,
+        "open": true,
+        "disabled": true,
+        "subList": {
+            "page01": "页面1",
+            "page02": "页面2"
+        }
+    }
+}

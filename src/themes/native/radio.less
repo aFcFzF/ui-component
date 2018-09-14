@@ -205,7 +205,8 @@
 
     &-group {
         display: inline-block;
-        >span {
+        > span,
+        > div {
             padding: 8px 15px;
             border-radius: 0;
             color: inherit;
@@ -217,7 +218,8 @@
             background-color: #FFF;
             border: @border;
             float: left;
-            +span {
+            + span,
+            + div {
                 margin-left: -1px;
             }
             position: relative;
@@ -231,13 +233,26 @@
             &:last-of-type {
                 border-radius: 0 @border-radius @border-radius 0;
             }
-            &[checked] {
+            &[checked],
+            .@{radio-prefix}-checked {
                 background-color: @primary-color;
                 border-color: darken(@primary-color, 2%);
                 color: @white-color;
                 z-index: 3;
             }
+            .@{radio-prefix}-icon {
+                display: none;
+            }
         }
+
+        > div,
+        .@{prefix}badge {
+            padding: 0;
+            .@{radio-prefix}-content {
+                padding: 8px 15px;
+            }
+        }
+
         &-small>span {
             padding: 5px 8px;
         }

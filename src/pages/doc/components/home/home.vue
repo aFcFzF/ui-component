@@ -7,8 +7,9 @@
                     <span class="logo-caption">Tiny-UI</span>
                 </router-link>
                 <div class="tabs">
-                    <router-link to="/docs" class="tab"><span>文档</span></router-link>
-                    <router-link to="/example" class="tab"><span>组件</span></router-link>
+                    <router-link to="/docs/introduction" class="tab"><span>文档</span></router-link>
+                    <router-link to="/docs/button" class="tab"><span>组件</span></router-link>
+                    <router-link to="/demos" class="tab"><span>例子</span></router-link>
                 </div>
             </div>
         </div>
@@ -30,7 +31,7 @@ body {
         height: 70px;
         line-height: 70px;
         background: @white-color;
-        min-width: 1200px;
+        // min-width: 1200px;
         position: fixed;
         top: 0;
         left: 0;

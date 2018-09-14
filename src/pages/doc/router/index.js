@@ -26,6 +26,7 @@ const routes = [
     }
 ];
 
+console.log('all-router', docRoute);
 export default new VueRouter({
     routes
 });

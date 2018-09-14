@@ -124,7 +124,7 @@
 </style>
 
 <script>
-import list from '@/pages/doc/common/config/menu.json';
+import list from '@/pages/doc/demos/menu.json';
 import SettingBar from './settingBar';
 const convertDts = o =>
 Object.entries(o).map(([k, v]) => {
@@ -144,7 +144,6 @@ Object.entries(o).map(([k, v]) => {
 
 const menuList = convertDts(list);
 console.log(menuList);
-
 
 export default {
     data() {

@@ -31,7 +31,7 @@ export default {
         position: {
             type: String,
             validator(value) {
-                return ['right', 'left'].indexOf(value) > -1;
+                return ['right', 'left', 'center'].indexOf(value) > -1;
             }
         }
     },
@@ -47,7 +47,8 @@ export default {
         badgeCls() {
             return {
                 [`${prefix}`]: true,
-                [`${prefix}-position-right`]: this.position === 'right'
+                [`${prefix}-position-right`]: this.position === 'right',
+                [`${prefix}-position-center`]: this.position === 'center'
             };
         },
         badgeCountCls() {

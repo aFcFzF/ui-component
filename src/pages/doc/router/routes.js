@@ -5,6 +5,7 @@
 import {event} from '@/common/util.js';
 import menuCfg from '../common/config/menu.json';
 import loadBar from '@/plugins/loadingBar';
+import demoMenu from '../demos/menu.json';
 
 event.$on('begin-loading', () => loadBar.start());
 event.$on('finish-loading', () => loadBar.success());
@@ -46,11 +47,31 @@ Object.keys(menuCfg).forEach(name => {
     });
 });
 
+
+// 获取demo页面的内容
+
+const demoChildrenRoute = [];
+console.log('demoMenu: ', demoMenu);
+Object.keys(demoMenu).forEach(name => {
+    getSubList(demoMenu[name]).forEach(key => {
+        demoChildrenRoute.push({
+            path: key,
+            component: () => notifyLoad(import(`../demos/${key}.vue`))
+        });
+    });
+});
+
 export default [
     {
         path: '/docs',
         redirect: '/docs/introduction',
         component: () => notifyLoad(import('../components/docs/viewpoint.vue')),
         children: docsChildrenRoute
+    },
+    {
+        path: '/demos',
+        redirect: '/demos/page01',
+        component: () => notifyLoad(import('../components/docs/demoViewPoint.vue')),
+        children: demoChildrenRoute
     }
 ];

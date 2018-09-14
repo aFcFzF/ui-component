@@ -189,8 +189,8 @@ export default {
     data() {
         return {
             sidebarOpen: false,
-            borderValue: 0,
-            transBorderVal: 0,
+            borderValue: 12,
+            transBorderVal: 3,
             loadingOpen: false,
             colorFormat: ['hsl', 'hsv', 'hex', 'rgb'],
             formatVal: 'hex',
@@ -247,9 +247,9 @@ export default {
             this.sideBarConfig('color', val, idx);
         },
         dragend(val) {
-            this.sideBarConfig('radius', '3px', this.borderValue);
+            this.sideBarConfig('radius', 3, this.transBorderVal);
         },
-        sideBarConfig(val, idx) {
+        sideBarConfig(type, val, idx) {
             const getRules = src => {
                 const xhr = new XMLHttpRequest();
                 return Reflect.construct(Promise, [(resolve, reject) => {
@@ -270,7 +270,7 @@ export default {
                 document.head.appendChild(syl);
             };
 
-            const replaceText = (text, oldColor, newColor) => {
+            const replaceColorText = (text, oldColor, newColor) => {
                 const genColorReg = (oldColor, newColor, colorTable) => {
                     const colorMap = {
                         ori: [],
@@ -359,6 +359,11 @@ export default {
                 return text;
             };
 
+            const replaceRadius = (text, oldRadius, newRadius) => {
+                const reOld = new RegExp('border-radius\\s*:.*;', 'gmi');
+                const newRule = `border-radius: ${newRadius}px;`;
+                return text.replace(reOld, newRule);
+            };
 
             if (!rules) {
                 const sheets = [...document.styleSheets];
@@ -370,7 +375,7 @@ export default {
                 getRules(sht)
                 .then(text => {
                     rules = text;
-                    const r = replaceText(rules, oldColors[idx], val);
+                    const r = type === 'color' ? replaceColorText(rules, oldColors[idx], val) : replaceRadius(rules, val, idx);
                     createStyle(r);
                 })
                 .catch(e => {
@@ -379,7 +384,7 @@ export default {
             }
             else {
                 const elSyl = document.head.querySelector('#replaced-style');
-                const r = replaceText(rules, oldColors[idx], val);
+                const r = type === 'color' ? replaceColorText(rules, oldColors[idx], val) : replaceRadius(rules, val, idx);
                 createStyle(r);
                 elSyl.remove();
             }

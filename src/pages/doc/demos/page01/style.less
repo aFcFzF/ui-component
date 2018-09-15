@@ -1,0 +1,85 @@
+#page01 {
+    margin: 0;
+    padding: 0;
+    @captionWdt: 120px;
+    .main-header {
+        background: #F6F7FB;
+        height: 60px;
+        line-height: 60px;
+    }
+    .main-content {
+        min-width: 860px;
+        margin: 20px;
+        .panel {
+            padding: 30px;
+            overflow: hidden;
+            &.content-left {
+                background: @white-color;
+            }
+            .section {
+                padding: 30px 0;
+                border-top: solid 1px @split-color;
+                &:first-of-type {
+                    border: none;
+                    padding-top: 0;
+                }
+                .title {
+                    border-left: 4px solid @primary-color;
+                    font-size: 18px;
+                    padding-left: 10px;
+                }
+                .row {
+                    margin-top: 20px;
+                    > * {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    .row-item {
+                        margin-right: 10px;
+                        &.new-line {
+                            display: block;
+                            padding-left: @captionWdt;
+                            margin-top: 10px;
+                        }
+                        .ui-tag {
+                            padding: 0;
+                            margin: 0;
+                        }
+                    }
+                    .caption {
+                        display: inline-block;
+                        width: @captionWdt;
+                        margin: 0;
+                    }
+                    .system-select {
+                        display: inline-block;
+                        width: 160px;
+                    }
+                    .ui-slider {
+                        width: 200px;
+                    }
+                    &.systemDisk {
+                        .valume {
+                            width: 100px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .info-panel {
+            float: right;
+            padding: 0;
+            .panel-wrapper {
+                margin-left: 20px;
+                background: @white-color;
+                padding: 30px;
+                .title {
+                    margin-top: 0;
+                    padding-top: 0;
+                }
+            }
+
+        }
+    }
+}

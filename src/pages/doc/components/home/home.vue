@@ -1,5 +1,5 @@
 <template>
-    <div class="home-page">
+    <div class="home-page" :class="currentPage">
         <div class="navigator doc">
             <div class="navigator-wrapper">
                 <router-link class="logo" to="/">
@@ -27,6 +27,12 @@ body {
     height: 100%;
     overflow: hidden;
 
+    &.demos {
+        .navigator.doc {
+            box-shadow: none;
+        }
+    }
+
     .navigator {
         height: 70px;
         line-height: 70px;
@@ -36,7 +42,7 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1;
+        z-index: 2;
 
         &.doc {
             box-shadow: 0 2px 2px @split-color;
@@ -101,3 +107,15 @@ body {
     }
 }
 </style>
+
+<script>
+export default {
+    computed: {
+        currentPage() {
+            return {
+                'demos': this.$route.meta.path && this.$route.meta.path === 'demos'
+            };
+        }
+    }
+};
+</script>

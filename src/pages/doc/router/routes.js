@@ -56,6 +56,8 @@ Object.keys(demoMenu).forEach(name => {
     getSubList(demoMenu[name]).forEach(key => {
         demoChildrenRoute.push({
             path: key,
+            name: key,
+            meta: {path: 'demos'},
             component: () => notifyLoad(import(`../demos/${key}.vue`))
         });
     });

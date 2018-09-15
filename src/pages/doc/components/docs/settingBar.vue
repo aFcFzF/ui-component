@@ -59,114 +59,112 @@
 </template>
 
 <style lang="less">
-.component-doc {
-    .side-toolbar {
-        position: relative;
-        float: right;
+.side-toolbar {
+    position: relative;
+    float: right;
+    height: 100%;
+    width: 0;
+    right: 0;
+    z-index: 0;
+    padding-left: 40px;
+    background: @white-color;
+    transition: width .3s ease-in-out;
+
+    &.open {
+        width: 360px;
+        border-left: solid 1px @split-color;
+    }
+
+    .switch-btn {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 5px;
+        font-size: 20px;
+        color: @primary-color;
+        transform: translateY(-50%);
+
+        &.hover {
+            background: @primary-color;
+            color: @white-color;
+        }
+
+        .ui-icon-left {
+            transition: transform 300ms ease-in-out;
+            &.open {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .ui-zoom-in-enter-active,
+    .ui-zoom-in-leave-active {
+        transition: opacity .3s ease;
+    }
+
+    .ui-zoom-in-enter,
+    .ui-zoom-in-leave-to
+    {
+        opacity: 0;
+    }
+
+    &-wrapper {
+        position: absolute;
+        width: 320px;
         height: 100%;
-        width: 0;
-        right: 0;
-        z-index: 0;
-        padding-left: 40px;
-        background: @white-color;
-        transition: width .3s ease-in-out;
+        padding: 20px;
+        padding-left: 0;
 
-        &.open {
-            width: 360px;
-            border-left: solid 1px @split-color;
+        .title {
+            font-size: 16px;
+            font-weight: bold;
         }
 
-        .switch-btn {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            height: 40px;
-            line-height: 40px;
-            padding: 0 5px;
-            font-size: 20px;
-            color: @primary-color;
-            transform: translateY(-50%);
-
-            &.hover {
-                background: @primary-color;
-                color: @white-color;
-            }
-
-            .ui-icon-left {
-                transition: transform 300ms ease-in-out;
-                &.open {
-                    transform: rotate(180deg);
-                }
-            }
-        }
-
-        .ui-zoom-in-enter-active,
-        .ui-zoom-in-leave-active {
-            transition: opacity .3s ease;
-        }
-
-        .ui-zoom-in-enter,
-        .ui-zoom-in-leave-to
-        {
-            opacity: 0;
-        }
-
-        &-wrapper {
-            position: absolute;
-            width: 320px;
-            height: 100%;
-            padding: 20px;
-            padding-left: 0;
-
-            .title {
-                font-size: 16px;
-                font-weight: bold;
-            }
-
-            .main-options {
-                .style-opt {
-                    .border-slider {
-                        display: flex;
-                        align-items: center;
-                        .caption {
-                            flex-shrink: 0;
-                        }
-                        .ui-slider {
-                            width: 160px;
-                        }
-                        .border-radius-text {
-                            text-align: center;
-                            flex-grow: 1;
-                            font-size: 16px;
-                        }
-                    }
-                }
-            }
-
-            .ui-radio-group {
-                .caption,
-                .ui-radio {
-                    margin-right: 5px;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-            }
-
-            .color-opts {
-                .ui-tag {
-                    margin: 10px 0;
-                }
-                .picker {
+        .main-options {
+            .style-opt {
+                .border-slider {
                     display: flex;
                     align-items: center;
-                    .theme-color-picker {
-                        font-size: 0;
+                    .caption {
+                        flex-shrink: 0;
                     }
-                    .color-text {
-                        font-size: 18px;
-                        color: @secondary-color;
-                        padding-left: 20px;
+                    .ui-slider {
+                        width: 160px;
                     }
+                    .border-radius-text {
+                        text-align: center;
+                        flex-grow: 1;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .ui-radio-group {
+            .caption,
+            .ui-radio {
+                margin-right: 5px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+        .color-opts {
+            .ui-tag {
+                margin: 10px 0;
+            }
+            .picker {
+                display: flex;
+                align-items: center;
+                .theme-color-picker {
+                    font-size: 0;
+                }
+                .color-text {
+                    font-size: 18px;
+                    color: @secondary-color;
+                    padding-left: 20px;
                 }
             }
         }
@@ -183,7 +181,7 @@ const {Color} = tree;
 // console.log('less: ', less);
 
 let rules = '';
-let oldColors = ['#457EFF', '#8a95af', '#63CE81', '#FFD735', '#F95D5D'];
+let oldColors = ['#457EFF', '#8a95af', '#63CE81', '#F8CF68', '#F95D5D'];
 
 export default {
     data() {
@@ -225,7 +223,7 @@ export default {
                 },
                 {
                     label: '警告',
-                    color: '#FFD735'
+                    color: '#F8CF68'
                 },
                 {
                     label: '错误',

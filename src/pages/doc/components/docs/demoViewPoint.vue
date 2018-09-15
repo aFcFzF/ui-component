@@ -1,11 +1,14 @@
 <template>
     <div class="doc-page">
-        <div class="component-list" >
-            <ui-scrollbar style="height: 100%">
+        <!-- <div class="component-list" > -->
+            <!-- <ui-scrollbar style="height: 100%">
                 <ui-menu ref="sideList" :datas="menuList" className="ui-menu-white" @select="menuSelHdl"></ui-menu>
-            </ui-scrollbar>
-        </div>
-        <div class="component-doc">
+            </ui-scrollbar> -->
+        <!-- </div> -->
+        <div class="demo-page">
+            <header class="tab-card">
+                <ui-tabs v-model="activeVal" @click="menuSelHdl" :datas="tabs1" class-name="ui-tabs-card"></ui-tabs>
+            </header>
             <setting-bar></setting-bar>
             <ui-scrollbar style="height: 100%">
                 <transition name="component-fade" mode="out-in">
@@ -19,8 +22,23 @@
     </div>
 </template>
 <style lang="less">
+.home-page.demos {
+    .doc-page {
+        position:relative;
+        .side-toolbar {
+            position: absolute;
+            z-index: 1;
+        }
+    }
+}
+
+
 .doc-page {
     height: 100%;
+    .tab-card {
+        padding-top: 10px;
+        background: @white-color;
+    }
     .component-list {
         width: 300px;
         float: left;
@@ -38,9 +56,25 @@
             padding-bottom: 100px;
         }
     }
-    .component-doc {
+    .demo-page {
         height: 100%;
         overflow: hidden;
+        background: @split-color;
+
+        .side-toolbar {
+            background: transparent;
+            transition: background .5s ease-in-out;
+            &:hover {
+                // background: @white-color;
+                background: rgba(255, 255, 255, .8);
+            }
+            &.open {
+                background: @white-color;
+                position: relative;
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+
         .comp-section {
             padding: 0 40px;
             margin-top: 40px;
@@ -149,12 +183,17 @@ export default {
     data() {
         return {
             menuList,
-            hgt: 0
+            hgt: 0,
+            tabs1: [
+                {label: '测试页面1', value: 'page01'},
+                {label: '测试页面2', value: 'page02'}
+            ],
+            activeVal: 'page01'
         };
     },
     methods: {
         menuSelHdl(e) {
-            this.$router.push(e.key);
+            this.$router.push(this.activeVal);
         }
     },
     beforeRouteUpdate(to, from, next) {

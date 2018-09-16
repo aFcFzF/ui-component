@@ -7,14 +7,16 @@
                     <span class="logo-caption">Tiny-UI</span>
                 </router-link>
                 <div class="tabs">
-                    <router-link to="/docs/introduction" class="tab"><span>文档</span></router-link>
-                    <router-link to="/docs/button" class="tab"><span>组件</span></router-link>
-                    <router-link to="/demos" class="tab"><span>例子</span></router-link>
+                    <router-link to="/docs/introduction" class="tab"><i class="ui-icon-edit"/><span>文档</span></router-link>
+                    <router-link to="/docs/button" class="tab"><i class="ui-icon-calendar"/><span>组件</span></router-link>
+                    <router-link to="/demos" class="tab"><i class="ui-icon-star-on"/><span>例子</span></router-link>
                 </div>
             </div>
         </div>
         <div class="router-view">
-            <router-view></router-view>
+            <transition name="component-fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>
@@ -82,8 +84,17 @@ body {
                     font-size: 18px;
                     text-decoration: none;
                     color: @secondary-color;
-                    margin-left: 10px;
+                    margin-left: 20px;
                     transition: color .3s;
+
+                    > span,
+                    > i {
+                        vertical-align: middle;
+                    }
+
+                    > span {
+                        padding-left: 5px;
+                    }
 
                     &:hover {
                         color: @primary-color;

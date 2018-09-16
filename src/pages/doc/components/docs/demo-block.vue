@@ -197,7 +197,6 @@ export default {
 
     methods: {
         goJsfiddle() {
-            debugger;
             const {script, html, style} = this.jsfiddle;
             const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>'
             + '\n<scr' + `ipt src="//unpkg.com/element-ui@${version}/lib/index.js"></scr` + 'ipt>';

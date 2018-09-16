@@ -37,6 +37,9 @@
                     </div>
                 </div>
             </div>
+            <div class="footer-info">
+                © 2017-2018 SAU. All Rights Reserved.
+            </div>
         </div>
     </ui-scrollbar>
 </template>

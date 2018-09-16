@@ -4,7 +4,7 @@
 
 <style lang="less">
 @import '~@/themes/index.less';
-@import '~highlight.js/styles/agate.css';
+@import '~highlight.js/styles/vs.css';
 #app {
     width: 100%;
     height: 100%;

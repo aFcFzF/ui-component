@@ -69,7 +69,7 @@
                         <ui-select v-model="systemOpt.value" :datas="systemOpt.opts" placeholder="请选择" class="ui-select-wdt">
                             <template slot-scope="props" slot="item">
                             <div>标题：{{props.item.label}}</div>
-                            <div class='gray1-color'>描述：{{props.item.value}}</div>
+                            <div class="gray1-color">描述：{{props.item.value}}</div>
                             </template>
                         </ui-select>
                     </div>

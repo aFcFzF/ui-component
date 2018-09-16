@@ -6,7 +6,7 @@
         "subList": {
             "introduction": "介绍",
             "quick-start": "快速上手",
-            "post-compile": "后编译",
+            "custom-theme": "定制主题",
             "theme": "主题",
             "singleton": "单例模式"
         }

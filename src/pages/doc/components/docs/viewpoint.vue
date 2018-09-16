@@ -19,6 +19,22 @@
     </div>
 </template>
 <style lang="less">
+.footer-info {
+    padding: 60px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+}
+.component-fade-enter-active,
+.component-fade-leave-active {
+    transition: opacity .1s ease;
+}
+
+.component-fade-enter,
+.component-fade-leave-to
+{
+    opacity: 0;
+}
 .doc-page {
     height: 100%;
     .component-list {
@@ -44,6 +60,12 @@
         .comp-section {
             padding: 0 40px;
             margin-top: 40px;
+            code.hljs {
+                border-radius: 3px;
+                padding: 20px;
+                border: solid 3px @split-color;
+                background: tint(@fill-color, 90);
+            }
         }
 
         h3 {
@@ -102,24 +124,7 @@
             line-height: 2em;
         }
 
-        .component-fade-enter-active,
-        .component-fade-leave-active {
-            transition: opacity .1s ease;
-        }
-
-        .component-fade-enter,
-        .component-fade-leave-to
-        {
-            opacity: 0;
-        }
-
-        .footer-info {
-            padding: 60px;
-            text-align: center;
-            width: 100%;
-            overflow: hidden;
-        }
-  }
+    }
 }
 </style>
 

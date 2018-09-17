@@ -1,11 +1,12 @@
 #page01 {
     margin: 0;
     padding: 0;
-    @captionWdt: 120px;
+    @caption-wdt: 120px;
     .main-header {
         background: #F6F7FB;
         height: 60px;
         line-height: 60px;
+        padding: 0 20px;
     }
     .main-content {
         min-width: 860px;
@@ -29,6 +30,7 @@
                     padding-left: 10px;
                 }
                 .row {
+                    display: flex;
                     margin-top: 20px;
                     > * {
                         display: inline-block;
@@ -38,7 +40,7 @@
                         margin-right: 10px;
                         &.new-line {
                             display: block;
-                            padding-left: @captionWdt;
+                            // padding-left: @caption-wdt;
                             margin-top: 10px;
                         }
                         .ui-tag {
@@ -46,11 +48,30 @@
                             margin: 0;
                         }
                     }
-                    .caption {
-                        display: inline-block;
-                        width: @captionWdt;
+                    .caption,
+                    .row-label {
+                        width: @caption-wdt;
                         margin: 0;
+                        vertical-align: top;
+                        flex-shrink: 0;
                     }
+
+                    .row-content {
+                        vertical-align: top;
+                        flex-grow: 1;
+                        .content-item {
+                            vertical-align: middle;
+                            display: inline-block;
+                            margin-right: 10px;
+                            &.new-line {
+                                display: block;
+                            }
+                            .row:first-of-type {
+                                margin-top: 0;
+                            }
+                        }
+                    }
+
                     .system-select {
                         display: inline-block;
                         width: 160px;
@@ -61,6 +82,12 @@
                     &.systemDisk {
                         .valume {
                             width: 100px;
+                        }
+                    }
+
+                    &.csd {
+                        .row {
+                            margin-top: 0;
                         }
                     }
                 }

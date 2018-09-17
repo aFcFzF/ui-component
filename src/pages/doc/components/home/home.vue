@@ -8,7 +8,7 @@
                 </router-link>
                 <div class="tabs">
                     <router-link to="/docs/introduction" class="tab"><i class="ui-icon-edit"/><span>文档</span></router-link>
-                    <router-link to="/docs/button" class="tab"><i class="ui-icon-calendar"/><span>组件</span></router-link>
+                    <router-link to="/docs/color" class="tab"><i class="ui-icon-calendar"/><span>组件</span></router-link>
                     <router-link to="/demos" class="tab"><i class="ui-icon-star-on"/><span>例子</span></router-link>
                 </div>
             </div>

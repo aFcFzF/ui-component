@@ -3,7 +3,7 @@
         <div :class="showCls">
         <template v-if="multiple">
             <div class="ui-select-multiple-tags">
-            <span v-for="obj of objects" :key="obj[key]">
+            <span v-for="(obj, k) of objects" :key="obj[key]">
                 <span>{{obj[title]}}</span><i class="ui-icon-close" @click.stop="setvalue(obj)" v-if="!disabled"></i>
             </span>
             <input

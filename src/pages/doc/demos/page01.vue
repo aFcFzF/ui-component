@@ -95,28 +95,33 @@
             </dl>
             <dl class="section section-config" key="store" >
                 <dt class="title">存储</dt>
-                <dd :class="['row', key]" v-for="(item, key) of storeOpts" :key="key">
-                    <div :class="['row-item', {'new-line': e.br}, {caption: e.type === 'label'}]" v-for="e of item" :key="e.name">
-                        <template v-if="e.type === 'label'">{{e.name}}</template>
-                        <ui-select v-else-if="e.type === 'selector'" :datas="e.opts" v-model="e.value"/>
-                        <ui-slider v-else-if="e.type ==='slider'" v-model="e.value"></ui-slider>
-                        <input type="text" :class="e.class" v-else-if="e.type === 'input'" :value="e.value">
-                        <ui-button
-                            v-else-if="e.type === 'button' && !e.hidden"
-                            @click="clkHdl(e.event.click, $event)"
-                            class="ui-btn-primary ui-btn-xs"
-                            :disabled="e.disabled"
-                            :icon="e.icon">
-                                {{e.name}}
-                            </ui-button>
-                        <tooltip v-else-if="e.type === 'tooltip'">
-                            <div slot="content">{{e.content}}</div>
-                            <i :class="[e.icon, 'yellow-color']"/>
-                        </tooltip>
-                        <ui-switch v-else-if="e.type === 'switch'" v-model="e.value"></ui-switch>
-                        <p :class="e.class" v-else-if="e.type === 'tag'" v-html="e.content"/>
-                    </div>
-                </dd>
+                <template v-for="(item, key) of storeOpts">
+                    <opt-item :options="item" :key="key" :class="['row', key]" @clkHdl="clkHdl"></opt-item>
+                </template>
+            </dl>
+            <dl class="section section-resource" key="resource" >
+                <dt class="title">弹性资源</dt>
+                <template v-for="(item, key) of resourceOpts">
+                    <opt-item :options="item" :key="key" :class="['row', key]" @clkHdl="clkHdl"></opt-item>
+                </template>
+            </dl>
+            <dl class="section section-network" key="network" >
+                <dt class="title">标签</dt>
+                <template v-for="(item, key) of tagOpts">
+                    <opt-item :options="item" :key="key" :class="['row', key]" @clkHdl="clkHdl"></opt-item>
+                </template>
+            </dl>
+            <dl class="section section-systemInfo" key="systemInfo" >
+                <dt class="title">系统信息</dt>
+                <template v-for="(item, key) of systemInfoOpts">
+                    <opt-item :options="item" :key="key" :class="['row', key]" @clkHdl="clkHdl"></opt-item>
+                </template>
+            </dl>
+            <dl class="section section-orderInfo" key="orderInfo" >
+                <dt class="title">系统信息</dt>
+                <template v-for="(item, key) of orderInfoOpts">
+                    <opt-item :options="item" :key="key" :class="['row', key]" @clkHdl="clkHdl"></opt-item>
+                </template>
             </dl>
         </article>
         <ui-modal
@@ -137,16 +142,21 @@
 <script>
 import cusModal from './page01/modal';
 import formData from './page01/data';
-
+import Item from './page01/item';
+import Vue from 'vue';
+Vue.component('opt-item', Item);
+let deleteIdx = 0;
 export default {
     components: {
         cusModal
     },
+
     data() {
         return {
             ...formData
         };
     },
+
     computed: {
         showImage: {
             get() {
@@ -157,11 +167,28 @@ export default {
             }
         }
     },
+
     methods: {
         clkHdl(type, e) {
-            console.log('点击', type, e)
+            console.log('点击', type, e);
+            if (type === 'createCds') {
+                const {template, opts} = this.storeOpts.cds.opts[0];
+                const tpl = JSON.parse(JSON.stringify(template));
+                tpl[3].event.click.data = deleteIdx++;
+                opts.push({opts: tpl});
+            }
+
+            if (type === 'removeDisk') {
+                const idx = e;
+                const {opts} = this.storeOpts.cds.opts[0];
+                if (idx != null) {
+                    const i = opts.map(e => e.opts[3].event.click.data).indexOf(idx);
+                    i > -1 && opts.splice(i, 1);
+                }
+            }
         }
     },
+
     watch: {
         // 观察 可用区A
         'feeOpts.use.value'(n) {
@@ -227,6 +254,7 @@ export default {
             this.systemVersion.value = this.versionOpt[n].value;
         }
     },
+
     mounted() {
         // 初始化系统版本选项
         const val = this.systemOpt.value;

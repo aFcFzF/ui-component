@@ -22,7 +22,12 @@ const routes = [
                 component: Index
             },
             ...docRoute
-        ]
+        ],
+        beforeEnter: (to, from, next) => {
+            console.log(this, 'befire');
+            next();
+        // ...
+        }
     }
 ];
 

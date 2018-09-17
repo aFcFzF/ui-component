@@ -7,7 +7,7 @@
         </div>
         <div class="component-doc">
             <setting-bar></setting-bar>
-            <ui-scrollbar style="height: 100%">
+            <ui-scrollbar style="height: 100%" ref="docSrcrll">
                 <transition name="component-fade" mode="out-in">
                     <router-view class="comp-section"></router-view>
                 </transition>
@@ -167,6 +167,7 @@ export default {
         const m = to.path.match(/\/docs\/(\w+)/);
         const compName = m && m[1];
         const sideList = this.$refs.sideList;
+        this.$refs.docSrcrll.scrollToTop();
         sideList && sideList.status.selected !== compName && sideList.select(compName);
         next();
     },

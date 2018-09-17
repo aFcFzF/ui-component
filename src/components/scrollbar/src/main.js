@@ -134,6 +134,10 @@ export default {
 
             this.sizeHeight = (heightPercentage < 100) ? (heightPercentage + '%') : '';
             this.sizeWidth = (widthPercentage < 100) ? (widthPercentage + '%') : '';
+        },
+
+        scrollToTop() {
+            this.wrap.scrollTop = this.wrap.scrollLeft = this.moveX = this.moveY = 0;
         }
     },
 

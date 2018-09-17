@@ -7,8 +7,7 @@
             "introduction": "介绍",
             "quick-start": "快速上手",
             "custom-theme": "定制主题",
-            "theme": "主题",
-            "singleton": "单例模式"
+            "transition": "过渡动画"
         }
     },
     "components": {
@@ -20,6 +19,7 @@
                 "name": "全局",
                 "disabled": true,
                 "subList": {
+                    "color": "Color 配色",
                     "button": "Button 按钮",
                     "loading": "Loading 加载动画",
                     "icon": "Icon 图标"

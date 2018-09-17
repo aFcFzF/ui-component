@@ -414,13 +414,14 @@ export default {
                 {
                     type: 'slider',
                     name: '磁盘大小',
-                    value: 0
+                    value: 20
                 },
                 {
                     type: 'input',
                     name: '磁盘输入框',
                     class: 'valume',
-                    value: 0
+                    value: 20,
+                    bind: 1
                 },
                 {
                     type: 'button',
@@ -462,13 +463,14 @@ export default {
                         {
                             type: 'slider',
                             name: '磁盘大小',
-                            value: 0
+                            value: 20
                         },
                         {
                             type: 'input',
                             name: '磁盘输入框',
                             class: 'valume',
-                            value: 0
+                            value: 0,
+                            bind: 1
                         },
                         {
                             type: 'button',
@@ -748,8 +750,46 @@ export default {
             label: '购买个数',
             opts: [
                 {
-                    type: 'button',
-                    name: '+'
+                    type: 'group',
+                    opts: [
+                        {
+                            type: 'ipt-group',
+                            class: 'server-count',
+                            opts: [
+                                {
+                                    type: 'input',
+                                    value: 1
+                                },
+                                {
+                                    type: 'button',
+                                    name: '+',
+                                    class: 'add ',
+                                    disabled: false,
+                                    event: {
+                                        click: {
+                                            name: 'addOne'
+                                        }
+                                    }
+                                },
+                                {
+                                    type: 'button',
+                                    name: '-',
+                                    class: 'sub ',
+                                    disabled: false,
+                                    event: {
+                                        click: {
+                                            name: 'subOne'
+                                        }
+                                    }
+                                },
+                                {
+                                    type: 'label',
+                                    content: '台',
+                                    class: 'count-word'
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },

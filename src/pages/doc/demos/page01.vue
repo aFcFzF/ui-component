@@ -6,13 +6,16 @@
 <div id="page01" class="demo page01">
     <header class="main-header">
         <div class="back"><i class="ui-icon-left"/>返回实例列表</div>
+        <div class="order-steps">
+            <ui-steps :datas="steps" class="ui-steps-s" :step="step" ></ui-steps>
+        </div>
     </header>
     <div class="main-content">
-        <div class="info-panel panel">
+        <div id="info-panel" class="info-panel panel">
+            <ui-loading :loading="showLoading"></ui-loading>
             <div class="panel-wrapper">
-                <dl class="section section-fee">
-                    <dd class="title">所选配置</dd>
-                </dl>
+                <bill :datas="billInfo"></bill>
+                <button class="next ui-btn ui-btn-primary ui-btn-no-border" @click="submitHdl">下一步</button>
             </div>
         </div>
         <article class="content-left panel">
@@ -134,6 +137,16 @@
         <cus-modal></cus-modal>
         </ui-modal>
 
+        <ui-modal
+            v-model="showPayment"
+            :middle="true"
+            :has-close-icon="true"
+            :has-divider="true"
+        >
+        <div slot="header">支付费用</div>
+        <pay-ment :datas="billInfo"></pay-ment>
+        </ui-modal>
+
 </div>
 
 </div>
@@ -144,16 +157,33 @@ import cusModal from './page01/modal';
 import formData from './page01/data';
 import Item from './page01/item';
 import Vue from 'vue';
+import payMent from './page01/pay';
+import Bill from './page01/bill';
+
 Vue.component('opt-item', Item);
 let deleteIdx = 0;
+
 export default {
     components: {
-        cusModal
+        cusModal,
+        payMent,
+        bill: Bill
     },
 
     data() {
         return {
-            ...formData
+            ...formData,
+            serverExpense: 0,
+            showLoading: false,
+            showPayment: false,
+            billInfo: {},
+            steps: [
+                '选择配置',
+                '确认订单',
+                '在线支付',
+                '支付成功'
+            ],
+            step: 0
         };
     },
 
@@ -165,12 +195,76 @@ export default {
             set() {
                 this.configOpt.image.value = 'public';
             }
+        },
+        feeMethod() {
+            const m = {};
+            this.feeOpts.method.opts.forEach(e => m[e.value] = e.label);
+            return m[this.feeOpts.method.value];
+        },
+        district() {
+            const m = {};
+            this.feeOpts.area.opts.forEach(e => m[e.value] = e.label);
+            return m[this.feeOpts.area.value];
+        },
+        canUse() {
+            const m = {};
+            this.feeOpts.use.opts.forEach(e => m[e.value] = e.label);
+            return m[this.feeOpts.use.value];
+        },
+        orderConf() {
+            const m = {};
+            const conf = [];
+            // 服务器类型
+            this.configOpt.type.opts.forEach(e => m[e.value] = e.label);
+            conf[0] = m[this.configOpt.type.value];
+            // cpu数量
+            this.configOpt.cpu.opts.forEach(e => m[e.value] = e.label);
+            conf[1] = m[this.configOpt.cpu.value];
+            // 内存大小
+            this.configOpt.memory.opts.forEach(e => m[e.value] = e.label);
+            conf[2] = m[this.configOpt.memory.value];
+            // 镜像类型
+            this.configOpt.image.opts.forEach(e => m[e.value] = e.label);
+            conf[3] = m[this.configOpt.image.value];
+            // gpu 型号
+            this.configOpt.gpuType.opts.forEach(e => m[e.value] = e.label);
+            conf[4] = m[this.configOpt.gpuType.value];
+            // gpu型号
+            this.configOpt.gpuNum.opts.forEach(e => m[e.value] = e.label);
+            conf[5] = m[this.configOpt.gpuNum.value];
+            return conf.join();
+        },
+        os() {
+            const os = this.systemOpt.value;
+            const o = {};
+            this.versionOpt[os].opts.forEach(e => o[e.value] = e.label);
+
+            const m = {};
+            this.systemOpt.opts.forEach(e => m[e.value] = e.label);
+            return m[os] + '-' + o[this.versionOpt[os].value];
+        },
+        publicNet() {
+            const m = {};
+            this.resourceOpts.publicNet.opts[0].datas.forEach(e => m[e.value] = e.label);
+            return m[this.resourceOpts.publicNet.opts[0].value];
+        },
+        orderSetting() {
+            // const m = {};
+            // this.orderInfoOpts.time.opts[0].datas.forEach(e => m[e.value] = e.label);
+            const month = this.orderInfoOpts.time.opts[0].value;
+            const count = this.orderInfoOpts.count.opts[0].opts[0].opts[0].value + '台';
+            const time =  month < 10 ? month + '个月' : ~~(month / 12) + '年';
+            return count + ' * ' + time;
+        },
+        diskSetting() {
+            const sysDisk = this.storeOpts.systemDisk.opts[1].value;
+            const cds = this.storeOpts.cds.opts[0].opts.map(e => e.opts[1].value).reduce((a, b) => a + b, 0);
+            return sysDisk + cds;
         }
     },
 
     methods: {
         clkHdl(type, e) {
-            console.log('点击', type, e);
             if (type === 'createCds') {
                 const {template, opts} = this.storeOpts.cds.opts[0];
                 const tpl = JSON.parse(JSON.stringify(template));
@@ -186,6 +280,34 @@ export default {
                     i > -1 && opts.splice(i, 1);
                 }
             }
+
+            if (type === 'addOne') {
+                const group = this.orderInfoOpts.count.opts[0].opts[0].opts;
+                const [ipt, add, sub] = group;
+                ipt.value++;
+                sub.disabled && (sub.disabled = false);
+            }
+
+            if (type === 'subOne') {
+                const group = this.orderInfoOpts.count.opts[0].opts[0].opts;
+                const [ipt, add, sub] = group;
+                ipt.value--;
+                this.$nextTick(_ => ipt.value < 2 && (sub.disabled = true));
+            }
+        },
+
+        genMoney(setting) {
+            this.showLoading = true;
+            const expense = '￥ ' + ~~(Math.random() * 100) * 10;
+            this.serverExpense = expense;
+            this.$nextTick(_ => [...setting, 'serverExpense'].forEach(k => this.$set(this.billInfo, k, this[k])));
+            setTimeout(_ => {
+                this.showLoading = false;
+            }, 500);
+        },
+
+        submitHdl() {
+            this.showPayment = true;
         }
     },
 
@@ -252,6 +374,12 @@ export default {
         'systemOpt.value'(n) {
             this.systemVersion.opts = this.versionOpt[n].opts;
             this.systemVersion.value = this.versionOpt[n].value;
+        },
+
+        // 监听，然后生成钱数
+        // showImage: this.genMoney,
+        showPayment(n) {
+            this.step = n ? 1 : 0;
         }
     },
 
@@ -260,6 +388,10 @@ export default {
         const val = this.systemOpt.value;
         this.systemVersion.opts = this.versionOpt[val].opts;
         this.systemVersion.value = this.versionOpt[val].value;
+        const billItems = ['feeMethod', 'district', 'canUse', 'orderConf', 'os', 'publicNet', 'orderSetting', 'diskSetting'];
+        // console.log(this.$watch);
+        billItems.forEach(e => this.$watch(e, this.genMoney));
+        this.genMoney(billItems);
     }
 };
 </script>

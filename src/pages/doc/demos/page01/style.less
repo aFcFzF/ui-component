@@ -3,14 +3,20 @@
     padding: 0;
     @caption-wdt: 120px;
     .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         background: #F6F7FB;
         height: 60px;
-        line-height: 60px;
         padding: 0 20px;
+        .order-steps {
+            width: 400px;
+        }
     }
     .main-content {
-        min-width: 860px;
+        min-width: 1200px;
         margin: 20px;
+        padding-right: 30px;
         .panel {
             padding: 30px;
             overflow: hidden;
@@ -69,6 +75,9 @@
                             .row:first-of-type {
                                 margin-top: 0;
                             }
+                            .valume {
+                                width: 100px;
+                            }
                         }
                     }
 
@@ -91,22 +100,56 @@
                         }
                     }
                 }
+                &.section-orderInfo {
+                    .server-count {
+                        .content-item {
+                            margin-right: 0;
+                            input {
+                                border-top-right-radius: 0;
+                                border-bottom-right-radius: 0;
+                                width: 100px;
+                                border-color: @split-color;
+                            }
+
+                            .ui-btn {
+                                border-color: @split-color;
+                                &.add,
+                                &.sub {
+                                    border-left: none;
+                                    border-top-left-radius: 0;
+                                    border-bottom-left-radius: 0;
+                                }
+                                &.add {
+                                    border-top-right-radius: 0;
+                                    border-bottom-right-radius: 0;
+                                }
+                            }
+
+                            .count-word {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        .info-panel {
+        #info-panel {
+            position: sticky;
+            top: 20px;
             float: right;
             padding: 0;
+            width: 340px;
+            font-size: 13px;
             .panel-wrapper {
                 margin-left: 20px;
                 background: @white-color;
-                padding: 30px;
-                .title {
-                    margin-top: 0;
-                    padding-top: 0;
-                }
+                padding: 0;
+                overflow: hidden;
             }
-
+            button.next {
+                width: 100%;
+            }
         }
     }
 }

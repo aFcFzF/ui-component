@@ -9,15 +9,17 @@
             <header class="tab-card">
                 <ui-tabs v-model="activeVal" @click="menuSelHdl" :datas="tabs1" class-name="ui-tabs-card"></ui-tabs>
             </header>
-            <setting-bar></setting-bar>
-            <ui-scrollbar style="height: 100%">
-                <transition name="component-fade" mode="out-in">
-                    <router-view class="comp-section"></router-view>
-                </transition>
-                <div class="footer-info">
-                    © 2017-2018 SAU. All Rights Reserved.
-                </div>
-            </ui-scrollbar>
+            <article class="tab-content">
+                <setting-bar></setting-bar>
+                <ui-scrollbar style="height: 100%;">
+                    <transition name="component-fade" mode="out-in">
+                        <router-view class="comp-section"></router-view>
+                    </transition>
+                    <div class="footer-info">
+                        © 2017-2018 SAU. All Rights Reserved.
+                    </div>
+                </ui-scrollbar>
+            </article>
         </div>
     </div>
 </template>
@@ -39,23 +41,10 @@
         padding-top: 10px;
         background: @white-color;
     }
-    .component-list {
-        width: 300px;
-        float: left;
-        border-right: solid 1px #eee;
-        height: 100%;
-        // padding-bottom: 120px;
-        .ui-scrollbar__bar {
-            &.is-vertical {
-                right: 0;
-            }
-        }
-
-        .ui-menu {
-            padding-top: 40px;
-            padding-bottom: 100px;
-        }
+    .tab-content {
+        height: calc(~"100% - 44px");
     }
+
     .demo-page {
         height: 100%;
         overflow: hidden;

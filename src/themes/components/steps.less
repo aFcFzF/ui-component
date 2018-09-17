@@ -93,7 +93,7 @@
         &-custom {
             font-size: 25px;
             line-height: 1;
-            background-color: @white-color;
+            // background-color: @white-color;
         }
     }
 
@@ -152,6 +152,25 @@
             font-style: normal;
             line-height: 30px;
             top: -1px;
+        }
+    }
+
+    &-s {
+        .@{steps-prefix} {
+            &-index {
+                height: 24px;
+                width: 24px;
+                > i {
+                    width: 24px;
+                    line-height: 24px;
+                }
+            }
+
+            &-title,
+            &-desc {
+                color: @describe-color;
+                font-size: @font-size-smini;
+            }
         }
     }
 }

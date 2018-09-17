@@ -11,7 +11,7 @@
             >
                 <ui-select v-if="e.type === 'selector'" :autosize="e.autosize" :datas="e.opts || e.datas" v-model="e.value" :key="e.name + '_selector_' + key"/>
                 <ui-slider v-else-if="e.type ==='slider'" v-model="e.value"></ui-slider>
-                <input type="text" :class="e.class" v-else-if="e.type === 'input'" :value="e.value" :placeholder="e.placeholder">
+                <input type="text" :class="e.class" v-else-if="e.type === 'input'" :value="!e.bind ? e.value : options.opts[e.bind].value + ' GB'" :placeholder="e.placeholder">
                 <label v-else-if="e.type === 'label'" :class="e.class">{{e.content}}</label>
                 <ui-button
                     v-else-if="e.type === 'button' && !e.hidden"
@@ -33,7 +33,7 @@
                     <ui-radio v-for="rdoItem of e.datas" :value="rdoItem.value" v-model="e.value" :key="rdoItem.value">{{rdoItem.label}}</ui-radio>
                 </div>
                 <p :class="e.class" v-else-if="e.type === 'tag'" v-html="e.content"/>
-                <opt-item v-else-if="e.type === 'group'" v-for="(subItem, key) of e.opts" :options="subItem" :key="'__' + key + e.name" :class="['row', key]" @clkHdl=" clkHdl"></opt-item>
+                <opt-item v-else-if="e.type === 'group'" v-for="(subItem, key) of e.opts" :options="subItem" :key="'__' + key + e.name" :class="['row', key, subItem.class]" @clkHdl=" clkHdl"></opt-item>
             </div>
         </div>
     </dd>

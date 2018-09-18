@@ -300,7 +300,9 @@ export default {
             this.showLoading = true;
             const expense = '￥ ' + ~~(Math.random() * 100) * 10;
             this.serverExpense = expense;
-            this.$nextTick(_ => [...setting, 'serverExpense'].forEach(k => this.$set(this.billInfo, k, this[k])));
+            this.$nextTick(_ => [...setting, 'serverExpense'].forEach(k =>
+                this.billInfo[k] != null ? this.billInfo[k] = this[k] : this.$set(this.billInfo, k, this[k])
+            ));
             setTimeout(_ => {
                 this.showLoading = false;
             }, 500);
@@ -390,7 +392,7 @@ export default {
         this.systemVersion.value = this.versionOpt[val].value;
         const billItems = ['feeMethod', 'district', 'canUse', 'orderConf', 'os', 'publicNet', 'orderSetting', 'diskSetting'];
         // console.log(this.$watch);
-        billItems.forEach(e => this.$watch(e, this.genMoney));
+        billItems.forEach(e => this.$watch(e, _ => this.genMoney(billItems)));
         this.genMoney(billItems);
     }
 };

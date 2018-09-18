@@ -148,7 +148,6 @@ Object.entries(o).map(([k, v]) => {
 });
 
 const menuList = convertDts(list);
-console.log(menuList);
 
 
 export default {
@@ -161,18 +160,24 @@ export default {
     methods: {
         menuSelHdl(e) {
             this.$router.push(e.key);
+        },
+        actMenu(url) {
+            const m = url.path.match(/\/docs\/(\w+)/);
+            const compName = m && m[1];
+            const sideList = this.$refs.sideList;
+            this.$refs.docSrcrll.scrollToTop();
+            sideList && sideList.status.selected !== compName && sideList.select(compName);
         }
     },
     beforeRouteUpdate(to, from, next) {
-        const m = to.path.match(/\/docs\/(\w+)/);
-        const compName = m && m[1];
-        const sideList = this.$refs.sideList;
-        this.$refs.docSrcrll.scrollToTop();
-        sideList && sideList.status.selected !== compName && sideList.select(compName);
+        this.actMenu(to);
         next();
     },
     components: {
         SettingBar
+    },
+    mounted() {
+        this.actMenu(this.$route);
     }
 };
 </script>

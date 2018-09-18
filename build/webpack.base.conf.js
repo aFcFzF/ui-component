@@ -246,7 +246,7 @@ const config = {
                 }]
             },
             {
-                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz|mp4)(\?.+)?$/,
                 exclude: /favicon\.png$/,
                 use: [{
                     loader: 'url-loader',
